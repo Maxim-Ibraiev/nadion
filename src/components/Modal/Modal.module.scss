@@ -1,0 +1,28 @@
+@import "@/styles/variables.scss";
+
+.center {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.layout {
+  position: absolute;
+  inset: 0;
+  bottom: none;
+  z-index: 5;
+
+  background-color: var(--backdrop);
+}
+
+.content {
+  position: absolute;
+  top: 50px;
+
+  width: 100%;
+  overflow: auto;
+
+  box-sizing: border-box;
+  outline: none;
+
+  background: var(--secondary);
+}

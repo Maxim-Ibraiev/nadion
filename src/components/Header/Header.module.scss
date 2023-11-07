@@ -1,0 +1,92 @@
+@import "@/styles/variables.scss";
+
+.header {
+  position: relative;
+
+  height: var(--headerHeight);
+  max-width: $desktop;
+  min-width: 300px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  margin-bottom: 30px;
+  padding-left: 15px;
+
+  background-color: var(--bgContrast);
+
+  .logo {
+    font-family: Playball, serif;
+    font-size: 24px;
+
+    padding: 11px 0;
+  }
+
+  a {
+    color: var(--primary);
+  }
+}
+
+.nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.navItem {
+  height: 100%;
+
+  & > * {
+    margin-left: 15px;
+    margin-right: 15px;
+  }
+}
+
+.link {
+  display: inline-block;
+  padding: 15px 5px;
+
+  &::after {
+    content: "";
+    position: absolute;
+
+    width: 100%;
+    height: 1px;
+    left: 0;
+    bottom: 3px;
+
+    transform: scale(0, 1);
+    border-radius: 4px;
+    border: 1px solid var(--accents-0);
+  }
+}
+
+.active {
+  position: relative;
+  transition: scale linear 250ms;
+}
+
+.active::after {
+  content: "";
+
+  transform: scale(1, 1);
+  transition: all var(--cubic) var(--time-out);
+}
+
+.row {
+  display: flex;
+  color: var(--primary);
+}
+
+.mobUpper {
+  @media screen and (max-width: $mobileLesser) {
+    display: none;
+  }
+}
+
+.menuBtn {
+  @media screen and (min-width: $mobileUpper) {
+    display: none;
+  }
+}
