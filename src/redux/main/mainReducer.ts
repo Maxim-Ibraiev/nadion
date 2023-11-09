@@ -1,34 +1,26 @@
+import { getError, getProductsForRedux } from "@/redux/selectors";
 import { combineReducers, createAction, createReducer } from "@reduxjs/toolkit";
 import { HYDRATE } from "next-redux-wrapper";
 import { ProductStructure } from "../../helpers";
-import { IError, IProductObject, IShotSelectedProducts } from "../../interfaces";
+import { IError, IProductObject, IShotSelectedProducts, IState } from "../../interfaces";
 import { productsError, productsSuccess, selectedProductsSuccess, setSelectedProducts, setSelectedSizeOfProduct } from "./mainActions";
 
 interface IPayload<T> {
 	payload: T;
 }
 
-export const HYDRATE_PRODUCT = createAction<IProductObject[]>(HYDRATE);
-export const HYDRATE_ERROR = createAction<IError>(HYDRATE);
+export const hydrate = createAction<IState>(HYDRATE);
 
 const products = createReducer<IProductObject[]>([], (builder) => {
 	builder
-		.addCase(HYDRATE_PRODUCT, (_, action) => action.payload)
+		.addCase(hydrate, (_, { payload }) => getProductsForRedux(payload))
 		.addCase(productsSuccess, (_, action) => action.payload)
-		.addCase(setSelectedSizeOfProduct, (state, { payload }) => handleSelectedSizeOfProduct(state, { payload }));
-});
-
-const selectedProducts = createReducer<IProductObject[]>([], (builder) => {
-	builder
-		.addCase(HYDRATE_PRODUCT, (_, { payload }) => payload)
-		.addCase(selectedProductsSuccess, (_, { payload }) => payload.map((el) => el.toObject()))
-		.addCase(setSelectedProducts, (_, { payload }) => payload.map((el) => el.toObject()))
 		.addCase(setSelectedSizeOfProduct, (state, { payload }) => handleSelectedSizeOfProduct(state, { payload }));
 });
 
 const error = createReducer<IError>(null, (builder) => {
 	builder
-		.addCase(HYDRATE_ERROR, (_, { payload }) => payload)
+		.addCase(hydrate, (_, { payload }) => getError(payload))
 		.addCase(productsSuccess, () => null)
 		.addCase(productsError, (_, { payload }) => payload);
 });
@@ -41,9 +33,19 @@ function handleSelectedSizeOfProduct(productsOfRedux: IProductObject[], { payloa
 	});
 }
 
+export const selectedProducts = createReducer<IProductObject[]>([], (builder) => {
+	builder
+		.addCase(hydrate, (draft, { payload }) => {
+			// todo validation for product from local storage
+			draft.concat(getProductsForRedux(payload));
+		})
+		.addCase(selectedProductsSuccess, (_, { payload }) => payload.map((el) => el.toObject()))
+		.addCase(setSelectedProducts, (_, { payload }) => payload.map((el) => el.toObject()))
+		.addCase(setSelectedSizeOfProduct, (state, { payload }) => handleSelectedSizeOfProduct(state, { payload }));
+});
+
 const main = combineReducers({
 	products,
-	selectedProducts,
 	error,
 });
 export default main;

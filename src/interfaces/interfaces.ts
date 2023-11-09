@@ -27,9 +27,9 @@ export interface IDataResponse {
 export interface IState {
 	main: {
 		products: IProductObject[];
-		selectedProducts: IProductObject[];
 		error: IError;
 	};
+	selectedProducts: IProductObject[];
 }
 
 export type IError = {

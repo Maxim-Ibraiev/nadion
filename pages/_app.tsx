@@ -5,17 +5,19 @@ import { PersistGate } from "redux-persist/integration/react";
 
 import "./global.css";
 
-function MyApp({ Component, pageProps, ...rest }: AppProps) {
-	const { store } = wrapper.useWrappedStore(rest);
+function MyApp({ Component, ...rest }: AppProps) {
+	const { store, props } = wrapper.useWrappedStore(rest);
 
 	return (
-		<Provider store={store}>
-			<PersistGate persistor={persistor}>
-				<div id="reactModal">
-					<Component {...pageProps} />
-				</div>
-			</PersistGate>
-		</Provider>
+		<div>
+			<Provider store={store}>
+				<PersistGate persistor={persistor}>
+					<div id="reactModal">
+						<Component {...props.pageProps} />
+					</div>
+				</PersistGate>
+			</Provider>
+		</div>
 	);
 }
 

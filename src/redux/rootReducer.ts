@@ -1,3 +1,5 @@
-import main from "./main/mainReducer";
+import { combineReducers } from "@reduxjs/toolkit";
 
-export default main;
+import main, { selectedProducts } from "./main/mainReducer";
+
+export default combineReducers({ main, selectedProducts });
