@@ -1,3 +1,3 @@
-import * as mainActions from "./main/mainActions";
+import * as mainActions from './main/mainActions'
 
-export default mainActions;
+export default mainActions

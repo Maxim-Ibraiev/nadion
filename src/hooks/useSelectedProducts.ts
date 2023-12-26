@@ -1,15 +1,15 @@
-import { useDispatch, useSelector } from "react-redux";
-import { IProduct, IShotSelectedProducts, IState } from "../interfaces";
-import * as actions from "../redux/main/mainActions";
-import { getProductById, getSelectedProducts } from "../redux/selectors";
+import { useDispatch, useSelector } from 'react-redux'
+import { IProduct, IShotSelectedProducts, IState } from '../interfaces'
+import * as actions from '../redux/main/mainActions'
+import { getProductById, getSelectedProducts } from '../redux/selectors'
 
 export default function useSelectedProducts() {
-	const selectedProductFromRedux = useSelector(getSelectedProducts);
-	const dispatch = useDispatch();
+	const selectedProductFromRedux = useSelector(getSelectedProducts)
+	const dispatch = useDispatch()
 	const setSelectedProductFromRedux = (products: IProduct[]) => {
-		dispatch(actions.setSelectedProducts(products));
-	};
-	return [selectedProductFromRedux, setSelectedProductFromRedux];
+		dispatch(actions.setSelectedProducts(products))
+	}
+	return [selectedProductFromRedux, setSelectedProductFromRedux]
 }
 
 /*

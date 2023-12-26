@@ -1,11 +1,11 @@
 .chip {
-  padding: 5px 15px;
+	padding: 5px 15px;
 
-  border: solid 1px gray;
-  border-radius: 16px;
+	border: solid 1px gray;
+	border-radius: 16px;
 }
 
 .disabled {
-  color: var(--disabledText);
-  border-color: transparent;
+	color: var(--disabledText);
+	border-color: transparent;
 }

@@ -1,90 +1,90 @@
 @import '../../styles/variables.scss';
 
 .wrapper {
-  position: relative;
+	position: relative;
 
-  height: min-content;
-  margin-bottom: 125px;
-  padding-left: 20px;
-  padding-right: 20px;
-  padding-bottom: 20px;
+	height: min-content;
+	margin-bottom: 125px;
+	padding-left: 20px;
+	padding-right: 20px;
+	padding-bottom: 20px;
 
-  @media screen and (min-width: $tableUpper) {
-    margin-bottom: 0;
-  }
+	@media screen and (min-width: $tableUpper) {
+		margin-bottom: 0;
+	}
 }
 
 .header {
-  display: flex;
+	display: flex;
 }
 
 .x {
-  width: 50px;
-  height: 50px;
+	width: 50px;
+	height: 50px;
 
-  background-color: transparent;
+	background-color: transparent;
 }
 
 .container {
-  & > *:first-child {
-    border-top: 1px solid var(--border-palette);
-  }
-  & > * {
-    border-bottom: 1px solid var(--border-palette);
-    border-right: none;
-    border-left: none;
-    border-top: none;
-  }
+	& > *:first-child {
+		border-top: 1px solid var(--border-palette);
+	}
+	& > * {
+		border-bottom: 1px solid var(--border-palette);
+		border-right: none;
+		border-left: none;
+		border-top: none;
+	}
 }
 
 .close {
-  max-width: 200px;
+	max-width: 200px;
 
-  margin-top: auto;
-  margin-left: auto;
-  margin-right: auto;
+	margin-top: auto;
+	margin-left: auto;
+	margin-right: auto;
 }
 
 .title {
-  width: 100%;
+	width: 100%;
 
-  margin-top: auto;
-  margin-bottom: auto;
+	margin-top: auto;
+	margin-bottom: auto;
 
-  text-align: center;
-  font-size: 18px;
-  font-weight: 700;
-  letter-spacing: 5.5px;
-  text-transform: uppercase;
+	text-align: center;
+	font-size: 18px;
+	font-weight: 700;
+	letter-spacing: 5.5px;
+	text-transform: uppercase;
 }
 
 .footer {
-  width: calc(100% - 40px);
+	width: calc(100% - 40px);
 
-  @media screen and (max-width: $tableLesser) {
-    position: fixed;
-    bottom: 0;
-  }
+	@media screen and (max-width: $tableLesser) {
+		position: fixed;
+		bottom: 0;
+	}
 
-  @media screen and (min-width: $tableUpper) {
-    inset: unset;
-    position: unset;
+	@media screen and (min-width: $tableUpper) {
+		inset: unset;
+		position: unset;
 
-    width: inherit;
-  }
+		width: inherit;
+	}
 }
 
 .secondaryBottom {
-  flex-basis: 48%;
-  color: inherit;
-  background: var(--primary);
-  border: 1px solid var(--accent);
+	flex-basis: 48%;
+	color: inherit;
+	background: var(--primary);
+	border: 1px solid var(--accent);
 }
 
 .primaryBottom {
-  flex-basis: 48%;
+	flex-basis: 48%;
 
-  & > * {
-    width: 100%;
-  }
+	& > * {
+		width: 100%;
+	}
 }

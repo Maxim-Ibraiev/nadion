@@ -1,16 +1,16 @@
-import { IProductObject } from "@/interfaces";
+import { IProductObject } from '@/interfaces'
 
 export interface IProductsProps {
-  products: IProductObject[] | null;
-  productsError: {
-    data: unknown;
-    message: string;
-  };
+	products: IProductObject[] | null
+	productsError: {
+		data: unknown
+		message: string
+	}
 }
 export interface ICategoriesProps {
-  categories: IProductObject | null;
-  categoriesError: {
-    data: unknown;
-    message: string;
-  };
+	categories: IProductObject | null
+	categoriesError: {
+		data: unknown
+		message: string
+	}
 }

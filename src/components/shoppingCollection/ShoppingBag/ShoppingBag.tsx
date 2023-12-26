@@ -1,41 +1,41 @@
-import Button from "@/components/buttons/MainButton";
-import { CloseIcon } from "@/components/icons";
-import ShoppingBagFooter from "@/components/shoppingCollection/ShoppingBagFooter";
-import ShoppingBagItem from "@/components/shoppingCollection/ShoppingBagItem";
-import { SHOPPING_ID } from "@/constants";
+import Button from '@/components/buttons/MainButton'
+import { CloseIcon } from '@/components/icons'
+import ShoppingBagFooter from '@/components/shoppingCollection/ShoppingBagFooter'
+import ShoppingBagItem from '@/components/shoppingCollection/ShoppingBagItem'
+import { SHOPPING_ID } from '@/constants'
 // import { useSelectedProducts } from "@/hooks";
-import { IProduct } from "@/interfaces";
-import language from "@/language";
-import Link from "@/lib/next/Link";
-import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
-import routes from "../../../routes";
-import s from "./ShoppingBag.module.scss";
+import { IProduct } from '@/interfaces'
+import language from '@/language'
+import Link from '@/lib/next/Link'
+import { useRouter } from 'next/router'
+import { useEffect, useState } from 'react'
+import routes from '../../../routes'
+import s from './ShoppingBag.module.scss'
 
 interface IProps {
-	handleCloseModal: () => void;
+	handleCloseModal: () => void
 }
 
 export default function ShoppingBag({ handleCloseModal }: IProps) {
-	const router = useRouter();
-	const [selectedProducts, _] = useState<IProduct[]>([]);
-	const [shoppingId, setShoppingId] = useState("");
-	const [isLoading, setIsLoading] = useState(false);
+	const router = useRouter()
+	const [selectedProducts, _] = useState<IProduct[]>([])
+	const [shoppingId, setShoppingId] = useState('')
+	const [isLoading, setIsLoading] = useState(false)
 
 	// const handleDelete = (product: IProduct) => {
 	// 	setSelectedProducts(selectedProducts.filter((el) => el.getId() !== product.getId()));
 	// };
 
 	const handleOrder = () => {
-		if (routes.getCheckout(shoppingId) === router.asPath) handleCloseModal();
-		else setIsLoading(true);
-	};
+		if (routes.getCheckout(shoppingId) === router.asPath) handleCloseModal()
+		else setIsLoading(true)
+	}
 
 	useEffect(() => {
-		const id = localStorage.getItem(SHOPPING_ID);
+		const id = localStorage.getItem(SHOPPING_ID)
 
-		if (id) setShoppingId(id);
-	}, []);
+		if (id) setShoppingId(id)
+	}, [])
 
 	return (
 		<section className={s.wrapper}>
@@ -64,7 +64,7 @@ export default function ShoppingBag({ handleCloseModal }: IProps) {
 						<Button className={s.secondaryBottom} handleClick={() => handleCloseModal()}>
 							{language.continueShopping}
 						</Button>
-						<Link href={routes.getCheckout(shoppingId)} style={{ pointerEvents: "none" }} className={s.primaryBottom}>
+						<Link href={routes.getCheckout(shoppingId)} style={{ pointerEvents: 'none' }} className={s.primaryBottom}>
 							<Button handleClick={handleOrder} isLoading={isLoading}>
 								{language.orderProduct}
 							</Button>
@@ -73,12 +73,12 @@ export default function ShoppingBag({ handleCloseModal }: IProps) {
 				</>
 			) : (
 				<>
-					<p style={{ textAlign: "center" }}>{language.emptyBag}</p>
+					<p style={{ textAlign: 'center' }}>{language.emptyBag}</p>
 					<Button className={s.close} handleClick={() => (handleCloseModal ? handleCloseModal() : router.push(routes.home))}>
 						{language.close}
 					</Button>
 				</>
 			)}
 		</section>
-	);
+	)
 }

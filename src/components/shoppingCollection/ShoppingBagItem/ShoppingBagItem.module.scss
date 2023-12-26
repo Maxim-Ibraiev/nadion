@@ -1,56 +1,56 @@
 .wrapper {
-  position: relative;
-  display: flex;
+	position: relative;
+	display: flex;
 
-  padding: 20px 0;
+	padding: 20px 0;
 }
 .image {
-  min-width: 82px;
+	min-width: 82px;
 }
 
 .imageLink {
-  display: block;
+	display: block;
 
-  box-sizing: content-box;
-  border: 2px solid transparent;
-  outline: none;
+	box-sizing: content-box;
+	border: 2px solid transparent;
+	outline: none;
 
-  &:focus {
-    border: 2px solid var(--blue);
-    outline: none;
-  }
+	&:focus {
+		border: 2px solid var(--blue);
+		outline: none;
+	}
 }
 
 .info {
-  width: calc(100% - 120px);
+	width: calc(100% - 120px);
 
-  padding-left: 10px;
-  // padding-right: 40px;
+	padding-left: 10px;
+	// padding-right: 40px;
 
-  font-size: 14px;
+	font-size: 14px;
 }
 .size {
-  display: flex;
-  align-items: center;
+	display: flex;
+	align-items: center;
 
-  margin-top: 20px;
+	margin-top: 20px;
 
-  & > *:not(:first-child) {
-    margin-left: 20px;
-  }
+	& > *:not(:first-child) {
+		margin-left: 20px;
+	}
 }
 .select {
-  width: 120px;
+	width: 120px;
 }
 
 .close {
-  position: absolute;
+	position: absolute;
 
-  top: 10px;
-  right: 0;
+	top: 10px;
+	right: 0;
 
-  width: 40px;
+	width: 40px;
 
-  bottom: none;
-  background: inherit;
+	bottom: none;
+	background: inherit;
 }

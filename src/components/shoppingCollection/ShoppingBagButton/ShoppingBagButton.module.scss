@@ -1,18 +1,18 @@
-@import "@/styles/variables.scss";
+@import '@/styles/variables.scss';
 
 .shoppingBag {
-  height: calc(100vh - 50px);
+	height: calc(100vh - 50px);
 
-  border-radius: 4px;
-  background-color: var(--primary);
+	border-radius: 4px;
+	background-color: var(--primary);
 
-  @media screen and (min-width: $tableUpper) {
-    width: 400px;
-    inset: unset;
+	@media screen and (min-width: $tableUpper) {
+		width: 400px;
+		inset: unset;
 
-    top: 50px;
-    right: calc(((100vw - $tableUpper) / 2));
-    height: unset;
-    max-height: calc(100vh - 80px);
-  }
+		top: 50px;
+		right: calc(((100vw - $tableUpper) / 2));
+		height: unset;
+		max-height: calc(100vh - 80px);
+	}
 }

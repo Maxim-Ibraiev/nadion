@@ -1,9 +1,9 @@
-import { getError, getProductsForRedux } from "@/redux/selectors"
-import { combineReducers, createAction, createReducer } from "@reduxjs/toolkit"
-import { HYDRATE } from "next-redux-wrapper"
-import { ProductStructure } from "../../helpers"
-import { IError, IProductObject, IShotSelectedProducts, IState } from "../../interfaces"
-import { productsError, productsSuccess, selectedProductsSuccess, setSelectedProducts, setSelectedSizeOfProduct } from "./mainActions"
+import { getError, getProductsForRedux } from '@/redux/selectors'
+import { combineReducers, createAction, createReducer } from '@reduxjs/toolkit'
+import { HYDRATE } from 'next-redux-wrapper'
+import { ProductStructure } from '../../helpers'
+import { IError, IProductObject, IShotSelectedProducts, IState } from '../../interfaces'
+import { productsError, productsSuccess, selectedProductsSuccess, setSelectedProducts, setSelectedSizeOfProduct } from './mainActions'
 
 interface IPayload<T> {
 	payload: T

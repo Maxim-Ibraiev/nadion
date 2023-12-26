@@ -1,56 +1,56 @@
 @import '../../../styles/variables.scss';
 
 .btn {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 
-  min-height: 50px;
+	min-height: 50px;
 
-  padding-left: 15px;
-  padding-right: 15px;
+	padding-left: 15px;
+	padding-right: 15px;
 
-  background: var(--accent);
-  border-radius: 4px;
+	background: var(--accent);
+	border-radius: 4px;
 
-  transition: background-color $animation $cubic;
+	transition: background-color $animation $cubic;
 
-  color: var(--primary);
-  font-size: 11px;
-  font-weight: 900;
-  letter-spacing: 1.4px;
-  text-transform: uppercase;
+	color: var(--primary);
+	font-size: 11px;
+	font-weight: 900;
+	letter-spacing: 1.4px;
+	text-transform: uppercase;
 }
 
 .error {
-  background: var(--error);
+	background: var(--error);
 }
 .request {
-  background: var(--request);
+	background: var(--request);
 }
 .success {
-  background: var(--success);
+	background: var(--success);
 }
 
 .content {
-  & > *:not(:first-child) {
-    margin-left: 10px;
-  }
+	& > *:not(:first-child) {
+		margin-left: 10px;
+	}
 }
 
 .hiddenContent {
-  color: transparent;
-  visibility: hidden;
+	color: transparent;
+	visibility: hidden;
 }
 
 .hiddenIcon {
-  display: none;
-  visibility: hidden;
+	display: none;
+	visibility: hidden;
 }
 
 .loadingIcon {
-  position: absolute;
+	position: absolute;
 
-  display: block;
-  visibility: visible;
+	display: block;
+	visibility: visible;
 }

@@ -1,10 +1,5 @@
-import { Categories } from "@/interfaces";
+import { Categories } from '@/interfaces'
 
-const categories: Categories = [
-  "femaleClothes",
-  "maleClothes",
-  "childrenClothes",
-  "all",
-];
+const categories: Categories = ['femaleClothes', 'maleClothes', 'childrenClothes', 'all']
 
-export default categories;
+export default categories

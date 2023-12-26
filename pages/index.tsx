@@ -1,8 +1,8 @@
-import Layout from "@/components/Layout"
-import Link from "@/lib/next/Link"
-import { productsSuccess } from "@/redux/main/mainActions"
-import { wrapper } from "@/redux/store"
-import routes from "@/routes"
+import Layout from '@/components/Layout'
+import Link from '@/lib/next/Link'
+import { productsSuccess } from '@/redux/main/mainActions'
+import { wrapper } from '@/redux/store'
+import routes from '@/routes'
 
 function Home() {
 	return (

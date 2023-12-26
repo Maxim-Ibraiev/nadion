@@ -1,23 +1,28 @@
 {
-  "extends": ["eslint-config-airbnb","next/core-web-vitals", "prettier"],
-  "rules": {
-    "no-undef":"off",
-    "no-console":"off",
-    "import/extensions":"off",
-    "import/no-unresolved":"off",
-    "react/jsx-props-no-spreading":"off",
-    "import/no-anonymous-default-export":"off",
-    "no-restricted-exports":"off",
-    "react/jsx-filename-extension":"off",
-    "no-use-before-define":"off", 
-    "react/self-closing-comp":"warn", 
-    "no-unused-vars":["warn", { 
-      "varsIgnorePattern": "^_" ,
-      "argsIgnorePattern": "^_" 
-      }],
-    "react/require-default-props": ["warn", {
-      "functions":  "defaultArguments"
-      
-    }]
-  }
+	"extends": ["eslint-config-airbnb", "next/core-web-vitals", "prettier"],
+	"rules": {
+		"no-undef": "off",
+		"no-console": "off",
+		"import/extensions": "off",
+		"import/no-unresolved": "off",
+		"react/jsx-props-no-spreading": "off",
+		"import/no-anonymous-default-export": "off",
+		"no-restricted-exports": "off",
+		"react/jsx-filename-extension": "off",
+		"no-use-before-define": "off",
+		"react/self-closing-comp": "warn",
+		"no-unused-vars": [
+			"warn",
+			{
+				"varsIgnorePattern": "^_",
+				"argsIgnorePattern": "^_"
+			}
+		],
+		"react/require-default-props": [
+			"warn",
+			{
+				"functions": "defaultArguments"
+			}
+		]
+	}
 }

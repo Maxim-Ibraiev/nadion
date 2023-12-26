@@ -1,18 +1,18 @@
-import { IProduct } from "@/interfaces";
-import classNames from "classnames";
-import React, { useState } from "react";
-import { UAH } from "../../../constants";
+import { IProduct } from '@/interfaces'
+import classNames from 'classnames'
+import React, { useState } from 'react'
+import { UAH } from '../../../constants'
 // import { useSelectedProducts } from "../../../hooks";
-import language from "../../../language";
-import s from "./ShoppingBagFooter.module.scss";
+import language from '../../../language'
+import s from './ShoppingBagFooter.module.scss'
 
 interface IProps {
-	className?: string;
-	children: React.ReactNode;
+	className?: string
+	children: React.ReactNode
 }
 
-function ShoppingBagFooter({ className = "", children }: IProps) {
-	const [selectedProducts] = useState<IProduct[]>([]);
+function ShoppingBagFooter({ className = '', children }: IProps) {
+	const [selectedProducts] = useState<IProduct[]>([])
 
 	return (
 		<div className={classNames(s.footer, { [className]: className })}>
@@ -27,7 +27,7 @@ function ShoppingBagFooter({ className = "", children }: IProps) {
 			</div>
 			{children && <div className={s.footerBottoms}>{children}</div>}
 		</div>
-	);
+	)
 }
 
-export default ShoppingBagFooter;
+export default ShoppingBagFooter

@@ -1,19 +1,19 @@
-import { configureStore } from "@reduxjs/toolkit";
-import { createWrapper } from "next-redux-wrapper";
+import { configureStore } from '@reduxjs/toolkit'
+import { createWrapper } from 'next-redux-wrapper'
 
-import { persistReducer, persistStore } from "redux-persist";
-import storage from "redux-persist/lib/storage"; // defaults to localStorage for web
-import reducer from "./rootReducer";
+import { persistReducer, persistStore } from 'redux-persist'
+import storage from 'redux-persist/lib/storage' // defaults to localStorage for web
+import reducer from './rootReducer'
 
 const persistConfig = {
-	key: "root",
+	key: 'root',
 	storage,
-	whitelist: ["selectedProducts"],
-};
+	whitelist: ['selectedProducts'],
+}
 
-const persistedReducer = persistReducer(persistConfig, reducer);
+const persistedReducer = persistReducer(persistConfig, reducer)
 
-export const store = configureStore({ reducer: persistedReducer, devTools: true, middleware: [] });
-export const persistor = persistStore(store);
+export const store = configureStore({ reducer: persistedReducer, devTools: true, middleware: [] })
+export const persistor = persistStore(store)
 
-export const wrapper = createWrapper(() => store);
+export const wrapper = createWrapper(() => store)

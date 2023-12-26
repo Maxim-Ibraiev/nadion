@@ -1,13 +1,13 @@
-import { CATEGORIES } from "@/constants"
-import language from "@/language"
-import Link from "@/lib/next/Link"
-import routes from "@/routes"
-import ArrowForwardIcon from "@mui/icons-material/ArrowForward"
-import CheckCircleIcon from "@mui/icons-material/CheckCircle"
-import CircleIcon from "@mui/icons-material/Circle"
-import { Box, Button, Checkbox, Chip, FormControlLabel, FormGroup, Paper, Slider, Stack } from "@mui/material"
-import { useState } from "react"
-import FilterAccordion from "./FilterAccordion"
+import { CATEGORIES } from '@/constants'
+import language from '@/language'
+import Link from '@/lib/next/Link'
+import routes from '@/routes'
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward'
+import CheckCircleIcon from '@mui/icons-material/CheckCircle'
+import CircleIcon from '@mui/icons-material/Circle'
+import { Box, Button, Checkbox, Chip, FormControlLabel, FormGroup, Paper, Slider, Stack } from '@mui/material'
+import { useState } from 'react'
+import FilterAccordion from './FilterAccordion'
 
 function valuetext(v: number) {
 	return `${v} ${language.UAH}`
@@ -15,9 +15,9 @@ function valuetext(v: number) {
 
 export default function Filter() {
 	const [value, setValue] = useState<number[]>([20, 3000])
-	const colors = ["red", "blue", "black", "beige", "brown"]
-	const sizes = ["XS", "S", "M", "L", "XL", "XXL"]
-	const dressType = ["без рукавів", "Короткий рукав", "Довгі рукави", "Довгий  довжина до коліна", "Короткі"]
+	const colors = ['red', 'blue', 'black', 'beige', 'brown']
+	const sizes = ['XS', 'S', 'M', 'L', 'XL', 'XXL']
+	const dressType = ['без рукавів', 'Короткий рукав', 'Довгі рукави', 'Довгий  довжина до коліна', 'Короткі']
 
 	const handleChange = (_: Event, newValue: number | number[]) => {
 		setValue(newValue as number[])
@@ -25,7 +25,7 @@ export default function Filter() {
 
 	return (
 		<Box>
-			<Paper sx={{ display: "grid", gap: "24px", padding: { xs: "15px 10px", sm: "30px 40px" } }}>
+			<Paper sx={{ display: 'grid', gap: '24px', padding: { xs: '15px 10px', sm: '30px 40px' } }}>
 				<Stack>
 					{CATEGORIES.map((category) => (
 						<Link key={category} href={routes[category]}>
@@ -39,7 +39,7 @@ export default function Filter() {
 
 			<FilterAccordion summary={language.price}>
 				<Slider
-					getAriaLabel={() => "Price range"}
+					getAriaLabel={() => 'Price range'}
 					value={value}
 					onChange={handleChange}
 					valueLabelDisplay="auto"
@@ -47,7 +47,7 @@ export default function Filter() {
 					max={3000}
 					getAriaValueText={valuetext}
 				/>
-				<Box sx={{ display: "flex", justifyContent: "space-around" }}>
+				<Box sx={{ display: 'flex', justifyContent: 'space-around' }}>
 					<Chip label={`${value[0]} ${language.UAH}`} />
 					<Chip label={`${value[1]} ${language.UAH}`} />
 				</Box>
@@ -56,10 +56,10 @@ export default function Filter() {
 			<FilterAccordion summary={language.color}>
 				<Box
 					sx={{
-						display: "grid",
-						gridTemplateColumns: "repeat(auto-fill, 28px)",
-						gridAutoRows: "28px",
-						gap: "15px",
+						display: 'grid',
+						gridTemplateColumns: 'repeat(auto-fill, 28px)',
+						gridAutoRows: '28px',
+						gap: '15px',
 					}}
 				>
 					{colors.map((color) => (
@@ -73,7 +73,7 @@ export default function Filter() {
 			</FilterAccordion>
 
 			<FilterAccordion summary={language.sizes}>
-				<FormGroup sx={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)" }}>
+				<FormGroup sx={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)' }}>
 					{sizes.map((size) => (
 						<FormControlLabel key={size} control={<Checkbox />} label={size} />
 					))}

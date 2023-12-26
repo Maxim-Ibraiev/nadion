@@ -1,53 +1,53 @@
 @import '../../styles/variables.scss';
 
 .container {
-  display: grid;
+	display: grid;
 
-  margin-top: 30px;
+	margin-top: 30px;
 
-  background: var(--bgContrast);
-  color: var(--accents-3);
+	background: var(--bgContrast);
+	color: var(--accents-3);
 
-  @media screen and (min-width: $mobileUpper) {
-    grid-template-columns: 1fr 1fr;
-  }
+	@media screen and (min-width: $mobileUpper) {
+		grid-template-columns: 1fr 1fr;
+	}
 }
 
 .contacts {
-  margin-top: 20px;
-  margin-left: 50%;
-  transform: translateX(-50%);
-  width: max-content;
+	margin-top: 20px;
+	margin-left: 50%;
+	transform: translateX(-50%);
+	width: max-content;
 }
 
 .link {
-  width: max-content;
-  display: block;
-  width: max-content;
+	width: max-content;
+	display: block;
+	width: max-content;
 }
 
 .adress {
-  display: inline-flex;
-  flex-direction: column;
+	display: inline-flex;
+	flex-direction: column;
 
-  width: max-content;
+	width: max-content;
 
-  vertical-align: middle;
+	vertical-align: middle;
 }
 
 .street {
-  font-size: 14px;
-  color: var(--accents-6);
+	font-size: 14px;
+	color: var(--accents-6);
 }
 
 .about {
-  width: calc(100% - 100px);
+	width: calc(100% - 100px);
 
-  margin-top: 30px;
-  margin-left: 50px;
-  text-align: center;
+	margin-top: 30px;
+	margin-left: 50px;
+	text-align: center;
 }
 
 .icon {
-  margin: 15px;
+	margin: 15px;
 }
