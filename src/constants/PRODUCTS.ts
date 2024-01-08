@@ -1,3 +1,5 @@
+import { IProductObject } from '@/interfaces'
+
 export default [
 	{
 		colors: ['black'],
@@ -93,4 +95,4 @@ export default [
 		__v: 0,
 		id: '643eeb6b80c5ab00476474ca',
 	},
-]
+] as IProductObject[]

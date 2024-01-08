@@ -1,8 +1,8 @@
-import { useState, useEffect } from 'react'
+import ProductCard from '@/components/ProductCard'
 import throttle from 'lodash.throttle'
+import { useEffect, useState } from 'react'
 import { getImgSize } from '../../helpers'
 import { IProduct } from '../../interfaces'
-import ProductCard from '../cards/ProductCard'
 import NoProduct from '../NoProduct'
 import s from './CardList.module.scss'
 
@@ -11,7 +11,7 @@ interface IProps {
 	getLinkForProdutc?: (id: string) => string
 }
 
-export default function CardList({ products, getLinkForProdutc }: IProps) {
+export default function CardList({ products, getLinkForProdutc = undefined }: IProps) {
 	const [imgSize, setImgSize] = useState({ width: 170, height: 220 })
 
 	useEffect(() => {
