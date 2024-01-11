@@ -7,12 +7,12 @@ interface IProps {
 	children?: React.ReactNode
 	className?: string
 	fill?: string
-	handleClick: () => void
+	onClick: () => void
 }
 
-function HederBtn({ src, className = '', fill = '#fff', ariaLabel, children = null, handleClick }: IProps) {
+function HederBtn({ src, className = '', fill = '#fff', ariaLabel, children = null, onClick }: IProps) {
 	return (
-		<button className={`${s.wrapper} ${className}`} type="button" onClick={handleClick} aria-label={ariaLabel}>
+		<button className={`${s.wrapper} ${className}`} type="button" onClick={onClick} aria-label={ariaLabel}>
 			{children}
 			{src && <span style={{ backgroundImage: `url(${src})`, fill }} className={s.icon} />}
 		</button>

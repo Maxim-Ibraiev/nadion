@@ -15,7 +15,7 @@ export default function NavMenu() {
 				<Button
 					ariaLabel={language.menu}
 					src="/icons/menu.svg"
-					handleClick={() => {
+					onClick={() => {
 						setIsOpen(true)
 					}}
 				/>

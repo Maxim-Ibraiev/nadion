@@ -42,7 +42,7 @@ export default function ShoppingBag({ handleCloseModal }: IProps) {
 			<div className={s.header}>
 				<p className={s.title}>{language.productsInBag}</p>
 
-				<Button handleClick={() => handleCloseModal()} className={s.x}>
+				<Button onClick={() => handleCloseModal()} className={s.x}>
 					<CloseIcon height="20px" />
 				</Button>
 			</div>
@@ -61,11 +61,11 @@ export default function ShoppingBag({ handleCloseModal }: IProps) {
 						))}
 					</div>
 					<ShoppingBagFooter className={s.footer}>
-						<Button className={s.secondaryBottom} handleClick={() => handleCloseModal()}>
+						<Button className={s.secondaryBottom} onClick={() => handleCloseModal()}>
 							{language.continueShopping}
 						</Button>
 						<Link href={routes.getCheckout(shoppingId)} style={{ pointerEvents: 'none' }} className={s.primaryBottom}>
-							<Button handleClick={handleOrder} isLoading={isLoading}>
+							<Button onClick={handleOrder} isLoading={isLoading}>
 								{language.orderProduct}
 							</Button>
 						</Link>
@@ -74,7 +74,7 @@ export default function ShoppingBag({ handleCloseModal }: IProps) {
 			) : (
 				<>
 					<p style={{ textAlign: 'center' }}>{language.emptyBag}</p>
-					<Button className={s.close} handleClick={() => (handleCloseModal ? handleCloseModal() : router.push(routes.home))}>
+					<Button className={s.close} onClick={() => (handleCloseModal ? handleCloseModal() : router.push(routes.home))}>
 						{language.close}
 					</Button>
 				</>

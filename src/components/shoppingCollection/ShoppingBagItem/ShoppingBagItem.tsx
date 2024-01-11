@@ -51,7 +51,7 @@ export default function ShoppingBagItem({ product, handleDelete, handleClose }: 
 					</div>
 				</div>
 			</div>
-			<Button className={s.close} handleClick={handleDelete}>
+			<Button className={s.close} onClick={handleDelete}>
 				<CloseIcon height="10px" />
 			</Button>
 		</div>

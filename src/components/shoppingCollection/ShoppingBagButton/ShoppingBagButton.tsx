@@ -16,7 +16,7 @@ export default function ShoppingBagButton() {
 				<Button
 					ariaLabel={language.menu}
 					src={isOpenShoppingBag ? '/icons/close.svg' : '/icons/bag.svg'}
-					handleClick={() => {
+					onClick={() => {
 						setIsOpenShoppingBag(true)
 					}}
 				/>
