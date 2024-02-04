@@ -11,6 +11,7 @@
 		"react/jsx-filename-extension": "off",
 		"no-use-before-define": "off",
 		"react/self-closing-comp": "warn",
+		"react/jsx-no-useless-fragment": "warn",
 		"no-unused-vars": [
 			"warn",
 			{
