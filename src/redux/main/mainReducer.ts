@@ -15,7 +15,7 @@ const products = createReducer<IProductObject[]>([], (builder) => {
 	builder
 		.addCase(hydrate, (_, { payload }) => getProductsForRedux(payload))
 		.addCase(productsSuccess, (_, action) => action.payload)
-		.addCase(setSelectedSizeOfProduct, (state, { payload }) => handleSelectedSizeOfProduct(state, { payload }))
+		.addCase(setSelectedSizeOfProduct, handleSelectedSizeOfProduct)
 })
 
 const error = createReducer<IError>(null, (builder) => {
@@ -25,26 +25,27 @@ const error = createReducer<IError>(null, (builder) => {
 		.addCase(productsError, (_, { payload }) => payload)
 })
 
-function handleSelectedSizeOfProduct(productsOfRedux: IProductObject[], { payload }: IPayload<IShotSelectedProducts>) {
-	return productsOfRedux.map((prd) => {
-		const product = new ProductStructure(prd)
-		const selectedSize = payload.find((el) => el.id === product.getId())?.selectedSize
-		return selectedSize && selectedSize.length > 0 ? { ...product.toObject(), selectedSize } : product.toObject()
-	})
-}
-
 export const selectedProducts = createReducer<IProductObject[]>([], (builder) => {
 	builder
 		.addCase(hydrate, (draft, { payload }) => {
-			// todo validation for product from local storage
+			// TODO: validation for product from local storage
 			if (draft) {
 				draft.concat(getProductsForRedux(payload))
 			}
 		})
 		.addCase(selectedProductsSuccess, (_, { payload }) => payload.map((el) => el.toObject()))
 		.addCase(setSelectedProducts, (_, { payload }) => payload.map((el) => el.toObject()))
-		.addCase(setSelectedSizeOfProduct, (state, { payload }) => handleSelectedSizeOfProduct(state, { payload }))
+		.addCase(setSelectedSizeOfProduct, handleSelectedSizeOfProduct)
 })
+
+function handleSelectedSizeOfProduct(productsOfRedux: IProductObject[], { payload }: IPayload<IShotSelectedProducts>) {
+	return productsOfRedux.map((prd) => {
+		const product = new ProductStructure(prd)
+		const selectedSize = payload.find((el) => el.id === product.getId())?.selectedSize
+
+		return selectedSize ? { ...product.toObject(), selectedSize } : { ...product.toObject(), selectedSize: '' }
+	})
+}
 
 const main = combineReducers({
 	products,

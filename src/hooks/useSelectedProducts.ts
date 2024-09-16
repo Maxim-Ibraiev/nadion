@@ -1,9 +1,10 @@
+import { ProductStructure } from '@/helpers'
 import { useDispatch, useSelector } from 'react-redux'
 import { IProduct, IShotSelectedProducts, IState } from '../interfaces'
 import * as actions from '../redux/main/mainActions'
 import { getProductById, getSelectedProducts } from '../redux/selectors'
 
-export default function useSelectedProducts() {
+export default function useSelectedProducts(): [ProductStructure[], (products: IProduct[]) => void] {
 	const selectedProductFromRedux = useSelector(getSelectedProducts)
 	const dispatch = useDispatch()
 	const setSelectedProductFromRedux = (products: IProduct[]) => {

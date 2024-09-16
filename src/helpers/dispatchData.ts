@@ -23,7 +23,7 @@ export default async function dispatchData(dispatch: Dispatch, { shoppingBag, pr
 	}
 	if (products.data) dispatch(actions.productsSuccess(products.data))
 
-	// ! todo
+	// ! TODO:
 	// if (shoppingBag) {
 	//   const productList = getProductStructure(products.data);
 	//   const selectedProducts = shoppingBag.data.selectedProducts.map((el) =>
