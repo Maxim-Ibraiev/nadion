@@ -43,7 +43,7 @@ function handleSelectedSizeOfProduct(productsOfRedux: IProductObject[], { payloa
 		const product = new ProductStructure(prd)
 		const selectedSize = payload.find((el) => el.id === product.getId())?.selectedSize
 
-		return selectedSize ? { ...product.toObject(), selectedSize } : { ...product.toObject(), selectedSize: '' }
+		return typeof selectedSize !== 'undefined' ? { ...product.toObject(), selectedSize } : { ...product.toObject() }
 	})
 }
 

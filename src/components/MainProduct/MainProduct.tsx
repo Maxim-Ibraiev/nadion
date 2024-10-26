@@ -6,7 +6,7 @@ import cn from 'classnames'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { useEffect, useLayoutEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { SHOPPING_ID, UAH } from '../../constants'
 import language from '../../language'
 import routes from '../../routes'
@@ -18,9 +18,9 @@ import s from './MainProduct.module.scss'
 
 export default function MainProduct() {
 	const router = useRouter()
-	const idProduct = Array.isArray(router.query.id) ? router.query.id[0] : router.query.id
+	const idProduct = Array.isArray(router.query.id) ? router.query.id[0] : router.query.id || ''
 	const { getProductById, getProductsByModel } = useReduceSelectors()
-	const product = getProductById(idProduct || '')
+	const product = getProductById(idProduct)
 	const allModels = getProductsByModel(product?.getModel() || '')
 	const [selectedProducts, setSelectedProduct] = useSelectedProducts()
 	const [isProductSelected, setIsProductSelected] = useState(Boolean(selectedProducts.find(({ getId }) => getId() === product?.getId())))

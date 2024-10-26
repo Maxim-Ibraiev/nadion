@@ -1,7 +1,6 @@
 import { IProduct } from '@/interfaces/'
 import actions from '@/redux/allActions'
 import cn from 'classnames'
-import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 
 import { useSelectedProducts } from '@/hooks'
@@ -14,14 +13,14 @@ interface Props {
 export default function GridOfSizes({ product }: Props) {
 	const dispatch = useDispatch()
 	const [selectedProducts] = useSelectedProducts()
-	const [selectedSize, setSelectedSize] = useState(selectedProducts.find((el) => el.getId() === product.getId())?.getSelectedSize() || '')
+	let selectedSize = selectedProducts.find((el) => el.getId() === product.getId())?.getSelectedSize() || product.getSelectedSize() || ''
 
 	function handleClick(size: string) {
-		if (size === product.getSelectedSize()) {
+		if (size === selectedSize) {
 			dispatch(actions.setSelectedSizeOfProduct([{ id: product.getId(), selectedSize: '' }]))
-			setSelectedSize('')
+			selectedSize = ''
 		} else {
-			setSelectedSize(size)
+			selectedSize = size
 			dispatch(actions.setSelectedSizeOfProduct([{ id: product.getId(), selectedSize: size }]))
 		}
 	}
