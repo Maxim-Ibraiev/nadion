@@ -1,5 +1,6 @@
 import Layout from '@/components/Layout'
 import ProductCard from '@/components/ProductCard'
+import ProductsRow from '@/components/ProductsRow'
 import MainButton from '@/components/buttons/MainButton'
 import GridCol from '@/components/gridTemplates/GridCol/GridCol'
 import GridScrollRow from '@/components/gridTemplates/GridScrollRow'
@@ -56,13 +57,7 @@ function Home() {
 				<MainButton>up tp 300</MainButton>
 				<MainButton>up tp 400</MainButton>
 			</Box>
-			<GridScrollRow>
-				{products.map((product) => (
-					<div key={product.getId()} style={{ marginRight: '10px' }}>
-						<ProductCard width={200} height={300} product={product} />
-					</div>
-				))}
-			</GridScrollRow>
+			<ProductsRow products={products} />
 			<Box
 				sx={{
 					width: '100%',
@@ -83,16 +78,11 @@ function Home() {
 				<MainButton>Pass to ...</MainButton>
 			</Box>
 
-			<Typography variant="h3" textAlign="center">
+			<Typography variant="h3" textAlign="center" mb={2}>
 				The best to buy
 			</Typography>
-			<GridScrollRow>
-				{products.map((product) => (
-					<div key={product.getId()} style={{ marginRight: '10px' }}>
-						<ProductCard width={200} height={300} product={product} />
-					</div>
-				))}
-			</GridScrollRow>
+
+			<ProductsRow products={products} />
 		</Layout>
 	)
 }
