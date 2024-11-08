@@ -98,7 +98,7 @@ function Home() {
 				<MainButton>Pass to ...</MainButton>
 			</Box>
 
-			<Typography variant="h3" textAlign="center" mb={2}>
+			<Typography variant="h3" textAlign="center" mt={15} mb={9}>
 				The best to buy
 			</Typography>
 
