@@ -1,5 +1,4 @@
 import classNames from 'classnames'
-import React from 'react'
 import { UAH } from '../../../constants'
 import { useSelectedProducts } from '../../../hooks'
 import language from '../../../language'
