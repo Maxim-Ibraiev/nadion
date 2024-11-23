@@ -12,6 +12,7 @@
 		"no-use-before-define": "off",
 		"react/self-closing-comp": "warn",
 		"react/jsx-no-useless-fragment": "warn",
+		"react/jsx-curly-brace-presence": "warn",
 		"no-unused-vars": [
 			"warn",
 			{

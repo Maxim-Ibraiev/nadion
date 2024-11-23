@@ -3,7 +3,7 @@ import { CloseIcon } from '@/components/icons'
 import ShoppingBagFooter from '@/components/shoppingCollection/ShoppingBagFooter'
 import ShoppingBagItem from '@/components/shoppingCollection/ShoppingBagItem'
 import { SHOPPING_ID } from '@/constants'
-// import { useSelectedProducts } from "@/hooks";
+import { useSelectedProducts } from '@/hooks'
 import { IProduct } from '@/interfaces'
 import language from '@/language'
 import Link from '@/lib/next/Link'
@@ -18,13 +18,13 @@ interface IProps {
 
 export default function ShoppingBag({ handleCloseModal }: IProps) {
 	const router = useRouter()
-	const [selectedProducts, _] = useState<IProduct[]>([])
+	const [selectedProducts, setSelectedProducts] = useSelectedProducts()
 	const [shoppingId, setShoppingId] = useState('')
 	const [isLoading, setIsLoading] = useState(false)
 
-	// const handleDelete = (product: IProduct) => {
-	// 	setSelectedProducts(selectedProducts.filter((el) => el.getId() !== product.getId()));
-	// };
+	const handleDelete = (product: IProduct) => {
+		setSelectedProducts(selectedProducts.filter((el) => el.getId() !== product.getId()))
+	}
 
 	const handleOrder = () => {
 		if (routes.getCheckout(shoppingId) === router.asPath) handleCloseModal()
@@ -54,8 +54,7 @@ export default function ShoppingBag({ handleCloseModal }: IProps) {
 							<ShoppingBagItem
 								key={product.getId()}
 								product={product}
-								handleDelete={() => null}
-								// handleDelete={() => handleDelete(product)}
+								handleDelete={() => handleDelete(product)}
 								handleClose={handleCloseModal}
 							/>
 						))}

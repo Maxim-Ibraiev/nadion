@@ -1,8 +1,7 @@
-import { IProduct } from '@/interfaces'
 import classNames from 'classnames'
-import React, { useState } from 'react'
+import React from 'react'
 import { UAH } from '../../../constants'
-// import { useSelectedProducts } from "../../../hooks";
+import { useSelectedProducts } from '../../../hooks'
 import language from '../../../language'
 import s from './ShoppingBagFooter.module.scss'
 
@@ -12,7 +11,7 @@ interface IProps {
 }
 
 function ShoppingBagFooter({ className = '', children }: IProps) {
-	const [selectedProducts] = useState<IProduct[]>([])
+	const [selectedProducts] = useSelectedProducts()
 
 	return (
 		<div className={classNames(s.footer, { [className]: className })}>

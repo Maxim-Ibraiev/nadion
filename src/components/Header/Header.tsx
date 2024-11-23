@@ -1,7 +1,7 @@
 'use client'
 
 import ShoppingBagButton from '@/components/shoppingCollection/ShoppingBagButton'
-import CATEGORIES from '@/constants/CATEGORIES'
+import { categories } from '@/constants'
 import language from '@/language'
 import Link from '@/lib/next/Link'
 import cn from 'classnames'
@@ -21,7 +21,7 @@ export default function Header() {
 			<div className={s.nav}>
 				<nav>
 					<ul className={cn(s.row, s.mobUpper)}>
-						{CATEGORIES.map((category) => (
+						{categories.map((category) => (
 							<li key={category} className={s.navItem}>
 								<Link
 									href={routes[category]}

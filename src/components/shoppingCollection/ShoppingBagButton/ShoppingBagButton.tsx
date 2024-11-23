@@ -5,6 +5,7 @@ import Button from '@/components/buttons/HederBtn'
 import language from '@/language'
 import cn from 'classnames'
 import { useState } from 'react'
+import ShoppingBag from '../ShoppingBag/ShoppingBag'
 import s from './ShoppingBagButton.module.scss'
 
 export default function ShoppingBagButton() {
@@ -28,7 +29,7 @@ export default function ShoppingBagButton() {
 				overlayClassName={s.overModal}
 				onRequestClose={() => setIsOpenShoppingBag(false)}
 			>
-				{/* <ShoppingBag handleCloseModal={() => setIsOpenShoppingBag(false)} /> */}
+				<ShoppingBag handleCloseModal={() => setIsOpenShoppingBag(false)} />
 			</Modal>
 		</div>
 	)

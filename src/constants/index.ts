@@ -12,5 +12,6 @@ export const desktop = 1200
 export const SHOPPING_ID = 'shoppingId'
 export const DEFAULT_SORT_FOR_PRODUCTS = 'popularity'
 
-export { default as CATEGORIES } from './CATEGORIES'
+export { default as categories } from './categories'
 export { default as defaultOptions } from './defaultOptions'
+export { default as sizeList } from './sizeList'

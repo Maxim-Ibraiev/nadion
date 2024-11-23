@@ -1,13 +1,14 @@
+import sizeList from '@/constants/sizeList'
+import useReduceActinos from '@/hooks/useReduceActions'
+import language from '@/language'
+import { FormControl, MenuItem, Select, SelectProps } from '@mui/material'
 import Image from 'next/image'
 import Link from 'next/link'
-// import { useDispatch } from "react-redux";
 import { IProduct } from '../../../interfaces'
-import language from '../../../language'
-// import * as actions from "../../redux/main/mainActions";
+import routes from '../../../routes'
 import Button from '../../buttons/MainButton'
 import { CloseIcon } from '../../icons'
-// import CustomSelector, { OnChange } from "../inputs/CustomSelector";
-import routes from '../../../routes'
+
 import s from './ShoppingBagItem.module.scss'
 
 interface IProps {
@@ -17,13 +18,14 @@ interface IProps {
 }
 
 export default function ShoppingBagItem({ product, handleDelete, handleClose }: IProps) {
-	// const dispatch = useDispatch();
+	const { setSelectedSizeOfProduct } = useReduceActinos()
 
-	// const handleChangeSize: OnChange = (_, option) => {
-	//   const payload = { id: product.getId(), selectedSize: option[0] };
+	const handleChangeSize: SelectProps['onChange'] = (event) => {
+		const value = String(event.target.value || '')
+		const payload = { id: product.getId(), selectedSize: value }
 
-	//   dispatch(actions.setSelectedSizeOfProduct([payload]));
-	// };
+		setSelectedSizeOfProduct([payload])
+	}
 
 	return (
 		<div className={s.wrapper}>
@@ -41,14 +43,15 @@ export default function ShoppingBagItem({ product, handleDelete, handleClose }: 
 				<span>{product.getTitle()}</span>
 				<div className={s.size}>
 					<span>{language.size}:</span>
-					<div className={s.select}>
-						{/* <CustomSelector
-              onChange={handleChangeSize}
-              value={product.getSelectedSize()}
-              type="size"
-              menuPosition="fixed"
-            /> */}
-					</div>
+					<FormControl variant="standard" hiddenLabel>
+						<Select labelId="select-label" id="select" value={product.getSelectedSize()} label="size" onChange={handleChangeSize}>
+							{sizeList.map((el) => (
+								<MenuItem value={el} key={el}>
+									{el}
+								</MenuItem>
+							))}
+						</Select>
+					</FormControl>
 				</div>
 			</div>
 			<Button className={s.close} onClick={handleDelete}>

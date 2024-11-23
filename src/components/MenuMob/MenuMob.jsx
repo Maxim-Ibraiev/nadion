@@ -1,15 +1,15 @@
 /* eslint-disable jsx-a11y/interactive-supports-focus */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
+import { categories } from '@/constants'
+import language from '@/language'
 import Link from '@/lib/next/Link'
-import { CATEGORIES } from '../../constants'
-import language from '../../language'
-import routes from '../../routes'
+import routes from '@/routes'
 import s from './MenuMob.module.scss'
 
 export default function MenuMob() {
 	return (
 		<ul className={s.container}>
-			{CATEGORIES.map((category) => (
+			{categories.map((category) => (
 				<li key={category} className={s.item}>
 					<Link href={routes[category]} role="button">
 						{language[category] || category}

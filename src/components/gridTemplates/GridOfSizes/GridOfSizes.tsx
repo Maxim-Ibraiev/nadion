@@ -3,6 +3,7 @@ import actions from '@/redux/allActions'
 import cn from 'classnames'
 import { useDispatch } from 'react-redux'
 
+import { sizeList } from '@/constants'
 import { useSelectedProducts } from '@/hooks'
 import s from './GridOfSizes.module.scss'
 
@@ -27,7 +28,7 @@ export default function GridOfSizes({ product }: Props) {
 
 	return (
 		<div className={s.sizeWrapper}>
-			{product.getAllSizeOptions().map((size) => (
+			{sizeList.map((size) => (
 				<button
 					type="button"
 					onClick={() => handleClick(size)}
