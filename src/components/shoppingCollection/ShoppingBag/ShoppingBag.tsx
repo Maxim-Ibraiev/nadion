@@ -6,7 +6,6 @@ import { SHOPPING_ID } from '@/constants'
 import { useSelectedProducts } from '@/hooks'
 import { IProduct } from '@/interfaces'
 import language from '@/language'
-import Link from '@/lib/next/Link'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import routes from '../../../routes'
@@ -27,8 +26,11 @@ export default function ShoppingBag({ handleCloseModal }: IProps) {
 	}
 
 	const handleOrder = () => {
-		if (routes.getCheckout(shoppingId) === router.asPath) handleCloseModal()
-		else setIsLoading(true)
+		if (routes.checkout === router.asPath) handleCloseModal()
+		else {
+			setIsLoading(true)
+			router.push(routes.checkout)
+		}
 	}
 
 	useEffect(() => {
@@ -63,11 +65,9 @@ export default function ShoppingBag({ handleCloseModal }: IProps) {
 						<Button className={s.secondaryBottom} onClick={() => handleCloseModal()}>
 							{language.continueShopping}
 						</Button>
-						<Link href={routes.getCheckout(shoppingId)} style={{ pointerEvents: 'none' }} className={s.primaryBottom}>
-							<Button onClick={handleOrder} isLoading={isLoading}>
-								{language.orderProduct}
-							</Button>
-						</Link>
+						<Button onClick={handleOrder} isLoading={isLoading}>
+							{language.orderProduct}
+						</Button>
 					</ShoppingBagFooter>
 				</>
 			) : (

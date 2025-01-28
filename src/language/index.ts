@@ -90,6 +90,11 @@ const language = {
 	enterToAdmin: 'Вход в админ панель',
 	login: 'Логин',
 	password: 'Пароль',
+	delivary: 'Доставка',
+	pickup: 'Самовывоз',
+	city: 'Город',
+	adress: 'Адрес',
+	shopName: 'Название магазина',
 
 	// foter
 	aboutOurCompany: 'О нашей компании',

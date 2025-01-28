@@ -14,10 +14,10 @@ import s from './ShoppingBagItem.module.scss'
 interface IProps {
 	product: IProduct
 	handleDelete: () => void
-	handleClose: () => void
+	handleClose?: () => void
 }
 
-export default function ShoppingBagItem({ product, handleDelete, handleClose }: IProps) {
+export default function ShoppingBagItem({ product, handleDelete, handleClose = () => {} }: IProps) {
 	const { setSelectedSizeOfProduct } = useReduceActinos()
 
 	const handleChangeSize: SelectProps['onChange'] = (event) => {

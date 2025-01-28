@@ -1,9 +1,7 @@
 import Layout from '@/components/Layout'
-import ProductCard from '@/components/ProductCard'
 import ProductsRow from '@/components/ProductsRow'
 import MainButton from '@/components/buttons/MainButton'
 import GridCol from '@/components/gridTemplates/GridCol/GridCol'
-import GridScrollRow from '@/components/gridTemplates/GridScrollRow'
 import PRODUCTS from '@/constants/PRODUCTS'
 import { useReduceSelectors } from '@/hooks'
 import { productsSuccess } from '@/redux/main/mainActions'
@@ -16,6 +14,7 @@ import ContantImage4 from '@public/backgrounds/4.jpg'
 
 function Home() {
 	const { products } = useReduceSelectors()
+
 	return (
 		<Layout>
 			<Box

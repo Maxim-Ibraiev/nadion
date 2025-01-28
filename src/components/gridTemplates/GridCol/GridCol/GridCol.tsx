@@ -10,15 +10,15 @@ export default function GridCol({ children }: React.PropsWithChildren) {
 
 				'& > *': {
 					height: {
-						xs: 300,
-						sm: 440,
+						sm: 300,
+						md: 440,
 					},
 				},
 				'&>*:nth-of-type(6n-5)': {
-					gridColumn: { xs: '1/3', sm: '1/3' },
+					gridColumn: { sm: '1/3', md: '1/3' },
 				},
 				'&>*:nth-of-type(6n)': {
-					gridColumn: { xs: '1/3', sm: '3/5' },
+					gridColumn: { sm: '1/3', md: '3/5' },
 				},
 			}}
 		>

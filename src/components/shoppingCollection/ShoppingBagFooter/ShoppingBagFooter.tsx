@@ -6,10 +6,10 @@ import s from './ShoppingBagFooter.module.scss'
 
 interface IProps {
 	className?: string
-	children: React.ReactNode
+	children?: React.ReactNode
 }
 
-function ShoppingBagFooter({ className = '', children }: IProps) {
+function ShoppingBagFooter({ className = '', children = null }: IProps) {
 	const [selectedProducts] = useSelectedProducts()
 
 	return (
