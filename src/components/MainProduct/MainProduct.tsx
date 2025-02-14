@@ -32,7 +32,7 @@ export default function MainProduct() {
 			const isNeedToAdd = !selectedProducts.some(({ getId }) => getId() === product.getId())
 
 			if (isNeedToAdd) {
-				setSelectedProduct(selectedProducts.concat(product))
+				setSelectedProduct.add(product)
 				setIsProductSelected(true)
 			}
 		}

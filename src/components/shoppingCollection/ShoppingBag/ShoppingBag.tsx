@@ -21,10 +21,6 @@ export default function ShoppingBag({ handleCloseModal }: IProps) {
 	const [shoppingId, setShoppingId] = useState('')
 	const [isLoading, setIsLoading] = useState(false)
 
-	const handleDelete = (product: IProduct) => {
-		setSelectedProducts(selectedProducts.filter((el) => el.getId() !== product.getId()))
-	}
-
 	const handleOrder = () => {
 		if (routes.checkout === router.asPath) handleCloseModal()
 		else {
@@ -56,7 +52,7 @@ export default function ShoppingBag({ handleCloseModal }: IProps) {
 							<ShoppingBagItem
 								key={product.getId()}
 								product={product}
-								handleDelete={() => handleDelete(product)}
+								handleDelete={() => setSelectedProducts.delete(product.getId())}
 								handleClose={handleCloseModal}
 							/>
 						))}
