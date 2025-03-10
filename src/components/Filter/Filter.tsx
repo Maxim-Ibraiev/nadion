@@ -1,4 +1,4 @@
-import { CATEGORIES } from '@/constants'
+import categories from '@/constants/categories'
 import language from '@/language'
 import Link from '@/lib/next/Link'
 import routes from '@/routes'
@@ -14,20 +14,20 @@ function valuetext(v: number) {
 }
 
 export default function Filter() {
-	const [value, setValue] = useState<number[]>([20, 3000])
+	const [value, setValue] = useState<[number, number]>([20, 3000])
 	const colors = ['red', 'blue', 'black', 'beige', 'brown']
 	const sizes = ['XS', 'S', 'M', 'L', 'XL', 'XXL']
 	const dressType = ['без рукавів', 'Короткий рукав', 'Довгі рукави', 'Довгий  довжина до коліна', 'Короткі']
 
 	const handleChange = (_: Event, newValue: number | number[]) => {
-		setValue(newValue as number[])
+		setValue(newValue as [number, number])
 	}
 
 	return (
-		<Box>
+		<Box component="aside">
 			<Paper sx={{ display: 'grid', gap: '24px', padding: { xs: '15px 10px', sm: '30px 40px' } }}>
 				<Stack>
-					{CATEGORIES.map((category) => (
+					{categories.map((category) => (
 						<Link key={category} href={routes[category]}>
 							<Button fullWidth component="span" endIcon={<ArrowForwardIcon />} size="small">
 								{language[category]}

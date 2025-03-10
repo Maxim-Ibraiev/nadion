@@ -58,6 +58,7 @@ const language = {
 
 	allFilters: 'Все фильтры',
 	hideFilters: 'Скрыть все фильтры',
+	sort: 'Сортировать',
 	reset: 'Сбросить',
 	search: 'Поиск',
 
