@@ -53,7 +53,7 @@ export default function ProductsPage() {
 
 					<Modal open={isOpenSort} onClose={()=>setIsOpenSort(false)} >
 						<Paper sx={{width: '300px', m: '150px auto 0', }}>
-							{['sort by price', 'sort by popularity'].map(item=> <Button fullWidth	 onClick={()=> {
+							{['sort by price', 'sort by popularity'].map(item=> <Button key={item} fullWidth	 onClick={()=> {
 								setIsOpenSort(false)
 							}}>{item}</Button>)}
 						</Paper>
