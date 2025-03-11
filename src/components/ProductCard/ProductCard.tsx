@@ -6,19 +6,18 @@ import Link from 'next/link'
 import s from './ProductCard.module.scss'
 
 interface Props {
-	width: number
-	height: number
 	product: IProduct
-	getLinkForProdutc?: (id: string) => string
+	getLinkForProduct?: (id: string) => string
 }
 
-export default function ProductCard({ width, height, product, getLinkForProdutc = undefined }: Props) {
+export default function ProductCard({  product, getLinkForProduct = undefined }: Props) {
 	const { getProductsByModel } = useReduceSelectors()
 	const allModels = getProductsByModel(product.getModel())
 
 	return (
-		<Link href={getLinkForProdutc ? getLinkForProdutc(product.getId()) : `${routes.product}/${product.getId()}`} className={s.wrapper}>
-			<div className={s.image} style={{ width, height }}>
+		<Link href={getLinkForProduct ? getLinkForProduct(product.getId()) : `${routes.product}/${product.getId()}`} className={s.wrapper}>
+			<div className={s.imageWrapper} >
+				<div className={s.image}>
 				<Image
 					fill
 					sizes="(max-width: 765px) 364px,
@@ -29,6 +28,7 @@ export default function ProductCard({ width, height, product, getLinkForProdutc 
 					src={product.getMainImageSrc()}
 					alt={product.getTitle()}
 				/>
+				</div>
 			</div>
 			<div className={s.productDetails}>
 				<b className={s.price}>{`${product.getPrice()} грн`}</b>

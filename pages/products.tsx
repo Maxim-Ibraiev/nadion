@@ -14,28 +14,35 @@ import { useState } from 'react'
 export default function ProductsPage() {
 	const { products } = useReduceSelectors()
 	const { isMobile, isTable } = useDevice()
-	const [isOpen, setIsOpen] = useState(false)
+	const [isOpenFilter, setIsOpenFilter] = useState(false)
+	const [isOpenSort, setIsOpenSort]= useState(false)
+	const isShowFilter = isMobile || isTable
+
+
 
 	return (
 		<Layout>
-			{isMobile || isTable ? (
+			<Box sx={isShowFilter ?{}:{display: 'flex', gap: '56px'}}>
+
+			{isShowFilter ? (
 				<>
 					<Box display="flex" justifyContent="space-between">
-						<Button variant="text" sx={{ mb: 3 }} onClick={() => setIsOpen(true)}>
+						<Button variant="text" sx={{ mb: 3 }} onClick={() => setIsOpenFilter(true)}>
 							{language.allFilters}
 						</Button>
-						<Button variant="text" sx={{ mb: 3 }}>
+						<Button variant="text" sx={{ mb: 3 }} onClick={()=> setIsOpenSort(true)}>
 							{language.sort}
 						</Button>
 					</Box>
-					<Modal sx={{ overflowY: 'scroll' }} open={isOpen} onClose={() => setIsOpen(false)}>
+
+					<Modal sx={{ overflowY: 'scroll' }} open={isOpenFilter} onClose={() => setIsOpenFilter(false)}>
 						<Box>
 							<Box>
 								<Paper sx={{ display: 'flex', height: 60, borderBottom: '1px solid rgba(0, 0, 0, 0.87)' }}>
-									<Button sx={{ height: 1, flexGrow: 1 }} onClick={() => setIsOpen(false)} startIcon={<ArrowBackIcon />}>
+									<Button sx={{ height: 1, flexGrow: 1 }} onClick={() => setIsOpenFilter(false)} startIcon={<ArrowBackIcon />}>
 										{language.hideFilters}
 									</Button>
-									<Button sx={{ height: 1 }} onClick={() => setIsOpen(false)} startIcon={<RotateLeftIcon />}>
+									<Button sx={{ height: 1 }} onClick={() => setIsOpenFilter(false)} startIcon={<RotateLeftIcon />}>
 										{language.reset}
 									</Button>
 								</Paper>
@@ -43,11 +50,22 @@ export default function ProductsPage() {
 							<Filter />
 						</Box>
 					</Modal>
+
+					<Modal open={isOpenSort} onClose={()=>setIsOpenSort(false)} >
+						<Paper sx={{width: '300px', m: '150px auto 0', }}>
+							{['sort by price', 'sort by popularity'].map(item=> <Button fullWidth	 onClick={()=> {
+								setIsOpenSort(false)
+							}}>{item}</Button>)}
+						</Paper>
+					</Modal>
 				</>
 			) : (
 				<Filter />
 			)}
-			<CardList products={products} />
+				<Box sx={{flexGrow: 1}}>
+			<CardList products={products} /></Box>
+			</Box>
+
 		</Layout>
 	)
 }

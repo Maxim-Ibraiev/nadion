@@ -8,9 +8,9 @@ import { productsSuccess } from '@/redux/main/mainActions'
 import { wrapper } from '@/redux/store'
 import { Box, Typography } from '@mui/material'
 import heroImage from '@public/backgrounds/1.jpg'
-import ContantImage2 from '@public/backgrounds/2.jpg'
-import ContantImage3 from '@public/backgrounds/3.jpg'
-import ContantImage4 from '@public/backgrounds/4.jpg'
+import ContentImage2 from '@public/backgrounds/2.jpg'
+import ContentImage3 from '@public/backgrounds/3.jpg'
+import ContentImage4 from '@public/backgrounds/4.jpg'
 
 function Home() {
 	const { products } = useReduceSelectors()
@@ -50,7 +50,7 @@ function Home() {
 					<div
 						style={{
 							backgroundColor: 'lightgray',
-							backgroundImage: `url(${ContantImage3.src})`,
+							backgroundImage: `url(${ContentImage3.src})`,
 							backgroundPosition: 'center',
 							objectFit: 'contain',
 						}}
@@ -62,7 +62,7 @@ function Home() {
 					<div
 						style={{
 							backgroundColor: 'lightgray',
-							backgroundImage: `url(${ContantImage2.src})`,
+							backgroundImage: `url(${ContentImage2.src})`,
 							backgroundPosition: 'center',
 							objectFit: 'contain',
 						}}
@@ -87,7 +87,7 @@ function Home() {
 					alignItems: 'center',
 					my: '25px',
 					px: '20%',
-					backgroundImage: `url(${ContantImage4.src})`,
+					backgroundImage: `url(${ContentImage4.src})`,
 				}}
 			>
 				<Typography sx={{ mb: '45px' }} textAlign="center">
