@@ -13,6 +13,8 @@
 		"react/self-closing-comp": "warn",
 		"react/jsx-no-useless-fragment": "warn",
 		"react/jsx-curly-brace-presence": "warn",
+		"object-shorthand": "warn",
+		"arrow-body-style": "warn",
 		"no-unused-vars": [
 			"warn",
 			{
@@ -20,11 +22,6 @@
 				"args": "none"
 			}
 		],
-		"react/require-default-props": [
-			"warn",
-			{
-				"functions": "defaultArguments"
-			}
-		]
+		"react/require-default-props": "off"
 	}
 }

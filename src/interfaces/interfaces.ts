@@ -53,6 +53,7 @@ export type InitialFilter = {
 	material?: string | string[]
 	color?: string | string[]
 	sort?: string | string[]
+	price?: string | string[]
 }
 
 export type FilterQuery = {

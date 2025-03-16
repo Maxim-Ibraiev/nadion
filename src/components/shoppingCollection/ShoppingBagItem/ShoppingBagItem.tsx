@@ -1,5 +1,5 @@
 import sizeList from '@/constants/sizeList'
-import useReduceActinos from '@/hooks/useReduceActions'
+import useReduceActions from '@/hooks/useReduceActions'
 import language from '@/language'
 import { FormControl, MenuItem, Select, SelectProps } from '@mui/material'
 import Image from 'next/image'
@@ -18,7 +18,7 @@ interface IProps {
 }
 
 export default function ShoppingBagItem({ product, handleDelete, handleClose = () => {} }: IProps) {
-	const { setSelectedSizeOfProduct } = useReduceActinos()
+	const { setSelectedSizeOfProduct } = useReduceActions()
 
 	const handleChangeSize: SelectProps['onChange'] = (event) => {
 		const value = String(event.target.value || '')

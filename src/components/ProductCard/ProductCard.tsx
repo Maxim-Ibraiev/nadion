@@ -15,7 +15,7 @@ export default function ProductCard({  product, getLinkForProduct = undefined }:
 	const allModels = getProductsByModel(product.getModel())
 
 	return (
-		<Link href={getLinkForProduct ? getLinkForProduct(product.getId()) : `/${routes.product}/${product.getId()}`} className={s.wrapper}>
+		<Link href={getLinkForProduct ? getLinkForProduct(product.getId()) : `${routes.product}/${product.getId()}`} className={s.wrapper}>
 			<div className={s.imageWrapper} >
 				<div className={s.image}>
 				<Image

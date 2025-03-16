@@ -11,7 +11,7 @@ export default [
 		globalCategory: 'maleClothes',
 		category: 'tShirt',
 		model: 'Phillip Plein череп',
-		sizes: ['XXL', 'L', 'XL', 'M', 'S'],
+		sizes: [ 'M', 'S'],
 		images: [
 			{
 				color: ['black'],
@@ -44,7 +44,7 @@ export default [
 		globalCategory: 'maleClothes',
 		category: 'tShirt',
 		model: 'Phillip Plein череп',
-		sizes: ['XXL', 'L', 'XL', 'M', 'S'],
+		sizes: ['L', ],
 		images: [
 			{
 				color: ['blue'],
@@ -77,7 +77,7 @@ export default [
 		globalCategory: 'maleClothes',
 		category: 'tShirt',
 		model: 'Phillip Plein череп',
-		sizes: ['XXL', 'L', 'XL', 'M', 'S'],
+		sizes: ['XXL',  'XL', ],
 		images: [
 			{
 				color: ['white'],
