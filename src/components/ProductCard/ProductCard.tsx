@@ -10,14 +10,13 @@ interface Props {
 	getLinkForProduct?: (id: string) => string
 }
 
-export default function ProductCard({  product, getLinkForProduct = undefined }: Props) {
+export default function ProductCard({ product, getLinkForProduct = undefined }: Props) {
 	const { getProductsByModel } = useReduceSelectors()
 	const allModels = getProductsByModel(product.getModel())
 
 	return (
 		<Link href={getLinkForProduct ? getLinkForProduct(product.getId()) : `${routes.product}/${product.getId()}`} className={s.wrapper}>
-			<div className={s.imageWrapper} >
-				<div className={s.image}>
+			<div className={s.imageWrapper}>
 				<Image
 					fill
 					sizes="(max-width: 765px) 364px,
@@ -28,7 +27,6 @@ export default function ProductCard({  product, getLinkForProduct = undefined }:
 					src={product.getMainImageSrc()}
 					alt={product.getTitle()}
 				/>
-				</div>
 			</div>
 			<div className={s.productDetails}>
 				<b className={s.price}>{`${product.getPrice()} грн`}</b>

@@ -11,7 +11,7 @@ export default function ProductsRow({ products }: IProps) {
 		<GridScrollRow>
 			{products.map((product) => (
 				<div key={product.getId()} style={{ marginRight: '10px' }}>
-					<ProductCard width={200} height={266} product={product} />
+					<ProductCard product={product} />
 				</div>
 			))}
 		</GridScrollRow>

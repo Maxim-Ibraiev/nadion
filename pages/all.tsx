@@ -1,79 +1,13 @@
-import CardList from '@/components/CardList'
-import Filter from '@/components/Filter/Filter'
+import Catalog from '@/components/Catalog'
 import Layout from '@/components/Layout'
 import PRODUCTS from '@/constants/PRODUCTS'
-import { useDevice } from '@/hooks'
-import language from '@/language'
 import { productsSuccess } from '@/redux/main/mainActions'
 import { wrapper } from '@/redux/store'
-import { Box, Button, Modal, Paper } from '@mui/material'
-import { useState } from 'react'
-import useProducts from '@/hooks/useProducts'
-import useFilter from '@/hooks/useFilter'
 
 export default function ProductsPage() {
-	const { isMobile, isTable } = useDevice()
-	const [isOpenFilter, setIsOpenFilter] = useState(false)
-	const [isOpenSort, setIsOpenSort] = useState(false)
-	const isShowFilter = isMobile || isTable
-	const { filteredProducts } = useProducts()
-	const filter = useFilter()
-
 	return (
 		<Layout>
-			<Box sx={isShowFilter ? {} : { display: 'flex', gap: '56px' }}>
-				{isShowFilter ? (
-					<>
-						<Box display="flex" justifyContent="space-between">
-							<Button variant="text" sx={{ mb: 3 }} onClick={() => setIsOpenFilter(true)}>
-								{language.allFilters}
-							</Button>
-							<Button variant="text" sx={{ mb: 3 }} onClick={() => setIsOpenSort(true)}>
-								{language.sort}
-							</Button>
-						</Box>
-
-						<Modal
-							sx={{ overflowY: 'scroll' }}
-							open={isOpenFilter}
-							onClose={() => setIsOpenFilter(false)}
-							aria-labelledby="modal-for-filter"
-							aria-describedby="filter-products"
-						>
-							<Filter onRequestClose={() => setIsOpenFilter(false)} />
-						</Modal>
-
-						<Modal
-							open={isOpenSort}
-							onClose={() => setIsOpenSort(false)}
-							aria-labelledby="modal-for-sort"
-							aria-describedby="sort-products"
-						>
-							<Paper sx={{ width: '300px', m: '150px auto 0' }}>
-								{['popularity', 'lowPriceFirst', 'highPriceFirst'].map((item) => (
-									<Button
-										key={item}
-										fullWidth
-										onClick={() => {
-											const newQuery = filter.define('sort', [item])
-											filter.updateURL(newQuery)
-
-											setIsOpenSort(false)
-										}}
-									>
-										{item}
-									</Button>
-								))}
-							</Paper>
-						</Modal>
-					</>
-				) : (
-					<Filter />
-				)}
-				<Box sx={{ flexGrow: 1 }}>
-					<CardList products={filteredProducts} />
-				</Box>
-			</Box>
+			<Catalog />
 		</Layout>
 	)
 }
