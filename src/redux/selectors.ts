@@ -12,8 +12,9 @@ export const getSelectedProducts = (state: IState): IProduct[] => getProductStru
 
 export const getProductById = (state: IState, id: string): IProduct | undefined => getProducts(state).find((el) => el.getId() === id)
 
-export const getProductsByModel = memoize((state: IState, model: string): IProduct[] =>
-	getProducts(state).filter((product) => product.getModel() === model)
+export const getProductsByModel = memoize(
+	(state: IState, model: string): IProduct[] => getProducts(state).filter((product) => product.getModel() === model),
+	(_, model) => model
 )
 
 export const getProductStructure = memoize((products: IProductObject[]): IProduct[] => {

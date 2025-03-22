@@ -1,6 +1,5 @@
 import Chip from '@/components/buttons/Chip'
 import ArrowForward from '@mui/icons-material/ArrowForward'
-
 import { Box } from '@mui/material'
 import classNames from 'classnames'
 import React, { useRef, useState } from 'react'
@@ -12,9 +11,7 @@ export default function GridInfRow({ children }: React.PropsWithChildren) {
 	return (
 		<div style={{ position: 'relative' }}>
 			<div style={{ overflowX: 'scroll' }} ref={box}>
-				<Box sx={{ display: 'flex', width: 'fit-content' }} ref={box}>
-					{children}
-				</Box>
+				<Box sx={{ display: 'flex', width: 'fit-content' }}>{children}</Box>
 
 				<Box
 					sx={{
@@ -23,10 +20,11 @@ export default function GridInfRow({ children }: React.PropsWithChildren) {
 						display: 'flex',
 						width: '100%',
 						justifyContent: 'space-between',
+						visibility: 'hidden',
 					}}
 				>
 					<Chip
-						style={{ backgroundColor: 'white' }}
+						style={{ backgroundColor: 'white', visibility: 'visible' }}
 						onClick={() => {
 							if (box.current) {
 								box.current.scrollBy({ left: -300, behavior: 'smooth' })
@@ -38,7 +36,7 @@ export default function GridInfRow({ children }: React.PropsWithChildren) {
 						<ArrowForward style={{ rotate: '180deg' }} />
 					</Chip>
 					<Chip
-						style={{ backgroundColor: 'white' }}
+						style={{ backgroundColor: 'white', visibility: 'visible' }}
 						onClick={() => {
 							if (box.current) {
 								box.current.scrollBy({ left: 300, behavior: 'smooth' })

@@ -34,11 +34,22 @@ export default function Catalog() {
 						onClose={() => setIsOpenFilter(false)}
 						aria-labelledby="modal-for-filter"
 						aria-describedby="filter-products"
+						disablePortal
+						disableEnforceFocus
+						disableAutoFocus
 					>
 						<Filter onRequestClose={() => setIsOpenFilter(false)} />
 					</Modal>
 
-					<Modal open={isOpenSort} onClose={() => setIsOpenSort(false)} aria-labelledby="modal-for-sort" aria-describedby="sort-products">
+					<Modal
+						open={isOpenSort}
+						onClose={() => setIsOpenSort(false)}
+						aria-labelledby="modal-for-sort"
+						aria-describedby="sort-products"
+						disablePortal
+						disableEnforceFocus
+						disableAutoFocus
+					>
 						<Paper sx={{ width: '300px', m: '150px auto 0' }}>
 							{['popularity', 'lowPriceFirst', 'highPriceFirst'].map((item) => (
 								<Button

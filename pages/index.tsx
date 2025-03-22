@@ -3,7 +3,7 @@ import ProductsRow from '@/components/ProductsRow'
 import MainButton from '@/components/buttons/MainButton'
 import GridCol from '@/components/gridTemplates/GridCol/GridCol'
 import PRODUCTS from '@/constants/PRODUCTS'
-import { useReduceSelectors } from '@/hooks'
+import useProducts from '@/hooks/useProducts'
 import { productsSuccess } from '@/redux/main/mainActions'
 import { wrapper } from '@/redux/store'
 import { Box, Typography } from '@mui/material'
@@ -13,7 +13,7 @@ import ContentImage3 from '@public/backgrounds/3.jpg'
 import ContentImage4 from '@public/backgrounds/4.jpg'
 
 function Home() {
-	const { products } = useReduceSelectors()
+	const { products } = useProducts()
 
 	return (
 		<Layout>
@@ -75,7 +75,7 @@ function Home() {
 				<MainButton>up tp 300</MainButton>
 				<MainButton>up tp 400</MainButton>
 			</Box>
-			<ProductsRow products={products} />
+			<ProductsRow products={products} width={117} />
 			<Box
 				sx={{
 					width: '100%',
@@ -101,7 +101,7 @@ function Home() {
 				The best to buy
 			</Typography>
 
-			<ProductsRow products={products} />
+			<ProductsRow products={products} width={117} />
 		</Layout>
 	)
 }

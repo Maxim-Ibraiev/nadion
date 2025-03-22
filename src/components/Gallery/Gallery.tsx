@@ -39,7 +39,9 @@ export default function Gallery({ items, additionalClass = '' }: Props) {
 							priority={priority}
 							src={item.original}
 							fill
-							objectFit="contain"
+							style={{
+								objectFit: 'contain',
+							}}
 							quality={100}
 							placeholder="blur"
 							blurDataURL={getDataURL(700, 700)}

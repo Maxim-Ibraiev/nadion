@@ -1,19 +1,19 @@
+import FilterAccordion from '@/components/Filter/FilterAccordion'
+import MainButton from '@/components/buttons/MainButton'
 import categories from '@/constants/categories'
+import { arrayWrapper, toggleArrayValue } from '@/helpers'
+import useFilter from '@/hooks/useFilter'
+import { InitialFilter } from '@/interfaces'
 import language from '@/language'
 import Link from '@/lib/next/Link'
 import routes from '@/routes'
+import ArrowBackIcon from '@mui/icons-material/ArrowBack'
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward'
 import CheckCircleIcon from '@mui/icons-material/CheckCircle'
 import CircleIcon from '@mui/icons-material/Circle'
+import RotateLeftIcon from '@mui/icons-material/RotateLeft'
 import { Box, Button, Checkbox, Chip, FormControlLabel, FormGroup, Paper, Slider, Stack } from '@mui/material'
 import React, { forwardRef, useState } from 'react'
-import { InitialFilter } from '@/interfaces'
-import MainButton from '@/components/buttons/MainButton'
-import FilterAccordion from '@/components/Filter/FilterAccordion'
-import useFilter from '@/hooks/useFilter'
-import { arrayWrapper, toggleArrayValue } from '@/helpers'
-import ArrowBackIcon from '@mui/icons-material/ArrowBack'
-import RotateLeftIcon from '@mui/icons-material/RotateLeft'
 
 function valuetext(v: number) {
 	return `${v} ${language.UAH}`
@@ -23,12 +23,12 @@ interface IProps {
 	onRequestClose?: () => void
 }
 
-const Filter = forwardRef(({ onRequestClose = () => {} ,}: IProps,ref) => {
+const Filter = forwardRef(({ onRequestClose = () => {} }: IProps, ref) => {
 	const colors = ['red', 'blue', 'black', 'beige', 'brown']
 	const sizes = ['XS', 'S', 'M', 'L', 'XL', 'XXL']
 	const dressType = ['без рукавів', 'Короткий рукав', 'Довгі рукави', 'Довгий  довжина до коліна', 'Короткі']
 	const filter = useFilter()
-	const [priceRange, setPriceRange] = useState(filter.query.price ?filter.query.price.map(el => Number(el)): [20,3000]  )
+	const [priceRange, setPriceRange] = useState(filter.query.price ? filter.query.price.map((el) => Number(el)) : [20, 3000])
 	const [filterState, setFilterState] = useState(filter.query)
 
 	const handleChange = (option: keyof InitialFilter, value: string) => {
@@ -41,11 +41,11 @@ const Filter = forwardRef(({ onRequestClose = () => {} ,}: IProps,ref) => {
 
 	const handleChangePriceRange = (_: Event, newValue: number | number[]) => {
 		setPriceRange(arrayWrapper(newValue))
-		setFilterState((prevState) => ({...prevState , price: arrayWrapper(newValue).map(el => el.toString()) }))
+		setFilterState((prevState) => ({ ...prevState, price: arrayWrapper(newValue).map((el) => el.toString()) }))
 	}
 
 	return (
-		<Box component="aside" >
+		<Box component="aside">
 			<Paper
 				sx={{
 					display: 'grid',
@@ -90,7 +90,6 @@ const Filter = forwardRef(({ onRequestClose = () => {} ,}: IProps,ref) => {
 
 			<FilterAccordion summary={language.price}>
 				<Slider
-
 					getAriaLabel={() => 'Price range'}
 					value={priceRange}
 					onChange={handleChangePriceRange}
