@@ -3,7 +3,7 @@ import arrayWrapper from './arrayWrapper'
 import { IProduct, InitialFilter } from '../interfaces'
 
 interface IOptions {
-	[key: string]:  string[]
+	[key: string]: string[]
 }
 
 export default function getFilteredProducts(products: readonly IProduct[], options = {} as IOptions): IProduct[] {
@@ -92,20 +92,19 @@ const isSizeMatchedProduct = (product: IProduct, option: string | string[]): boo
 	})
 }
 
-function getPriceMatchedProducts(product: IProduct, options=['']) {
-		const minPrice = Math.min(...options.map((el) => parseInt(el, 10)))
-		const maxPrice = Math.max(...options.map((el) => parseInt(el, 10)))
+function getPriceMatchedProducts(product: IProduct, options = ['']) {
+	const minPrice = Math.min(...options.map((el) => parseInt(el, 10)))
+	const maxPrice = Math.max(...options.map((el) => parseInt(el, 10)))
 
-		if(!options[0] || minPrice === maxPrice ) return true
-		if (minPrice.toString() === 'NaN' || maxPrice.toString() === 'NaN') {
-			console.warn(`Max price must be a number. Price range is "${options}"`)
+	if (!options[0] || minPrice === maxPrice) return true
+	if (minPrice.toString() === 'NaN' || maxPrice.toString() === 'NaN') {
+		console.warn(`Max price must be a number. Price range is "${options}"`)
 
-			return false
-		}
-
-		return product.getPrice() >= minPrice && product.getPrice() <= maxPrice
+		return false
 	}
 
+	return product.getPrice() >= minPrice && product.getPrice() <= maxPrice
+}
 
 function getSortedProducts(products: IProduct[], sort?: InitialFilter['sort']): IProduct[] {
 	const sortArr = arrayWrapper(sort)

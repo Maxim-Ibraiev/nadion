@@ -67,7 +67,7 @@ export default function MainProduct() {
 					) : (
 						<MainButton className={s.buyBtn} onClick={handleSelectProduct}>
 							<BagIcon height="24px" />
-							<span>{language.orderProduct}</span>
+							<span>{language.toCart}</span>
 						</MainButton>
 					)}
 				</div>
