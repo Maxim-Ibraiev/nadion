@@ -2,7 +2,7 @@ import BaseIcon from '../BaseIcon'
 
 export default function UkrPost() {
 	return (
-		<BaseIcon title="Ukr post" width="301" height="77" viewBox="0 0 301 77">
+		<BaseIcon title="Ukr post" width="200" height="77" viewBox="0 0 301 77">
 			<g clipPath="url(#clip0_1301_212)">
 				<mask id="mask0_1301_212" maskUnits="userSpaceOnUse" x="0" y="0" width="301" height="77">
 					<path d="M0 76.9H300.565V0.0250244H0V76.9Z" fill="white" />

@@ -1,11 +1,11 @@
+import Layout from '@/components/Layout'
+import ToggleList from '@/components/ToggleList'
 import MainButton from '@/components/buttons/MainButton'
 import NovaPost from '@/components/icons/NovaPost'
 import UkrPost from '@/components/icons/UkrPost'
 import Form from '@/components/inputs/Form'
-import Layout from '@/components/Layout'
 import ShoppingBagFooter from '@/components/shoppingCollection/ShoppingBagFooter'
 import ShoppingBagItem from '@/components/shoppingCollection/ShoppingBagItem'
-import ToggleList from '@/components/ToggleList'
 import PRODUCTS from '@/constants/PRODUCTS'
 import { dispatchData } from '@/helpers'
 import useSelectedProducts from '@/hooks/useSelectedProducts'
@@ -95,7 +95,7 @@ export default function Checkout() {
 
 					{formChoise.isPostDelivary && (
 						<Box sx={{ my: 4 }}>
-							<Tabs sx={{ my: 4 }} value={postIndex} onChange={(e, v) => setPostIndex(v)}>
+							<Tabs sx={{ my: 4 }} value={postIndex} onChange={(_, v) => setPostIndex(v)}>
 								<Tab sx={{ mx: 'auto' }} icon={<NovaPost />} />
 								<Tab sx={{ mx: 'auto' }} icon={<UkrPost />} />
 							</Tabs>
@@ -128,51 +128,49 @@ export default function Checkout() {
 					)}
 
 					{formChoise.isPostDelivary && (
-						<>
-							<Box
-								component="form"
-								onSubmit={formik.handleSubmit}
-								style={{ display: 'grid', gridTemplateColumns: '40% 1fr', gap: '20px', marginBottom: '30px' }}
-							>
-								<Typography alignContent="center">{language.city}</Typography>
-								<Form.Select formik={formik} name="city" required>
-									{['Odessa', 'Kryvyi Rig'].map((el) => (
+						<Box
+							component="form"
+							onSubmit={formik.handleSubmit}
+							style={{ display: 'grid', gridTemplateColumns: '40% 1fr', gap: '20px', marginBottom: '30px' }}
+						>
+							<Typography alignContent="center">{language.city}</Typography>
+							<Form.Input formik={formik} name="city" required>
+								{['Odessa', 'Kryvyi Rig'].map((el) => (
+									<MenuItem key={el} value={el}>
+										{el}
+									</MenuItem>
+								))}
+							</Form.Input>
+
+							<Typography alignContent="center">Отделения почты</Typography>
+							{formChoise.isNovaPost && (
+								<Form.Input formik={formik} name="novaPostNumber" required>
+									{['#1', '#10'].map((el) => (
 										<MenuItem key={el} value={el}>
 											{el}
 										</MenuItem>
 									))}
-								</Form.Select>
+								</Form.Input>
+							)}
+							{formChoise.isUkrPost && (
+								<Form.Input formik={formik} name="ukrPostNumber" required>
+									{['5 UkrPost', '13 UkrPost'].map((el) => (
+										<MenuItem key={el} value={el}>
+											{el}
+										</MenuItem>
+									))}
+								</Form.Input>
+							)}
 
-								<Typography alignContent="center">Отделения почты</Typography>
-								{formChoise.isNovaPost && (
-									<Form.Select formik={formik} name="novaPostNumber" required>
-										{['#1', '#10'].map((el) => (
-											<MenuItem key={el} value={el}>
-												{el}
-											</MenuItem>
-										))}
-									</Form.Select>
-								)}
-								{formChoise.isUkrPost && (
-									<Form.Select formik={formik} name="ukrPostNumber" required>
-										{['5 UkrPost', '13 UkrPost'].map((el) => (
-											<MenuItem key={el} value={el}>
-												{el}
-											</MenuItem>
-										))}
-									</Form.Select>
-								)}
+							<Typography alignContent="center">{language.firstName}</Typography>
+							<Form.Input formik={formik} name="name" required />
 
-								<Typography alignContent="center">{language.firstName}</Typography>
-								<Form.Input formik={formik} name="name" multiline maxRows={4} required />
-
-								<Typography alignContent="center">{language.phoneNumber}</Typography>
-								<Form.Input formik={formik} name="phoneNumber" multiline maxRows={4} required />
-							</Box>
+							<Typography alignContent="center">{language.phoneNumber}</Typography>
+							<Form.Input formik={formik} name="phoneNumber" required />
 							<Box sx={{ my: 2 }}>
-								<MainButton isSubmit> onSubmit</MainButton>
+								<MainButton isSubmit>onSubmit</MainButton>
 							</Box>
-						</>
+						</Box>
 					)}
 				</Box>
 			</div>

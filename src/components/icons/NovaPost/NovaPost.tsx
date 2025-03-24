@@ -2,7 +2,7 @@ import BaseIcon from '../BaseIcon'
 
 export default function NovaPost() {
 	return (
-		<BaseIcon title="NovaPost" width="210" height="75" viewBox="0 0 210 75">
+		<BaseIcon title="NovaPost" width="180" height="75" viewBox="0 0 210 75">
 			<svg fill="none" xmlns="http://www.w3.org/2000/svg">
 				<path
 					fillRule="evenodd"
