@@ -1,4 +1,5 @@
 import Layout from '@/components/Layout'
+import ProductCard from '@/components/ProductCard'
 import ProductsRow from '@/components/ProductsRow'
 import MainButton from '@/components/buttons/MainButton'
 import GridCol from '@/components/gridTemplates/GridCol/GridCol'
@@ -6,11 +7,14 @@ import PRODUCTS from '@/constants/PRODUCTS'
 import useProducts from '@/hooks/useProducts'
 import { productsSuccess } from '@/redux/main/mainActions'
 import { wrapper } from '@/redux/store'
+import routes from '@/routes'
 import { Box, Typography } from '@mui/material'
+
 import heroImage from '@public/backgrounds/1.jpg'
 import ContentImage2 from '@public/backgrounds/2.jpg'
 import ContentImage3 from '@public/backgrounds/3.jpg'
 import ContentImage4 from '@public/backgrounds/4.jpg'
+import Link from 'next/link'
 
 function Home() {
 	const { products } = useProducts()
@@ -55,10 +59,18 @@ function Home() {
 							objectFit: 'contain',
 						}}
 					/>
-					<div style={{ backgroundColor: 'lightgray' }} />
-					<div style={{ backgroundColor: 'lightgray' }} />
-					<div style={{ backgroundColor: 'lightgray' }} />
-					<div style={{ backgroundColor: 'lightgray' }} />
+					<div>
+						<ProductCard product={products[3]} />
+					</div>
+					<div>
+						<ProductCard product={products[2]} />
+					</div>
+					<div>
+						<ProductCard product={products[1]} />
+					</div>
+					<div>
+						<ProductCard product={products[0]} />
+					</div>
 					<div
 						style={{
 							backgroundColor: 'lightgray',
@@ -69,11 +81,26 @@ function Home() {
 					/>
 				</GridCol>
 			</Box>
-			<Box sx={{ display: 'flex', gap: '24px', justifyContent: 'center', my: { xs: '60px', sm: '120px' } }}>
-				<MainButton>up tp 100</MainButton>
-				<MainButton>up tp 200</MainButton>
-				<MainButton>up tp 300</MainButton>
-				<MainButton>up tp 400</MainButton>
+			<Box
+				sx={{
+					display: 'flex',
+					gap: '24px',
+					justifyContent: 'center',
+					my: { xs: '60px', sm: '120px' },
+				}}
+			>
+				<Link href={routes.getPriceRange(0, 600)}>
+					<MainButton style={{ cursor: 'inherit' }}> up to 600</MainButton>
+				</Link>
+				<Link href={routes.getPriceRange(0, 1000)}>
+					<MainButton style={{ cursor: 'inherit' }}> up to 1000</MainButton>
+				</Link>
+				<Link href={routes.getPriceRange(0, 1500)}>
+					<MainButton style={{ cursor: 'inherit' }}> up to 1500</MainButton>
+				</Link>
+				<Link href={routes.getPriceRange(0, 2000)}>
+					<MainButton style={{ cursor: 'inherit' }}> up to 2000</MainButton>
+				</Link>
 			</Box>
 			<ProductsRow products={products} width={117} />
 			<Box

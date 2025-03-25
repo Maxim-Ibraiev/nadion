@@ -11,13 +11,13 @@ export default function Catalog() {
 	const { isMobile, isTable } = useDevice()
 	const [isOpenFilter, setIsOpenFilter] = useState(false)
 	const [isOpenSort, setIsOpenSort] = useState(false)
-	const isShowFilter = isMobile || isTable
+	const isUseModal = isMobile || isTable
 	const { filteredProducts } = useProducts()
 	const filter = useFilter()
 
 	return (
-		<Box sx={isShowFilter ? {} : { display: 'flex', gap: '56px' }}>
-			{isShowFilter ? (
+		<Box sx={isUseModal ? {} : { display: 'flex', gap: '56px' }}>
+			{isUseModal ? (
 				<>
 					<Box display="flex" justifyContent="space-between">
 						<Button variant="text" sx={{ mb: 3 }} onClick={() => setIsOpenFilter(true)}>
@@ -29,7 +29,7 @@ export default function Catalog() {
 					</Box>
 
 					<Modal
-						sx={{ overflowY: 'scroll' }}
+						sx={{ overflowY: 'scroll', padding: 2 }}
 						open={isOpenFilter}
 						onClose={() => setIsOpenFilter(false)}
 						aria-labelledby="modal-for-filter"

@@ -8,7 +8,6 @@ interface IProps {
 }
 
 export default function ProductsRow({ products, width }: IProps) {
-	console.log(' width:', width)
 	return (
 		<GridScrollRow>
 			{products.map((product) => (

@@ -10,11 +10,21 @@ interface IProps {
 	status?: Request
 	className?: string
 	isLoading?: boolean
+
 	// eslint-disable-next-line no-unused-vars
 	onClick?: (event: MouseEvent) => void
 }
+type ButtonType = React.DetailedHTMLProps<React.ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>
 
-function Button({ children, className = '', onClick = () => undefined, isSubmit = false, status = null, isLoading = false }: IProps) {
+function Button({
+	children,
+	className = '',
+	onClick = () => undefined,
+	isSubmit = false,
+	status = null,
+	isLoading = false,
+	...butonProps
+}: IProps & ButtonType) {
 	const isShowLoading = isLoading || status === 'Request'
 
 	return (
@@ -31,6 +41,7 @@ function Button({ children, className = '', onClick = () => undefined, isSubmit 
 			disabled={isShowLoading || status === 'Success'}
 			type={isSubmit ? 'submit' : 'button'}
 			onClick={onClick}
+			{...butonProps}
 		>
 			<span className={cn(s.content, { [s.hiddenContent]: isShowLoading })}>{children}</span>
 			<LoadingIcon className={cn(s.hiddenIcon, { [s.loadingIcon]: isShowLoading })} />

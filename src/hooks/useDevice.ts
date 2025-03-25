@@ -3,11 +3,15 @@ import { useEffect, useState } from 'react'
 import { mobileLesser, mobileUpper, tableLesser, tableUpper } from '../constants'
 
 export default function useDevice() {
-	const [devices, setDevise] = useState({
-		isMobile: true,
-		isTable: false,
-		isDesktop: false,
-	})
+	const [devices, setDevise] = useState(
+		document
+			? getScreenSize()
+			: {
+					isMobile: true,
+					isTable: false,
+					isDesktop: false,
+			  }
+	)
 
 	useEffect(() => {
 		const handleResize = throttle(() => setDevise(getScreenSize()), 100)
