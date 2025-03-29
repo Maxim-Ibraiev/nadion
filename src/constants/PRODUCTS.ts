@@ -16,17 +16,20 @@ export default [
 			{
 				color: ['black'],
 				original: 'https://res.cloudinary.com/butterfly-project/image/upload/v2/products/Чорна футболка Phillip Plein__0__6890',
-				thumbnail: 'https://res.cloudinary.com/butterfly-project/image/upload/v2/products/Чорна футболка Phillip Plein__0__6890',
+				thumbnail:
+					'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNzAwIiBoZWlnaHQ9IjcwMCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIj4KICA8ZGVmcz4KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0iZyI+CiAgICAgIDxzdG9wIHN0b3AtY29sb3I9IiNFREYwRjUiIG9mZnNldD0iMjAlIiAvPgogICAgICA8c3RvcCBzdG9wLWNvbG9yPSIjQTBFN0U1IiBvZmZzZXQ9IjUwJSIgLz4KICAgICAgPHN0b3Agc3RvcC1jb2xvcj0iI0VERjBGNSIgb2Zmc2V0PSI3MCUiIC8+CiAgICA8L2xpbmVhckdyYWRpZW50PgogIDwvZGVmcz4KICA8cmVjdCB3aWR0aD0iNzAwIiBoZWlnaHQ9IjcwMCIgZmlsbD0iI0VERjBGNSIgLz4KICA8cmVjdCBpZD0iciIgd2lkdGg9IjcwMCIgaGVpZ2h0PSI3MDAiIGZpbGw9InVybCgjZykiIC8+CiAgPGFuaW1hdGUgeGxpbms6aHJlZj0iI3IiIGF0dHJpYnV0ZU5hbWU9IngiIGZyb209Ii03MDAiIHRvPSI3MDAiIGR1cj0iMXMiIHJlcGVhdENvdW50PSJpbmRlZmluaXRlIiAgLz4KPC9zdmc+',
 			},
 			{
 				color: ['black'],
 				original: 'https://res.cloudinary.com/butterfly-project/image/upload/v2/products/Чорна футболка Phillip Plein__1__6890',
-				thumbnail: 'https://res.cloudinary.com/butterfly-project/image/upload/v2/products/Чорна футболка Phillip Plein__1__6890',
+				thumbnail:
+					'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAAECAIAAADETxJQAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAMUlEQVR4nGOY3dfo7OT87NlrBmdX38SENFNjSwYnJw9rK3sxMUkGHR0jZhae/9++AQAaMA0UfCg0rwAAAABJRU5ErkJggg==',
 			},
 			{
 				color: ['black'],
 				original: 'https://res.cloudinary.com/butterfly-project/image/upload/v2/products/Чорна футболка Phillip Plein__2__2971',
-				thumbnail: 'https://res.cloudinary.com/butterfly-project/image/upload/v2/products/Чорна футболка Phillip Plein__2__2971',
+				thumbnail:
+					'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAAECAIAAADETxJQAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAM0lEQVR4nAEoANf/APv//1lRT+vw9gCTi4oCAwmUjosAwKufFhsh0sS+AKOcnAABBb29vpr9EvCdCaZaAAAAAElFTkSuQmCC',
 			},
 		],
 		createdAt: '2023-04-18T19:06:18.939Z',
@@ -49,7 +52,8 @@ export default [
 			{
 				color: ['blue'],
 				original: 'Футболка Phillip Plein__0__3510',
-				thumbnail: 'Футболка Phillip Plein__0__3510',
+				thumbnail:
+					'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAUCAIAAAAyZ5t7AAAACXBIWXMAAAsTAAALEwEAmpwYAAADZ0lEQVR4nAFcA6P8APb///L8//f9/fD5/Mzm8+TBnNGbaoVhOVtsc6PH2e32+vP5+ury9urx9gDz/f/3///R6vl/xe1SsOZ0tNhtobpHj7gOeK4Ndac9ksK21efu9fjl7vEA9v3/6fj/Vq3iMp/bTK3lPabkLp/fNqDfPaLdNJrUEYHCPYq45O3v5e7xAPn9/8jn9xeKxSSOx0So4kKj3ECGrz6XyjSc2iiSzA1xqgddjczb5Ojv8wD5//+u2O4PerESc6Q9n9c2mtElgrU0lMgskcoPerMET38FVYutxtbp7vAA+f38o9XxD3m2BViFIYrCH4jCEobCLZTOEIG5BlyMAkdxCGKZl7HC6u/vAPL8/9TKu5CNgTlzkxSPyhKGwhKHwyaSzQ98twpon1hxgKaBXL+wouLu8gDv+f7supTLk2Jpob0TisQRg70XiccgkMoPebQJZZ5vkKPOkF7Ip4nZ5u0A8fLy3q6Iq4prebTWEonBEYK9G4zJG4vJD3q2CGCbZZSv1KN+z6J9ztTXAOzo4tyjcLuefnq52hOKxBGCvRqMyhSJxw95tAljnVyTstWngsiTacjKygDn3tLUlFu0oYtzt90ShcIShcIcjMkShsMPerUNcK1NjbTIo4XAiFrHyMgA593SyIZQu7CiZK3YDnezG4vHEobFEH66D3m2DnazRI25xKiSwopgxcvNAOfi3MWLXMG+uE+fzhGBvheHwxB9ug95tg53tA1vrUeOucWxoMGRbcnS1gDj4t/LlW++wsI5k8URgsARgr8Od7QOdrMOdbINba40grLAsai8kXbL1NkA4OLj3KaGw7qyLI7CEoTCEYLCEoLCEH28Dne0DG2qPHqj1LKexZ2FydbbANzf4uSymriJbyMqMhcuPRIuQhExRQ4pPBAjMAcSHC0tMc6XfMCZg8rS1wDg5+zHm4WbbFUhGBcICQkIBgYQEBAODg8ICAgJCgslIB+eZ07ApJvR2uAA4env3NbUlX51Dg8RDhEWAAEEXGJnQkhNAAIFDQ8TGRgZqZmU09XZztbdANvh5u30+6WuswYHCwwOEAgKC52jql9iZwAAAAwPEAgJDay0vdXc5MjQ1gDW3ePk6u6usrcICQ8FBgkmKi/EytF1e4AEBwoMDhAICg2coKfR197CytHWGc5K6ZwthwAAAABJRU5ErkJggg==',
 			},
 			{
 				color: ['blue'],
@@ -724,7 +728,8 @@ export default [
 			{
 				color: ['black'],
 				original: 'Оксамитове_плаття_Philipp_Plein',
-				thumbnail: 'Оксамитове_плаття_Philipp_Plein',
+				thumbnail:
+					'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAUCAIAAAALACogAAAACXBIWXMAAAsTAAALEwEAmpwYAAAD30lEQVR4nAHUAyv8AP/79Pn05/ny6fv07fTu5/337cfDu0FCQjEzNWdgX/Xu4N/Yz9vUzNzWzdvUzcXAswD/+O728eT17uPy7eDy7d/07+Xp49s1NDELDA2FgHzu59/a1Mvc18rn49TVzsPKw7sA+PLp8+3j6OTa6OPX6+Tb4t3S6OLaVVNREBAQtrOo6OHV2NHK39jQ7+neycK329TMAPfx6PDp4ero3ejk2+Da0s3IwcO9tjc6NygnJODazdvXx9TOwu3l3ujf2r+4r+jk1wD38erv6eHp49vj4djd29Lr39HVwq5iYmAzNDRWV1K9tKfc18ry7eDLxbvIw7ns59wA8evk7+nh5d7X3tvSzMW5YV9VVlROTU9ULjA0BgcJXltT1dDE39rOta+p2NHI6ePYAN7b0+be2N3a0eDe1YuNiAEGCg0OD0xQUkhNVY19antvX6+qpM7GvrGqo9zXzuXe1QDR0MfS0MXNzsLKyr52eHIJCwwcGxoYIieGgXiql38uLSugm5W7tK25sqrX0crWz8gAx8e9yMi+zs3DyMe7X2NgRTgxSkI7NDIqtJh4TT80Ly0sqaKbraefwby00crC0crCAMDAtrm5r8LCuK2vp6Kah5J/an97ca+XeDcyKgAAAEI+O5WOhqihm8C5ssS9trmyqgDHxbu2tqutraOen5aVi3ljXFBUVVMfHh4BBQktKSZMR0F/eHGjnpSmoJmnopufmpIAx8S7t7etp6eenZyUPT4+IycnKy0vEBMYDxAQh3hraF9WeXJpjYeAm5SMm5WOlI+IAMC+tre3raamm5KRhisuLkRBPCgnJwIHDW5dS2NWSzc1M3BpYoN9dpKLhJGLhIyHfwC3ua+2tqupqZ+PjoUxNDRmXlUeHx9WSz2CalQtLi41NzVxamKNh4CGgXeGhHqGhHoAtbOqtrOqrq2kmJmNSkxJMDQ1V1FFp5BxBgcFMzc2ZWJaaGJZg353g352gH92f3t0AK+poa2nn5+akpWUi09QTUZIRyYoJxAQEAAAAGVcUZKMf1hVToJ6coJ9dn9+d3x4cwCjoJiinpSUjYaKg3pFRUJHR0MzNDEAAAIXFRSWfmNLS0lTUE18dWx+e3V4d3F3dm8AnpyUn5qSk42FjYV+d3ZuYWBaKyolFxcTl3xhcWFOEBMSJSUieHBnd3Rvbm1lcnFrAJuVjpqVjpKPiJSPiJCPhWdmYAgLDExAM1JIOAABAwoMCzItJ2diW3Zxa2xqYnBuZwCbmI+ZmI6UjoaSi4SQjIRaWlUUFhUKDA0AAAIKDQ1yX0tiUUFVUUpzbWZrZl9ramP7UwDlDOqFLAAAAABJRU5ErkJggg==',
 			},
 		],
 		createdAt: '2025-03-22T16:28:12.496Z',

@@ -41,6 +41,8 @@ export default class ProductStructure {
 
 	getMainImageSrc = () => this.#getImageURL(this.getImages()[0].original)
 
+	getMainImageThumbnail = () => this.getImages()[0].thumbnail
+
 	getPrice = () => this.#product.price
 
 	getPopularity = () => this.#product.popularity
@@ -52,7 +54,7 @@ export default class ProductStructure {
 	getImages = () =>
 		this.#product.images.map((el) => ({
 			original: this.#getImageURL(el.original),
-			thumbnail: this.#getImageURL(el.thumbnail),
+			thumbnail: el.thumbnail,
 			color: el.color,
 		}))
 

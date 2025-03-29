@@ -1,4 +1,3 @@
-import { getDataURL } from '@/helpers'
 import cn from 'classnames'
 import Image from 'next/image'
 import { useState } from 'react'
@@ -44,7 +43,7 @@ export default function Gallery({ items, additionalClass = '' }: Props) {
 							}}
 							quality={100}
 							placeholder="blur"
-							blurDataURL={getDataURL(700, 700)}
+							blurDataURL={item.thumbnail}
 						/>
 					</div>
 				)

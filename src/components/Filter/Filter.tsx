@@ -1,9 +1,12 @@
 import FilterAccordion from '@/components/Filter/FilterAccordion'
 import MainButton from '@/components/buttons/MainButton'
-import categories from '@/constants/categories'
+import { categories } from '@/constants'
 import { arrayWrapper, toggleArrayValue } from '@/helpers'
+import getOptionsFromProducts from '@/helpers/getOptionsFromProducts'
+import { useDevice } from '@/hooks'
 import useFilter from '@/hooks/useFilter'
-import { InitialFilter } from '@/interfaces'
+import useProducts from '@/hooks/useProducts'
+import { Category, InitialFilter } from '@/interfaces'
 import language from '@/language'
 import Link from '@/lib/next/Link'
 import routes from '@/routes'
@@ -13,7 +16,9 @@ import CheckCircleIcon from '@mui/icons-material/CheckCircle'
 import CircleIcon from '@mui/icons-material/Circle'
 import RotateLeftIcon from '@mui/icons-material/RotateLeft'
 import { Box, Button, Checkbox, Chip, FormControlLabel, FormGroup, Paper, Slider, Stack } from '@mui/material'
+import { useRouter } from 'next/router'
 import React, { forwardRef, useState } from 'react'
+import ProductSorter from '../ProductSorter'
 
 function valuetext(v: number) {
 	return `${v} ${language.UAH}`
@@ -24,10 +29,13 @@ interface IProps {
 }
 
 const Filter = forwardRef(({ onRequestClose = () => {} }: IProps, ref) => {
-	const colors = ['red', 'blue', 'black', 'beige', 'brown']
-	const sizes = ['XS', 'S', 'M', 'L', 'XL', 'XXL']
+	const { categoredProducts } = useProducts()
 	const dressType = ['без рукавів', 'Короткий рукав', 'Довгі рукави', 'Довгий  довжина до коліна', 'Короткі']
+	const { isDesktop } = useDevice()
 	const filter = useFilter()
+	const router = useRouter()
+	const globalCategory = (arrayWrapper(router.query?.globalCategory)[0] || 'all') as Category
+	const filterOptions = getOptionsFromProducts(categoredProducts[globalCategory])
 	const [priceRange, setPriceRange] = useState(filter.query.price ? filter.query.price.map((el) => Number(el)) : [20, 3000])
 	const [filterState, setFilterState] = useState(filter.query)
 
@@ -55,13 +63,18 @@ const Filter = forwardRef(({ onRequestClose = () => {} }: IProps, ref) => {
 			>
 				<Box>
 					<Box sx={{ display: 'flex', width: 1, height: 60, borderBottom: '1px solid rgba(0, 0, 0, 0.87)' }}>
-						<Button sx={{ height: 1, flexGrow: 1 }} onClick={onRequestClose} startIcon={<ArrowBackIcon />}>
-							{language.hideFilters}
-						</Button>
+						{isDesktop ? (
+							<ProductSorter />
+						) : (
+							<Button sx={{ height: 1, flexGrow: 1 }} onClick={onRequestClose} startIcon={<ArrowBackIcon />}>
+								{language.hideFilters}
+							</Button>
+						)}
 						<Button
 							sx={{ height: 1 }}
 							onClick={() => {
 								filter.reset()
+								setFilterState({})
 								onRequestClose()
 							}}
 							startIcon={<RotateLeftIcon />}
@@ -72,16 +85,10 @@ const Filter = forwardRef(({ onRequestClose = () => {} }: IProps, ref) => {
 				</Box>
 
 				<Stack>
-					{categories.map((category) => (
-						<Link key={category} href={routes[category]}>
-							<Button
-								fullWidth
-								component="span"
-								endIcon={<ArrowForwardIcon />}
-								size="small"
-								onClick={() => handleChange('category', category)}
-							>
-								{language[category]}
+					{categories.map((el) => (
+						<Link key={el} href={routes[el]}>
+							<Button fullWidth component="span" endIcon={<ArrowForwardIcon />} size="small" onClick={() => handleChange('category', el)}>
+								{language[el]}
 							</Button>
 						</Link>
 					))}
@@ -113,15 +120,18 @@ const Filter = forwardRef(({ onRequestClose = () => {} }: IProps, ref) => {
 						gap: '15px',
 					}}
 				>
-					{colors.map((color) => (
+					{filterOptions.color.map(({ value }) => (
 						<Checkbox
-							key={color}
+							sx={{
+								boxShadow: `0px 0px 10px 7px ${filterState.color?.includes(value) ? 'rgba(0,255,232, 0.5)' : 'rgba(175, 175, 175,  0.5)'}`,
+							}}
+							key={value}
 							name="color"
-							value={color}
-							checked={filterState.color?.includes(color) || false}
-							onChange={() => handleChange('color', color)}
-							icon={<CircleIcon htmlColor={color} fontSize="large" />}
-							checkedIcon={<CheckCircleIcon htmlColor={color} fontSize="large" />}
+							value={value}
+							checked={filterState.color?.includes(value) || false}
+							onChange={() => handleChange('color', value)}
+							icon={<CircleIcon htmlColor={value} fontSize="large" />}
+							checkedIcon={<CheckCircleIcon htmlColor={value} fontSize="large" />}
 						/>
 					))}
 				</Box>
@@ -129,15 +139,15 @@ const Filter = forwardRef(({ onRequestClose = () => {} }: IProps, ref) => {
 
 			<FilterAccordion summary={language.sizes}>
 				<FormGroup sx={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)' }}>
-					{sizes.map((size) => (
+					{filterOptions.size.map(({ label, value }) => (
 						<FormControlLabel
 							name="size"
-							key={size}
-							checked={filterState.size?.includes(size) || false}
+							key={value}
+							checked={filterState.size?.includes(value) || false}
 							control={<Checkbox />}
-							label={size}
-							value={size}
-							onChange={() => handleChange('size', size)}
+							label={label}
+							value={value}
+							onChange={() => handleChange('size', value)}
 						/>
 					))}
 				</FormGroup>

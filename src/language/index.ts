@@ -22,8 +22,8 @@ const language = {
 	season: 'Сезон',
 	model: 'Модель',
 	popularity: 'За популярністю',
-	highPrice: 'За зростанням ціни',
-	lowPrice: 'За спаданням ціни',
+	lowPriceFirst: 'За зростанням ціни',
+	highPriceFirst: 'За спаданням ціни',
 	price: 'Ціна',
 	cotton: 'Бавовна',
 	silk: 'Шовк',
@@ -103,14 +103,14 @@ const language = {
 	adressOfCompany: 'Вулиця Лермонтова №3',
 	cityOfCompany: 'Кривий ріг, Україна',
 
-	handMagePage: {
-		title: 'Форма для індивідуального пошиття.',
-		description: 'Для замовлення індивідуального пошиття потрібно усі кілька речей.',
-		defineModel: 'Визначиться з моделей чи дизайном.',
-		defineMaterial: 'Вибрати тканину.',
-		defineSize: 'Знати розміри.',
-		submit: 'Подать заявку на звонок',
-	},
+	// handMagePage: {
+	// 	title: 'Форма для індивідуального пошиття.',
+	// 	description: 'Для замовлення індивідуального пошиття потрібно усі кілька речей.',
+	// 	defineModel: 'Визначиться з моделей чи дизайном.',
+	// 	defineMaterial: 'Вибрати тканину.',
+	// 	defineSize: 'Знати розміри.',
+	// 	submit: 'Подать заявку на звонок',
+	// },
 
 	// admin
 	addProduct: 'Додати товар',

@@ -1,5 +1,5 @@
-import ProductStructure from './ProductStructure'
 import { IProduct } from '../interfaces'
+import ProductStructure from './ProductStructure'
 
 class HendlerError {
 	static #baseError(message: string) {
@@ -11,6 +11,12 @@ class HendlerError {
 		const isInstance = products.every((el) => el instanceof ProductStructure)
 
 		if (!isInstance) this.#baseError(`Expected instanceof ProductStructure but got ${JSON.stringify(products)}.`)
+	}
+
+	static placeHolder(error: unknown) {
+		console.error(error)
+
+		this.#baseError(`getPlaceholder error.`)
 	}
 }
 

@@ -23,7 +23,7 @@ export default function ProductCard({ product, getLinkForProduct = undefined }: 
 					         (max-width: 999px) 313px,
 					         282px"
 					placeholder="blur"
-					blurDataURL={product.getMainImageSrc()}
+					blurDataURL={product.getMainImageThumbnail()}
 					src={product.getMainImageSrc()}
 					alt={product.getTitle()}
 				/>
