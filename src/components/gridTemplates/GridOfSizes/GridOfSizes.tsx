@@ -4,7 +4,7 @@ import cn from 'classnames'
 import { useDispatch } from 'react-redux'
 
 import { sizeList } from '@/constants'
-import { useSelectedProducts } from '@/hooks'
+import { useProducts } from '@/hooks'
 import s from './GridOfSizes.module.scss'
 
 interface Props {
@@ -13,7 +13,7 @@ interface Props {
 
 export default function GridOfSizes({ product }: Props) {
 	const dispatch = useDispatch()
-	const [selectedProducts] = useSelectedProducts()
+	const { selectedProducts } = useProducts()
 	let selectedSize = selectedProducts.find((el) => el.getId() === product.getId())?.getSelectedSize() || product.getSelectedSize() || ''
 
 	function handleClick(size: string) {

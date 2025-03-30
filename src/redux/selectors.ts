@@ -10,13 +10,6 @@ export const getError = (state: IState): IError => state.main.error
 export const getProducts = (state: IState): IProduct[] => getProductStructure(getProductsForRedux(state))
 export const getSelectedProducts = (state: IState): IProduct[] => getProductStructure(getSelectedProductsForRedux(state))
 
-export const getProductById = (state: IState, id: string): IProduct | undefined => getProducts(state).find((el) => el.getId() === id)
-
-export const getProductsByModel = memoize(
-	(state: IState, model: string): IProduct[] => getProducts(state).filter((product) => product.getModel() === model),
-	(_, model) => model
-)
-
 export const getProductStructure = memoize((products: IProductObject[]): IProduct[] => {
 	try {
 		return products.map((product) => new ProductStructure(product))

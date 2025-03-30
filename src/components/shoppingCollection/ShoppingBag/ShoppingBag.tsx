@@ -2,12 +2,10 @@ import Button from '@/components/buttons/MainButton'
 import { CloseIcon } from '@/components/icons'
 import ShoppingBagFooter from '@/components/shoppingCollection/ShoppingBagFooter'
 import ShoppingBagItem from '@/components/shoppingCollection/ShoppingBagItem'
-import { SHOPPING_ID } from '@/constants'
-import { useSelectedProducts } from '@/hooks'
-import { IProduct } from '@/interfaces'
+import { useProducts } from '@/hooks'
 import language from '@/language'
 import { useRouter } from 'next/router'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import routes from '../../../routes'
 import s from './ShoppingBag.module.scss'
 
@@ -17,8 +15,8 @@ interface IProps {
 
 export default function ShoppingBag({ handleCloseModal }: IProps) {
 	const router = useRouter()
-	const [selectedProducts, setSelectedProducts] = useSelectedProducts()
-	const [shoppingId, setShoppingId] = useState('')
+	const { selectedProducts, setSelectedProducts } = useProducts()
+	// const [shoppingId, setShoppingId] = useState('')
 	const [isLoading, setIsLoading] = useState(false)
 
 	const handleOrder = () => {
@@ -28,12 +26,6 @@ export default function ShoppingBag({ handleCloseModal }: IProps) {
 			router.push(routes.checkout)
 		}
 	}
-
-	useEffect(() => {
-		const id = localStorage.getItem(SHOPPING_ID)
-
-		if (id) setShoppingId(id)
-	}, [])
 
 	return (
 		<section className={s.wrapper}>
@@ -52,7 +44,7 @@ export default function ShoppingBag({ handleCloseModal }: IProps) {
 							<ShoppingBagItem
 								key={product.getId()}
 								product={product}
-								handleDelete={() => setSelectedProducts.delete(product.getId())}
+								handleDelete={() => setSelectedProducts('delete', product)}
 								handleClose={handleCloseModal}
 							/>
 						))}

@@ -8,7 +8,7 @@ import ShoppingBagFooter from '@/components/shoppingCollection/ShoppingBagFooter
 import ShoppingBagItem from '@/components/shoppingCollection/ShoppingBagItem'
 import PRODUCTS from '@/constants/PRODUCTS'
 import { dispatchData } from '@/helpers'
-import useSelectedProducts from '@/hooks/useSelectedProducts'
+import { useProducts } from '@/hooks'
 import language from '@/language'
 import { wrapper } from '@/redux/store'
 import routes from '@/routes'
@@ -35,7 +35,7 @@ const initianallformikState: NovaPostStateType = {
 export default function Checkout() {
 	const router = useRouter()
 	const isDesktop = true
-	const [selectedProducts, setSelectedProducts] = useSelectedProducts()
+	const { selectedProducts, setSelectedProducts } = useProducts()
 	const [delivaryIndex, setDelivaryIndex] = useState(0)
 	const [postIndex, setPostIndex] = useState(0)
 	const DELIVARY_POST_INDEX = 0
@@ -70,7 +70,7 @@ export default function Checkout() {
 								<ul className={s.productList}>
 									{selectedProducts.map((product) => (
 										<li key={product.getId()}>
-											<ShoppingBagItem product={product} handleDelete={() => setSelectedProducts.delete(product.getId())} />
+											<ShoppingBagItem product={product} handleDelete={() => setSelectedProducts('delete', product)} />
 										</li>
 									))}
 								</ul>

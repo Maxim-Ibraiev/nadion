@@ -31,7 +31,6 @@ export default function ProductSorter() {
 							fullWidth
 							onClick={() => {
 								const newQuery = filter.define('sort', [value])
-								console.log(' value:', value)
 								filter.updateURL(newQuery)
 
 								setIsOpenSort(false)

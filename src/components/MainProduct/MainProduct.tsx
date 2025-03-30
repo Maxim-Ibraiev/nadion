@@ -1,6 +1,5 @@
 import GridOfSizes from '@/components/gridTemplates/GridOfSizes'
-import { useSelectedProducts } from '@/hooks'
-import useReduceSelectors from '@/hooks/useReduceSelectors'
+import { useProducts } from '@/hooks'
 import { Typography } from '@mui/material'
 import cn from 'classnames'
 import Image from 'next/image'
@@ -19,10 +18,9 @@ import s from './MainProduct.module.scss'
 export default function MainProduct() {
 	const router = useRouter()
 	const idProduct = Array.isArray(router.query.id) ? router.query.id[0] : router.query.id || ''
-	const { getProductById, getProductsByModel } = useReduceSelectors()
+	const { getProductById, getProductsByModel, selectedProducts, setSelectedProducts } = useProducts()
 	const product = getProductById(idProduct)
 	const allModels = getProductsByModel(product?.getModel() || '')
-	const [selectedProducts, setSelectedProduct] = useSelectedProducts()
 	const [isProductSelected, setIsProductSelected] = useState(Boolean(selectedProducts.find(({ getId }) => getId() === product?.getId())))
 	const [isLoading, setIsLoading] = useState(false)
 	const [shoppingId, setShoppingId] = useState('')
@@ -32,7 +30,7 @@ export default function MainProduct() {
 			const isNeedToAdd = !selectedProducts.some(({ getId }) => getId() === product.getId())
 
 			if (isNeedToAdd) {
-				setSelectedProduct.add(product)
+				setSelectedProducts('add', product)
 				setIsProductSelected(true)
 			}
 		}

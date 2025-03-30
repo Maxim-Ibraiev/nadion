@@ -1,7 +1,7 @@
 import Layout from '@/components/Layout'
 import MainProduct from '@/components/MainProduct'
 import NotFoundProduct from '@/components/NotFoundProduct'
-import { useReduceSelectors } from '@/hooks'
+import { useProducts } from '@/hooks'
 import { useRouter } from 'next/router'
 // import api from '../../src/api/serverApi'
 import { REVALIDATE } from '@/constants'
@@ -14,7 +14,7 @@ import { wrapper } from '@/redux/store'
 export default function Product() {
 	const router = useRouter()
 	const idProduct = Array.isArray(router.query.id) ? router.query.id[0] : router.query.id
-	const { getProductById } = useReduceSelectors()
+	const { getProductById } = useProducts()
 	const product = getProductById(idProduct || '')
 
 	return <Layout>{product ? <MainProduct /> : <NotFoundProduct />}</Layout>

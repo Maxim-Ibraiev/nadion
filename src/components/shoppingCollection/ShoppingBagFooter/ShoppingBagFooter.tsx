@@ -1,7 +1,7 @@
+import { UAH } from '@/constants'
+import { useProducts } from '@/hooks'
+import language from '@/language'
 import classNames from 'classnames'
-import { UAH } from '../../../constants'
-import { useSelectedProducts } from '../../../hooks'
-import language from '../../../language'
 import s from './ShoppingBagFooter.module.scss'
 
 interface IProps {
@@ -10,7 +10,7 @@ interface IProps {
 }
 
 function ShoppingBagFooter({ className = '', children = null }: IProps) {
-	const [selectedProducts] = useSelectedProducts()
+	const { selectedProducts } = useProducts()
 
 	return (
 		<div className={classNames(s.footer, { [className]: className })}>

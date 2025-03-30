@@ -1,4 +1,4 @@
-import { useReduceSelectors } from '@/hooks'
+import { useProducts } from '@/hooks'
 import { IProduct } from '@/interfaces'
 import Image from '@/lib/next/Image'
 import routes from '@/routes'
@@ -11,7 +11,7 @@ interface Props {
 }
 
 export default function ProductCard({ product, getLinkForProduct = undefined }: Props) {
-	const { getProductsByModel } = useReduceSelectors()
+	const { getProductsByModel } = useProducts()
 	const allModels = getProductsByModel(product.getModel())
 
 	return (
