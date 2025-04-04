@@ -12,7 +12,7 @@ export default function Home() {
 	)
 }
 
-export const getServerSideProps = wrapper.getServerSideProps((state) => async () => {
+export const getServerSideProps = wrapper.getServerSideProps((state) => async ({ req, res }) => {
 	state.dispatch(productsSuccess(PRODUCTS))
 
 	return {

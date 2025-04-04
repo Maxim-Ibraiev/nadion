@@ -1,13 +1,13 @@
+import serverApi from '@/api/serverApi'
 import Layout from '@/components/Layout'
 import ProductCard from '@/components/ProductCard'
 import ProductsRow from '@/components/ProductsRow'
 import MainButton from '@/components/buttons/MainButton'
 import GridCol from '@/components/gridTemplates/GridCol/GridCol'
-import PRODUCTS from '@/constants/PRODUCTS'
 import useProducts from '@/hooks/useProducts'
-import { productsSuccess } from '@/redux/main/mainActions'
 import { wrapper } from '@/redux/store'
 import routes from '@/routes'
+import dispatchData from '@api/serverHelpers/dispatchData'
 import { Box, Typography } from '@mui/material'
 
 import heroImage from '@public/backgrounds/1.jpg'
@@ -135,8 +135,10 @@ function Home() {
 export default Home
 // Reinitialized existing Git repository
 
-export const getStaticProps = wrapper.getStaticProps(({ dispatch }) => () => {
-	dispatch(productsSuccess(PRODUCTS))
+export const getStaticProps = wrapper.getStaticProps(({ dispatch }) => async () => {
+	const res = await serverApi.getProducts()
+
+	dispatchData(dispatch, { products: res })
 
 	return { props: {} }
 })

@@ -1,0 +1,10 @@
+import axios from 'axios'
+import { IProductObject } from '../../../../../interfaces'
+
+export const addProduct = async (newProduct: IProductObject) =>
+	axios.post<IProductObject>('https://projectbf-29lq.onrender.com/products', newProduct).then((r) => r.data as IProductObject)
+
+export const updateProduct = async (id: IProductObject['id'], newProduct: IProductObject) =>
+	axios.patch<IProductObject>(`https://projectbf-29lq.onrender.com/products/${id}`, newProduct).then((r) => r.data as IProductObject)
+// export const removeProduct = async id => productsSchemas.findByIdAndRemove({ _id: id })
+// export const listProducts = async () => productsSchemas.find()

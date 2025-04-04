@@ -35,7 +35,7 @@ const Filter = forwardRef(({ onRequestClose = () => {} }: IProps, ref) => {
 	const filter = useFilter()
 	const router = useRouter()
 	const globalCategory = (arrayWrapper(router.query?.globalCategory)[0] || 'all') as Category
-	const filterOptions = getOptionsFromProducts(categoredProducts[globalCategory])
+	const filterOptions = getOptionsFromProducts(categoredProducts[globalCategory] || [])
 	const [priceRange, setPriceRange] = useState(filter.query.price ? filter.query.price.map((el) => Number(el)) : [20, 3000])
 	const [filterState, setFilterState] = useState(filter.query)
 

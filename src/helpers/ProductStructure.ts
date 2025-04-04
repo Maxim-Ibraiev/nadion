@@ -11,9 +11,6 @@ export interface IProductObject {
 	model: string
 	sizes: string[]
 	id: string
-	createdAt: string
-	updatedAt: string
-	__v: number
 	selectedSize?: null | string
 }
 
@@ -85,9 +82,6 @@ export default class ProductStructure {
 		title: this.getTitle(),
 		model: this.getModel(),
 		sizes: this.getAllSizeOptions(),
-		createdAt: '',
-		updatedAt: '',
-		__v: 0,
 		selectedSize: this.getSelectedSize(),
 	})
 

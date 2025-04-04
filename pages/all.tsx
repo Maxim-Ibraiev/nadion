@@ -1,8 +1,8 @@
+import serverApi from '@/api/serverApi'
 import Catalog from '@/components/Catalog'
 import Layout from '@/components/Layout'
-import PRODUCTS from '@/constants/PRODUCTS'
-import { productsSuccess } from '@/redux/main/mainActions'
 import { wrapper } from '@/redux/store'
+import dispatchData from '@api/serverHelpers/dispatchData'
 
 export default function ProductsPage() {
 	return (
@@ -12,8 +12,10 @@ export default function ProductsPage() {
 	)
 }
 
-export const getStaticProps = wrapper.getStaticProps((state) => () => {
-	state.dispatch(productsSuccess(PRODUCTS))
+export const getStaticProps = wrapper.getStaticProps(({ dispatch }) => async () => {
+	const res = await serverApi.getProducts()
+
+	dispatchData(dispatch, { products: res })
 
 	return {
 		props: {},

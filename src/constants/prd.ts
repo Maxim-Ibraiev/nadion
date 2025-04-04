@@ -1,4 +1,4 @@
-const x = [
+export default [
 	{
 		color: ['black'],
 		original: 'https://res.cloudinary.com/butterfly-project/image/upload/v2/products/Чорна футболка Phillip Plein__0__6890',

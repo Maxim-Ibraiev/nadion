@@ -15,6 +15,7 @@
 		"react/jsx-curly-brace-presence": "warn",
 		"object-shorthand": "warn",
 		"arrow-body-style": "warn",
+		"no-else-return": "warn",
 		"no-unused-vars": [
 			"warn",
 			{

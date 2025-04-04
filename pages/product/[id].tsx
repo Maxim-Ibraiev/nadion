@@ -4,12 +4,12 @@ import NotFoundProduct from '@/components/NotFoundProduct'
 import { useProducts } from '@/hooks'
 import { useRouter } from 'next/router'
 // import api from '../../src/api/serverApi'
+import serverApi from '@/api/serverApi'
 import { REVALIDATE } from '@/constants'
 import PRODUCTS from '@/constants/PRODUCTS'
-import { dispatchData } from '@/helpers'
-import { IProductObject, IResponse } from '@/interfaces'
 import { getProductStructure } from '@/redux/selectors'
 import { wrapper } from '@/redux/store'
+import dispatchData from '@api/serverHelpers/dispatchData'
 
 export default function Product() {
 	const router = useRouter()
@@ -22,12 +22,10 @@ export default function Product() {
 
 // const productsResponse = api.getProducts()
 
-export const getStaticProps = wrapper.getStaticProps((store) => async () => {
-	const data = {
-		products: { data: PRODUCTS, error: null, status: 200 } as IResponse<IProductObject[]>,
-	}
+export const getStaticProps = wrapper.getStaticProps(({ dispatch }) => async () => {
+	const res = await serverApi.getProducts()
 
-	dispatchData(store.dispatch, data)
+	dispatchData(dispatch, { products: res })
 
 	return {
 		props: {},

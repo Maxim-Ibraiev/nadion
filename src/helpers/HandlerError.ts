@@ -4,7 +4,7 @@ import ProductStructure from './ProductStructure'
 class HendlerError {
 	private static baseError(message: string) {
 		if (process.env.NODE_ENV === 'development') throw new Error(message)
-		console.error(message)
+		else console.error(message)
 	}
 
 	static addAction(message: string) {

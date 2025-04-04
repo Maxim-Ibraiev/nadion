@@ -20,6 +20,7 @@
 		],
 		"paths": {
 			"@/*": ["./src/*"],
+			"@api/*": ["./src/api/src/*"],
 			"@public/*": ["./public/*"]
 		}
 	},
@@ -33,6 +34,6 @@
 		"src/components/shoppingCollection/ShoppingBagButton/ShoppingBagButton",
 		"src/Redux-store/Redux-store.js",
 		"src/Redux-store/Redux-store"
-	],
+, "src/api/src/routes/products/productsModel.js"	],
 	"exclude": ["node_modules"]
 }
