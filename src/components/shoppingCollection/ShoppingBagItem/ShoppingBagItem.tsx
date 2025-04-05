@@ -1,4 +1,3 @@
-import sizeList from '@/constants/sizeList'
 import useReduceActions from '@/hooks/useReduceActions'
 import language from '@/language'
 import { FormControl, MenuItem, Select, SelectProps } from '@mui/material'
@@ -36,7 +35,14 @@ export default function ShoppingBagItem({ product, handleDelete, handleClose = (
 					className={s.imageLink}
 					style={{ width: '80px', height: '110px' }}
 				>
-					<Image src={product.getMainImageSrc()} width={80} height={110} alt={product.getTitle()} />
+					<Image
+						src={product.getMainImageSrc()}
+						width={80}
+						height={110}
+						alt={product.getTitle()}
+						placeholder="blur"
+						blurDataURL={product.getMainImageThumbnail()}
+					/>
 				</Link>
 			</div>
 			<div className={s.info}>
@@ -45,7 +51,7 @@ export default function ShoppingBagItem({ product, handleDelete, handleClose = (
 					<span>{language.size}:</span>
 					<FormControl variant="standard" hiddenLabel>
 						<Select labelId="select-label" id="select" value={product.getSelectedSize()} label="size" onChange={handleChangeSize}>
-							{sizeList.map((el) => (
+							{product.getAllSizeOptions().map((el) => (
 								<MenuItem value={el} key={el}>
 									{el}
 								</MenuItem>

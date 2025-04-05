@@ -37,10 +37,14 @@ export async function getStaticPaths() {
 	let paths: { params: { id: string } }[] = []
 
 	try {
-		const productsStructure = getProductStructure(PRODUCTS)
-		paths = productsStructure.map((product) => ({
-			params: { id: product.getId() },
-		}))
+		const res = await serverApi.getProducts()
+
+		if (res.data) {
+			const productsStructure = getProductStructure(PRODUCTS)
+			paths = productsStructure.map((product) => ({
+				params: { id: product.getId() },
+			}))
+		}
 	} catch (error) {
 		console.error('Product fetch error in product/[id]: ', error)
 	}

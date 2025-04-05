@@ -1,3 +1,4 @@
+import PRODUCTS from '@/constants/PRODUCTS'
 import { IProductObject, IResponse } from '@/interfaces'
 import { NextApiRequest, NextApiResponse } from 'next'
 import Responser from '../Responser'
@@ -17,7 +18,8 @@ export async function getProducts(req?: NextApiRequest, res?: NextApiResponse): 
 
 		if (res) res.status(response.status).json(response)
 
-		const fallback: IResponse<IProductObject[]> = { data: [], error: response.error, status: response.status }
+		const fallback: IResponse<IProductObject[]> = { data: PRODUCTS, error: response.error, status: response.status }
+		console.warn('Use fallback products', { response })
 
 		return fallback
 	}

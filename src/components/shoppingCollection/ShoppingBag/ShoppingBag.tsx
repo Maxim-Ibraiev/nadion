@@ -16,7 +16,6 @@ interface IProps {
 export default function ShoppingBag({ handleCloseModal }: IProps) {
 	const router = useRouter()
 	const { selectedProducts, setSelectedProducts } = useProducts()
-	// const [shoppingId, setShoppingId] = useState('')
 	const [isLoading, setIsLoading] = useState(false)
 
 	const handleOrder = () => {

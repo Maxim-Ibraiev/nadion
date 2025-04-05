@@ -13,6 +13,7 @@ export default function useReduceSelectors() {
 	const setSelectedProducts = (newSelectedProducts: IProduct[]) => {
 		dispatch(actions.setSelectedProducts(newSelectedProducts))
 	}
+
 	return {
 		products,
 		selectedProducts,

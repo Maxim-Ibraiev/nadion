@@ -37,19 +37,26 @@ const Filter = forwardRef(({ onRequestClose = () => {} }: IProps, ref) => {
 	const globalCategory = (arrayWrapper(router.query?.globalCategory)[0] || 'all') as Category
 	const filterOptions = getOptionsFromProducts(categoredProducts[globalCategory] || [])
 	const [priceRange, setPriceRange] = useState(filter.query.price ? filter.query.price.map((el) => Number(el)) : [20, 3000])
-	const [filterState, setFilterState] = useState(filter.query)
 
 	const handleChange = (option: keyof InitialFilter, value: string) => {
-		setFilterState((prevState) => ({
-			...prevState,
-			[option]: toggleArrayValue(arrayWrapper(prevState[option]), value),
-		}))
+		filter.define(option, toggleArrayValue(arrayWrapper(filter.query[option]), value))
 	}
-	const handleSubmitFilter = () => filter.updateURL(filterState)
+
+	const handleSubmitFilter = () => {
+		filter.updateURL(filter.query)
+	}
 
 	const handleChangePriceRange = (_: Event, newValue: number | number[]) => {
 		setPriceRange(arrayWrapper(newValue))
-		setFilterState((prevState) => ({ ...prevState, price: arrayWrapper(newValue).map((el) => el.toString()) }))
+		filter.define(
+			'price',
+			arrayWrapper(newValue).map((el) => el.toString())
+		)
+	}
+
+	const handleReset = () => {
+		filter.reset()
+		onRequestClose()
 	}
 
 	return (
@@ -70,15 +77,7 @@ const Filter = forwardRef(({ onRequestClose = () => {} }: IProps, ref) => {
 								{language.hideFilters}
 							</Button>
 						)}
-						<Button
-							sx={{ height: 1 }}
-							onClick={() => {
-								filter.reset()
-								setFilterState({})
-								onRequestClose()
-							}}
-							startIcon={<RotateLeftIcon />}
-						>
+						<Button sx={{ height: 1 }} onClick={handleReset} startIcon={<RotateLeftIcon />}>
 							{language.reset}
 						</Button>
 					</Box>
@@ -123,12 +122,12 @@ const Filter = forwardRef(({ onRequestClose = () => {} }: IProps, ref) => {
 					{filterOptions.color.map(({ value }) => (
 						<Checkbox
 							sx={{
-								boxShadow: `0px 0px 10px 7px ${filterState.color?.includes(value) ? 'rgba(0,255,232, 0.5)' : 'rgba(175, 175, 175,  0.5)'}`,
+								boxShadow: `0px 0px 10px 7px ${filter.query.color?.includes(value) ? 'rgba(0,255,232, 0.5)' : 'rgba(175, 175, 175,  0.5)'}`,
 							}}
 							key={value}
 							name="color"
 							value={value}
-							checked={filterState.color?.includes(value) || false}
+							checked={filter.query.color?.includes(value) || false}
 							onChange={() => handleChange('color', value)}
 							icon={<CircleIcon htmlColor={value} fontSize="large" />}
 							checkedIcon={<CheckCircleIcon htmlColor={value} fontSize="large" />}
@@ -143,7 +142,7 @@ const Filter = forwardRef(({ onRequestClose = () => {} }: IProps, ref) => {
 						<FormControlLabel
 							name="size"
 							key={value}
-							checked={filterState.size?.includes(value) || false}
+							checked={filter.query.size?.includes(value) || false}
 							control={<Checkbox />}
 							label={label}
 							value={value}
@@ -157,7 +156,7 @@ const Filter = forwardRef(({ onRequestClose = () => {} }: IProps, ref) => {
 				<FormGroup>
 					{dressType.map((type) => (
 						<FormControlLabel
-							checked={filterState.model?.includes(type) || false}
+							checked={filter.query.model?.includes(type) || false}
 							key={type}
 							control={<Checkbox />}
 							label={type}

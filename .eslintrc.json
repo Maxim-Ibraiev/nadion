@@ -10,6 +10,7 @@
 		"no-restricted-exports": "off",
 		"react/jsx-filename-extension": "off",
 		"no-use-before-define": "off",
+		"react-hooks/exhaustive-deps":"off",
 		"react/self-closing-comp": "warn",
 		"react/jsx-no-useless-fragment": "warn",
 		"react/jsx-curly-brace-presence": "warn",

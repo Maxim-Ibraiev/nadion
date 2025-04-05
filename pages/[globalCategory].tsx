@@ -1,8 +1,8 @@
+import serverApi from '@/api/serverApi'
 import Catalog from '@/components/Catalog'
 import Layout from '@/components/Layout'
-import PRODUCTS from '@/constants/PRODUCTS'
-import { productsSuccess } from '@/redux/main/mainActions'
 import { wrapper } from '@/redux/store'
+import dispatchData from '@api/serverHelpers/dispatchData'
 
 export default function Home() {
 	return (
@@ -12,8 +12,10 @@ export default function Home() {
 	)
 }
 
-export const getServerSideProps = wrapper.getServerSideProps((state) => async ({ req, res }) => {
-	state.dispatch(productsSuccess(PRODUCTS))
+export const getServerSideProps = wrapper.getServerSideProps(({ dispatch }) => async () => {
+	const products = await serverApi.getProducts()
+
+	dispatchData(dispatch, { products })
 
 	return {
 		props: {},
