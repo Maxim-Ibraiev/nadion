@@ -23,22 +23,20 @@ function Button({
 	isSubmit = false,
 	status = null,
 	isLoading = false,
+	disabled = false,
 	...butonProps
 }: IProps & ButtonType) {
 	const isShowLoading = isLoading || status === 'Request'
 
 	return (
 		<button
-			className={cn(
-				s.btn,
-				{
-					[s.request]: isShowLoading,
-					[s.error]: status === 'Error',
-					[s.success]: status === 'Success',
-				},
-				className
-			)}
-			disabled={isShowLoading || status === 'Success'}
+			className={cn(className, s.btn, {
+				[s.request]: isShowLoading,
+				[s.error]: status === 'Error',
+				[s.success]: status === 'Success',
+				[s.disabled]: disabled,
+			})}
+			disabled={isShowLoading || status === 'Success' || disabled}
 			type={isSubmit ? 'submit' : 'button'}
 			onClick={onClick}
 			{...butonProps}

@@ -16,8 +16,7 @@
 }
 
 .checkout {
-	margin-left: auto;
-	margin-right: auto;
+	flex-grow: 1;
 
 	@media screen and (max-width: $tableLesser) {
 		margin-top: 30px;

@@ -1,5 +1,5 @@
 const language = {
-	// ru - categories
+	// ua - categories
 	femaleClothes: 'Жіночий одяг',
 	maleClothes: 'Чоловічий одяг',
 	childrenClothes: 'Дитячий одяг',
@@ -12,7 +12,7 @@ const language = {
 	shirts: 'Сорочки',
 	handMade: 'Індивідуальне пошиття',
 
-	// ru - filters
+	// ua - filters
 	globalCategory: 'Глобальна категорія',
 	category: 'Категорія',
 	size: 'Розмір',
@@ -67,7 +67,7 @@ const language = {
 	menu: 'Меню',
 	save: 'Зберегти',
 
-	// ru - text
+	// ua - text
 	toCart: 'У кошик',
 	productsInBag: 'Товари в кошику',
 	emptyBag: 'Кошик порожній',
@@ -78,11 +78,11 @@ const language = {
 	continueShopping: 'Продовжити покупки',
 	makingAnOrder: 'Оформлення замовлення',
 
-	// ru - navigation
+	// ua - navigation
 	toHomePage: 'на головну сторінку',
 	noProducts: 'Товар не знайдено!',
 
-	// ru - form
+	// ua - form
 	firstName: "Ім'я",
 	lastName: 'Прізвище',
 	email: 'Email',
@@ -97,6 +97,8 @@ const language = {
 	city: 'Місто',
 	adress: 'Адреса',
 	shopName: 'Назва магазину',
+	thanks: 'Дякуємо за замовлення!',
+	waitForACall: 'Ваше вамовлення в обробці, очікуйте дзвінка менеджера!',
 
 	// foter
 	aboutOurCompany: 'Про нашу компанію',

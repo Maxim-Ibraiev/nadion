@@ -12,7 +12,8 @@ import language from '@/language'
 import { wrapper } from '@/redux/store'
 import routes from '@/routes'
 import dispatchData from '@api/serverHelpers/dispatchData'
-import { Box, MenuItem, Tab, Tabs, Typography } from '@mui/material'
+import CheckIcon from '@mui/icons-material/Check'
+import { Box, MenuItem, Modal, Paper, Tab, Tabs, Typography } from '@mui/material'
 import { useFormik } from 'formik'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
@@ -38,12 +39,12 @@ export default function Checkout() {
 	const { selectedProducts, setSelectedProducts } = useProducts()
 	const [delivaryIndex, setDelivaryIndex] = useState(0)
 	const [postIndex, setPostIndex] = useState(0)
+	const [isOpenSubmitModal, setIsOpenSubmitModal] = useState(false)
 	const DELIVARY_POST_INDEX = 0
 	const DELIVARY_PICK_UP_INDEX = 1
 	const NOVA_POST_INDEX = 0
 	const UKR_POST_INDEX = 1
 	const formChoise = {
-		post: '' as 'NovaPost' | 'ukrPost',
 		isPickUp: DELIVARY_PICK_UP_INDEX === delivaryIndex,
 		isPostDelivary: DELIVARY_POST_INDEX === delivaryIndex,
 		isNovaPost: NOVA_POST_INDEX === postIndex && DELIVARY_POST_INDEX === delivaryIndex,
@@ -56,7 +57,11 @@ export default function Checkout() {
 			if (formChoise.isNovaPost) formik.setFieldValue('ukrPostNumber', '')
 			if (formChoise.isUkrPost) formik.setFieldValue('novaPostNumber', '')
 
-			alert(JSON.stringify(formik.values, null, 2))
+			console.log({ formChoise, selectedProducts: selectedProducts.map((el) => el.toObject()) })
+
+			setSelectedProducts('reset')
+			setIsOpenSubmitModal(true)
+			formik.resetForm()
 		},
 	})
 
@@ -87,7 +92,7 @@ export default function Checkout() {
 					)}
 				</div>
 
-				<Box sx={{ mx: 2, my: 4, borderBottom: 1, borderColor: 'divider' }}>
+				<Box sx={{ mx: 2, my: 4, borderBottom: 1, borderColor: 'divider' }} className={s.checkout}>
 					<Tabs value={delivaryIndex} onChange={(e, v) => setDelivaryIndex(v)} className={s.line}>
 						<Tab sx={{ mx: 'auto' }} label={language.delivary} />
 						<Tab sx={{ mx: 'auto' }} label={language.pickup} />
@@ -168,12 +173,42 @@ export default function Checkout() {
 							<Typography alignContent="center">{language.phoneNumber}</Typography>
 							<Form.Input formik={formik} name="phoneNumber" required />
 							<Box sx={{ my: 2 }}>
-								<MainButton isSubmit>onSubmit</MainButton>
+								<MainButton isSubmit disabled={selectedProducts.length === 0}>
+									{language.confirmOrder}
+								</MainButton>
 							</Box>
 						</Box>
 					)}
 				</Box>
 			</div>
+
+			<Modal open={isOpenSubmitModal} onClose={() => setIsOpenSubmitModal(false)} disablePortal disableEnforceFocus disableAutoFocus>
+				<Paper sx={{ width: '600px', m: '60px auto 0', p: 4 }}>
+					<CheckIcon
+						fontSize="large"
+						sx={{
+							display: 'block',
+							width: ' 200px',
+							height: '200px',
+							m: '0 auto',
+							borderRadius: '50%',
+							bgcolor: '#e9ecef',
+							fill: '#6458b7',
+						}}
+					/>
+					<Box>
+						<Typography variant="h4" component="h2" textAlign="center" m={4}>
+							{language.thanks}
+						</Typography>
+						<Typography variant="body1" component="h3" textAlign="center" m={4}>
+							{language.waitForACall}
+						</Typography>
+						<Box sx={{ display: 'flex', justifyContent: 'center', mt: 2 }}>
+							<MainButton onClick={() => router.push(routes.home)}>{language.toHomePage}</MainButton>
+						</Box>
+					</Box>
+				</Paper>
+			</Modal>
 		</Layout>
 	)
 }

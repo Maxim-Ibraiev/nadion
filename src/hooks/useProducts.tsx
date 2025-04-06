@@ -16,14 +16,20 @@ export default function useProducts() {
 	const getProductsByModel = (model: string) => products.filter((product) => product.getModel() === model)
 	const getProductById = (id: string) => products.find((el) => el.getId() === id)
 
-	const setSelectedProductSwitch = (metoth: 'add' | 'delete', payload: IProduct) => {
+	function setSelectedProductSwitch(metoth: 'add' | 'delete', payload: IProduct): void
+	function setSelectedProductSwitch(metoth: 'reset'): void
+	function setSelectedProductSwitch(metoth: 'add' | 'delete' | 'reset', payload?: IProduct) {
 		switch (metoth) {
 			case 'delete':
-				setSelectedProducts(selectedProducts.filter((el) => el.getId() !== payload.getId()))
+				setSelectedProducts(selectedProducts.filter((el) => el.getId() !== payload?.getId()))
 				break
 
 			case 'add':
-				setSelectedProducts(selectedProducts.concat(payload))
+				if (payload) setSelectedProducts(selectedProducts.concat(payload))
+				break
+
+			case 'reset':
+				setSelectedProducts([])
 				break
 
 			default:
