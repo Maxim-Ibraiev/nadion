@@ -32,9 +32,6 @@ export default function Catalog() {
 						onClose={() => setIsOpenFilter(false)}
 						aria-labelledby="modal-for-filter"
 						aria-describedby="filter-products"
-						disablePortal
-						disableEnforceFocus
-						disableAutoFocus
 					>
 						<Filter onRequestClose={() => setIsOpenFilter(false)} />
 					</Modal>

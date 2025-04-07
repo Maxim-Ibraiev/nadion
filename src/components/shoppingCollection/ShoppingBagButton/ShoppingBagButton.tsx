@@ -1,8 +1,8 @@
 'use client'
 
-import Modal from '@/components/Modal'
 import Button from '@/components/buttons/HederBtn'
 import language from '@/language'
+import { Modal, Paper } from '@mui/material'
 import cn from 'classnames'
 import { useState } from 'react'
 import ShoppingBag from '../ShoppingBag/ShoppingBag'
@@ -23,13 +23,10 @@ export default function ShoppingBagButton() {
 				/>
 			</div>
 
-			<Modal
-				isOpen={isOpenShoppingBag}
-				className={cn(s.modal, s.shoppingBag)}
-				overlayClassName={s.overModal}
-				onRequestClose={() => setIsOpenShoppingBag(false)}
-			>
-				<ShoppingBag handleCloseModal={() => setIsOpenShoppingBag(false)} />
+			<Modal open={isOpenShoppingBag} onClose={() => setIsOpenShoppingBag(false)}>
+				<Paper className={cn(s.shoppingBag)}>
+					<ShoppingBag handleCloseModal={() => setIsOpenShoppingBag(false)} />
+				</Paper>
 			</Modal>
 		</div>
 	)

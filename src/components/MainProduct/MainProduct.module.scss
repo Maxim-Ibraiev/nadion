@@ -82,13 +82,13 @@
 	margin-top: 5px;
 	margin-bottom: 15px;
 
-	fill: var(--primary);
+	fill: var(--contrastText);
 	cursor: pointer;
 }
 
 .productSelected {
 	margin: 0;
-	background-color: var(--primary);
+	background-color: var(--gray-0);
 	border: 1px solid var(--accent);
 	color: inherit;
 }

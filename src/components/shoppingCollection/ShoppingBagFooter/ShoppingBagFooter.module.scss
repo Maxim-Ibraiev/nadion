@@ -1,8 +1,7 @@
 @import '@/styles/variables.scss';
 
 .footer {
-	background: var(--primary);
-	border-top: 1px solid var(--border-palette);
+	border-top: 1px solid var(--borderColor);
 	text-transform: uppercase;
 }
 
@@ -34,6 +33,6 @@
 .footerBottoms {
 	display: flex;
 	justify-content: space-between;
-
+	gap: 10px;
 	margin-bottom: 10px;
 }

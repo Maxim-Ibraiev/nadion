@@ -184,7 +184,7 @@ export default function Checkout() {
 				</Box>
 			</div>
 
-			<Modal open={isOpenSubmitModal} onClose={() => setIsOpenSubmitModal(false)} disablePortal disableEnforceFocus disableAutoFocus>
+			<Modal open={isOpenSubmitModal} onClose={() => setIsOpenSubmitModal(false)}>
 				<Paper className={s.modal}>
 					<CheckIcon fontSize="large" className={s.icon} />
 					<Box>

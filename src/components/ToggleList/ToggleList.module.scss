@@ -1,52 +1,52 @@
 @import '../../styles/variables.scss';
 
 .header {
-  width: 100%;
+	width: 100%;
 
-  display: flex;
-  align-items: center;
+	display: flex;
+	align-items: center;
 
-  padding-top: 15px;
-  padding-bottom: 15px;
+	padding-top: 15px;
+	padding-bottom: 15px;
 
-  border: 1px solid var(--gray);
+	border: 1px solid var(--borderColor);
 
-  text-align: left;
+	text-align: left;
 
-  transition: fill $animation $cubic;
+	transition: fill $animation $cubic;
 
-  &:hover,
-  &:focus {
-    fill: var(--blue);
-  }
+	&:hover,
+	&:focus {
+		fill: var(--accent);
+	}
 }
 
 .toggleIcon {
-  transition: transform $animation $cubic;
+	transition: transform $animation $cubic;
 }
 
 .rotate {
-  transform: rotate(180deg);
+	transform: rotate(180deg);
 }
 
 .title {
-  padding-left: 10px;
+	padding-left: 10px;
 }
 
 .content {
-  overflow-y: scroll;
-  visibility: hidden;
-  pointer-events: none;
+	overflow-y: scroll;
+	visibility: hidden;
+	pointer-events: none;
 
-  transition-property: max-height, visibility;
-  transition-duration: $animation;
-  transition-timing-function: ease-out;
+	transition-property: max-height, visibility;
+	transition-duration: $animation;
+	transition-timing-function: ease-out;
 
-  border: 1px solid var(--gray);
-  border-top: none;
+	border: 1px solid var(--borderColor);
+	border-top: none;
 
-  &.isOpen {
-    visibility: visible;
-    pointer-events: unset;
-  }
+	&.isOpen {
+		visibility: visible;
+		pointer-events: unset;
+	}
 }

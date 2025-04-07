@@ -14,7 +14,7 @@
 	margin-bottom: 30px;
 	padding-left: 15px;
 
-	background-color: var(--bgContrast);
+	background-color: var(--layoutBackground);
 
 	.logo {
 		font-family: Playball, serif;
@@ -24,7 +24,7 @@
 	}
 
 	a {
-		color: var(--primary);
+		color: var(--contrastText);
 	}
 }
 
@@ -58,7 +58,7 @@
 
 		transform: scale(0, 1);
 		border-radius: 4px;
-		border: 1px solid var(--accents-0);
+		border: 1px solid var(--gray-0);
 	}
 }
 
@@ -76,7 +76,7 @@
 
 .row {
 	display: flex;
-	color: var(--primary);
+	color: var(--contrastText);
 }
 
 .mobUpper {

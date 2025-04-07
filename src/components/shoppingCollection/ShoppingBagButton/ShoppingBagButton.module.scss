@@ -1,18 +1,16 @@
 @import '@/styles/variables.scss';
 
 .shoppingBag {
-	height: calc(100vh - 50px);
-
+	height: calc(100vh - var(--headerHeight));
+	margin-top: var(--headerHeight);
 	border-radius: 4px;
-	background-color: var(--primary);
+
+	overflow-y: scroll;
 
 	@media screen and (min-width: $tableUpper) {
 		width: 400px;
-		inset: unset;
 
-		top: 50px;
-		right: calc(((100vw - $tableUpper) / 2));
-		height: unset;
-		max-height: calc(100vh - 80px);
+		margin-left: auto;
+		margin-right: 80px;
 	}
 }

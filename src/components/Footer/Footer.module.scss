@@ -5,8 +5,8 @@
 
 	margin-top: 30px;
 
-	background: var(--bgContrast);
-	color: var(--accents-3);
+	background: var(--layoutBackground);
+	color: var(--gray-3);
 
 	@media screen and (min-width: $mobileUpper) {
 		grid-template-columns: 1fr 1fr;
@@ -38,7 +38,7 @@
 
 .street {
 	font-size: 14px;
-	color: var(--accents-6);
+	color: var(--gray-6);
 }
 
 .about {

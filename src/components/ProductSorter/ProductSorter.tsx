@@ -15,15 +15,7 @@ export default function ProductSorter() {
 				{language.sort}
 			</Button>
 
-			<Modal
-				open={isOpenSort}
-				onClose={() => setIsOpenSort(false)}
-				aria-labelledby="modal-for-sort"
-				aria-describedby="sort-products"
-				disablePortal
-				disableEnforceFocus
-				disableAutoFocus
-			>
+			<Modal open={isOpenSort} onClose={() => setIsOpenSort(false)} aria-labelledby="modal-for-sort" aria-describedby="sort-products">
 				<Paper sx={{ width: '300px', m: '150px auto 0' }}>
 					{sort.map(({ label, value }) => (
 						<Button

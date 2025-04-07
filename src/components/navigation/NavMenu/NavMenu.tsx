@@ -1,9 +1,9 @@
 'use client'
 
 import MenuMob from '@/components/MenuMob'
-import Modal from '@/components/Modal'
 import Button from '@/components/buttons/HederBtn'
 import language from '@/language'
+import { Modal } from '@mui/material'
 import { useState } from 'react'
 
 export default function NavMenu() {
@@ -21,7 +21,7 @@ export default function NavMenu() {
 				/>
 			</div>
 
-			<Modal isOpen={isOpen} onRequestClose={() => setIsOpen(false)}>
+			<Modal open={isOpen} onClose={() => setIsOpen(false)}>
 				<MenuMob />
 			</Modal>
 		</div>

@@ -27,10 +27,10 @@
 
 .container {
 	& > *:first-child {
-		border-top: 1px solid var(--border-palette);
+		border-top: 1px solid var(--borderColor);
 	}
 	& > * {
-		border-bottom: 1px solid var(--border-palette);
+		border-bottom: 1px solid var(--borderColor);
 		border-right: none;
 		border-left: none;
 		border-top: none;
@@ -60,7 +60,7 @@
 
 .footer {
 	width: calc(100% - 40px);
-
+	gap: 50px;
 	@media screen and (max-width: $tableLesser) {
 		position: fixed;
 		bottom: 0;
@@ -75,15 +75,12 @@
 }
 
 .secondaryBottom {
-	flex-basis: 48%;
 	color: inherit;
-	background: var(--primary);
+	background: var(--gray-0);
 	border: 1px solid var(--accent);
 }
 
 .primaryBottom {
-	flex-basis: 48%;
-
 	& > * {
 		width: 100%;
 	}
