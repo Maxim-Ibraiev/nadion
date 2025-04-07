@@ -16,9 +16,11 @@ import CheckCircleIcon from '@mui/icons-material/CheckCircle'
 import CircleIcon from '@mui/icons-material/Circle'
 import RotateLeftIcon from '@mui/icons-material/RotateLeft'
 import { Box, Button, Checkbox, Chip, FormControlLabel, FormGroup, Paper, Slider, Stack } from '@mui/material'
+import classNames from 'classnames'
 import { useRouter } from 'next/router'
 import React, { forwardRef, useState } from 'react'
 import ProductSorter from '../ProductSorter'
+import s from './Filter.module.scss'
 
 function valuetext(v: number) {
 	return `${v} ${language.UAH}`
@@ -61,23 +63,17 @@ const Filter = forwardRef(({ onRequestClose = () => {} }: IProps, ref) => {
 
 	return (
 		<Box component="aside">
-			<Paper
-				sx={{
-					display: 'grid',
-					gap: '24px',
-					padding: { xs: '15px 10px', sm: '30px 40px' },
-				}}
-			>
+			<Paper className={s.header}>
 				<Box>
-					<Box sx={{ display: 'flex', width: 1, height: 60, borderBottom: '1px solid rgba(0, 0, 0, 0.87)' }}>
+					<Box className={s.headerButtons}>
 						{isDesktop ? (
 							<ProductSorter />
 						) : (
-							<Button sx={{ height: 1, flexGrow: 1 }} onClick={onRequestClose} startIcon={<ArrowBackIcon />}>
+							<Button className={s.headerFilter} onClick={onRequestClose} startIcon={<ArrowBackIcon />}>
 								{language.hideFilters}
 							</Button>
 						)}
-						<Button sx={{ height: 1 }} onClick={handleReset} startIcon={<RotateLeftIcon />}>
+						<Button onClick={handleReset} startIcon={<RotateLeftIcon />}>
 							{language.reset}
 						</Button>
 					</Box>
@@ -104,21 +100,14 @@ const Filter = forwardRef(({ onRequestClose = () => {} }: IProps, ref) => {
 					max={3000}
 					getAriaValueText={valuetext}
 				/>
-				<Box sx={{ display: 'flex', justifyContent: 'space-around' }}>
+				<Box className={s.spaceAround}>
 					<Chip label={`${priceRange[0]} ${language.UAH}`} />
 					<Chip label={`${priceRange[1]} ${language.UAH}`} />
 				</Box>
 			</FilterAccordion>
 
 			<FilterAccordion summary={language.color}>
-				<Box
-					sx={{
-						display: 'grid',
-						gridTemplateColumns: 'repeat(auto-fill, 28px)',
-						gridAutoRows: '28px',
-						gap: '15px',
-					}}
-				>
+				<Box className={s.colorWrapper}>
 					{filterOptions.color.map(({ value }) => (
 						<Checkbox
 							sx={{
@@ -137,7 +126,7 @@ const Filter = forwardRef(({ onRequestClose = () => {} }: IProps, ref) => {
 			</FilterAccordion>
 
 			<FilterAccordion summary={language.sizes}>
-				<FormGroup sx={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)' }}>
+				<FormGroup className={classNames(s.sizes, s.grid)}>
 					{filterOptions.size.map(({ label, value }) => (
 						<FormControlLabel
 							name="size"

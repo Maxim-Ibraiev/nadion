@@ -15,11 +15,77 @@
 	}
 }
 
-.checkout {
+.checkoutTitle {
 	flex-grow: 1;
 
-	@media screen and (max-width: $tableLesser) {
-		margin-top: 30px;
+	margin: 32px 16px;
+
+	.postDelivary {
+		margin: 32px 0;
+	}
+
+	.center {
+		margin-left: auto;
+		margin-right: auto;
+	}
+}
+
+.pickUpContainer {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+
+	& > * {
+		min-width: 200px;
+	}
+	margin: 32px 0;
+}
+
+.adress {
+	display: flex;
+	justify-content: space-between;
+
+	width: 300px;
+}
+
+.form {
+	display: grid;
+	grid-template-columns: 40% 1fr;
+	gap: 20px;
+	margin-bottom: 30px;
+}
+
+.submit {
+	grid-column: 1/3;
+	margin: 0 auto;
+}
+
+.map {
+	width: 250px;
+	height: 250px;
+	background-image: url('/backgrounds/map.png');
+	background-size: cover;
+}
+
+.modal {
+	width: 600px;
+	margin: 60px auto 0;
+	padding: 32px;
+
+	.icon {
+		display: block;
+		width: 200px;
+		height: 200px;
+		margin: 0 auto;
+		border-radius: 50%;
+		background-color: var(--bg);
+		fill: var(--accent);
+	}
+
+	.buttonContainer {
+		display: flex;
+		justify-content: center;
+		margin-top: 16px;
 	}
 }
 

@@ -86,7 +86,7 @@ const language = {
 	firstName: "Ім'я",
 	lastName: 'Прізвище',
 	email: 'Email',
-	phoneNumber: 'Номер телефону',
+	phoneNumber: 'Телефон',
 	confirmOrder: 'Підтвердити замовлення',
 	orderIsConfirmed: 'Замовлення підтверджено',
 	enterToAdmin: 'Вхід в адмін панель',
@@ -96,13 +96,13 @@ const language = {
 	pickup: 'Самовивіз',
 	city: 'Місто',
 	adress: 'Адреса',
-	shopName: 'Назва магазину',
+	shopName: 'Магазин',
 	thanks: 'Дякуємо за замовлення!',
 	waitForACall: 'Ваше вамовлення в обробці, очікуйте дзвінка менеджера!',
 
 	// foter
 	aboutOurCompany: 'Про нашу компанію',
-	adressOfCompany: 'Вулиця Лермонтова №3',
+	adressOfCompany: 'Вул. Лермонтова №3',
 	cityOfCompany: 'Кривий ріг, Україна',
 
 	// handMagePage: {

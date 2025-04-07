@@ -1,0 +1,26 @@
+.wrapper {
+	position: relative;
+}
+
+.container {
+	overflow-x: scroll;
+}
+
+.list {
+	display: flex;
+	width: fit-content;
+}
+
+.chipsContainer {
+	position: absolute;
+	top: 40%;
+	display: flex;
+	width: 100%;
+	justify-content: space-between;
+	visibility: hidden;
+}
+
+.chip {
+	background-color: white;
+	visibility: visible;
+}

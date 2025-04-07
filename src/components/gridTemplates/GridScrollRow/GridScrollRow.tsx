@@ -3,48 +3,30 @@ import ArrowForward from '@mui/icons-material/ArrowForward'
 import { Box } from '@mui/material'
 import classNames from 'classnames'
 import React, { useRef, useState } from 'react'
+import s from './gridScrollRow.module.scss'
 
 export default function GridInfRow({ children }: React.PropsWithChildren) {
 	const box = useRef<HTMLDivElement>(null)
 	const [isHiddenChip, setIsHiddenChip] = useState(true)
 
-	return (
-		<div style={{ position: 'relative' }}>
-			<div style={{ overflowX: 'scroll' }} ref={box}>
-				<Box sx={{ display: 'flex', width: 'fit-content' }}>{children}</Box>
+	const handleLeftScroll = (scrollBy: number) => {
+		if (box.current) {
+			box.current.scrollBy({ left: scrollBy, behavior: 'smooth' })
 
-				<Box
-					sx={{
-						position: 'absolute',
-						top: '40%',
-						display: 'flex',
-						width: '100%',
-						justifyContent: 'space-between',
-						visibility: 'hidden',
-					}}
-				>
-					<Chip
-						style={{ backgroundColor: 'white', visibility: 'visible' }}
-						onClick={() => {
-							if (box.current) {
-								box.current.scrollBy({ left: -300, behavior: 'smooth' })
-								setIsHiddenChip(box.current.scrollLeft < 1)
-							}
-						}}
-						className={classNames({ hidden: isHiddenChip })}
-					>
+			setIsHiddenChip(box.current.scrollLeft < 1 && box.current.scrollLeft > scrollBy)
+		}
+	}
+
+	return (
+		<div className={s.wrapper}>
+			<div className={s.container} ref={box}>
+				<Box className={s.list}>{children}</Box>
+
+				<Box className={s.chipsContainer}>
+					<Chip className={classNames(s.chip, { hidden: isHiddenChip })} onClick={() => handleLeftScroll(-300)}>
 						<ArrowForward style={{ rotate: '180deg' }} />
 					</Chip>
-					<Chip
-						style={{ backgroundColor: 'white', visibility: 'visible' }}
-						onClick={() => {
-							if (box.current) {
-								box.current.scrollBy({ left: 300, behavior: 'smooth' })
-
-								setIsHiddenChip(false)
-							}
-						}}
-					>
+					<Chip className={s.chip} onClick={() => handleLeftScroll(300)}>
 						<ArrowForward />
 					</Chip>
 				</Box>

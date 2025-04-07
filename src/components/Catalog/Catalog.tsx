@@ -4,8 +4,10 @@ import { useDevice } from '@/hooks'
 import useProducts from '@/hooks/useProducts'
 import language from '@/language'
 import { Box, Button, Modal } from '@mui/material'
+import classNames from 'classnames'
 import { useState } from 'react'
 import ProductSorter from '../ProductSorter'
+import s from './Catalog.module.scss'
 
 export default function Catalog() {
 	const { isMobile, isTable } = useDevice()
@@ -14,20 +16,18 @@ export default function Catalog() {
 	const { filteredProducts } = useProducts()
 
 	return (
-		<Box sx={isUseModal ? {} : { display: 'flex', gap: '56px' }}>
+		<Box className={classNames({ [s.wrapper]: !isUseModal })}>
 			{isUseModal ? (
 				<>
-					<Box display="flex" justifyContent="space-between">
-						<Button variant="text" sx={{ mb: 3 }} onClick={() => setIsOpenFilter(true)}>
-							{language.allFilters}
-						</Button>
-						<Box sx={{ mb: 3 }}>
+					<Box className={s.buttonContainer}>
+						<Button onClick={() => setIsOpenFilter(true)}>{language.allFilters}</Button>
+						<Box>
 							<ProductSorter />
 						</Box>
 					</Box>
 
 					<Modal
-						sx={{ overflowY: 'scroll', padding: 2 }}
+						className={s.modal}
 						open={isOpenFilter}
 						onClose={() => setIsOpenFilter(false)}
 						aria-labelledby="modal-for-filter"
@@ -42,7 +42,7 @@ export default function Catalog() {
 			) : (
 				<Filter />
 			)}
-			<Box sx={{ flexGrow: 1 }}>
+			<Box className={s.catalog}>
 				<CardList products={filteredProducts} />
 			</Box>
 		</Box>

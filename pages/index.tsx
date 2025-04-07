@@ -9,35 +9,15 @@ import { wrapper } from '@/redux/store'
 import routes from '@/routes'
 import dispatchData from '@api/serverHelpers/dispatchData'
 import { Box, Typography } from '@mui/material'
-
-import heroImage from '@public/backgrounds/1.jpg'
-import ContentImage2 from '@public/backgrounds/2.jpg'
-import ContentImage3 from '@public/backgrounds/3.jpg'
-import ContentImage4 from '@public/backgrounds/4.jpg'
 import Link from 'next/link'
+import s from './mainPage.module.scss'
 
 function Home() {
 	const { products } = useProducts()
 
 	return (
 		<Layout>
-			<Box
-				sx={{
-					width: 1,
-					height: { xs: '400px', md: '700px' },
-
-					display: 'flex',
-					flexDirection: 'column',
-					justifyContent: 'center',
-
-					gap: { xs: '10px', md: '30px' },
-					mr: { xs: '20px', md: '80px' },
-					pl: '20px',
-
-					backgroundImage: `url(${heroImage.src})`,
-					objectFit: 'cover',
-				}}
-			>
+			<Box className={s.hero}>
 				<Typography variant="h1" fontSize={30}>
 					Nadion
 				</Typography>
@@ -49,16 +29,9 @@ function Home() {
 					<MainButton> Button</MainButton>
 				</Box>
 			</Box>
-			<Box sx={{ my: { xs: '30px', sm: '60px' } }}>
+			<Box className={s.margin}>
 				<GridCol>
-					<div
-						style={{
-							backgroundColor: 'lightgray',
-							backgroundImage: `url(${ContentImage3.src})`,
-							backgroundPosition: 'center',
-							objectFit: 'contain',
-						}}
-					/>
+					<div className={s.imageLint2} />
 					<div>
 						<ProductCard product={products[3]} />
 					</div>
@@ -71,24 +44,10 @@ function Home() {
 					<div>
 						<ProductCard product={products[0]} />
 					</div>
-					<div
-						style={{
-							backgroundColor: 'lightgray',
-							backgroundImage: `url(${ContentImage2.src})`,
-							backgroundPosition: 'center',
-							objectFit: 'contain',
-						}}
-					/>
+					<div className={s.imageLint1} />
 				</GridCol>
 			</Box>
-			<Box
-				sx={{
-					display: 'flex',
-					gap: '24px',
-					justifyContent: 'center',
-					my: { xs: '60px', sm: '120px' },
-				}}
-			>
+			<Box className={s.priceLinks}>
 				<Link href={routes.getPriceRange(0, 600)}>
 					<MainButton style={{ cursor: 'inherit' }}> up to 600</MainButton>
 				</Link>
@@ -102,29 +61,18 @@ function Home() {
 					<MainButton style={{ cursor: 'inherit' }}> up to 2000</MainButton>
 				</Link>
 			</Box>
+
 			<ProductsRow products={products} width={117} />
-			<Box
-				sx={{
-					width: '100%',
-					height: '700px',
-					bgcolor: 'lightgray',
-					display: 'flex',
-					flexDirection: 'column',
-					justifyContent: 'center',
-					alignItems: 'center',
-					my: '25px',
-					px: '20%',
-					backgroundImage: `url(${ContentImage4.src})`,
-				}}
-			>
-				<Typography sx={{ mb: '45px' }} textAlign="center">
+
+			<Box className={s.banner}>
+				<Typography mb={5} textAlign="center">
 					Lorem ipsum dolor sit amet consectetur, adipisicing elit. Exercitationem sapiente voluptate labore porro facere aliquam
 					voluptatem, qui beatae delectus
 				</Typography>
-				<MainButton>Pass to ...</MainButton>
+				<MainButton className={s.button}>Pass to ...</MainButton>
 			</Box>
 
-			<Typography variant="h3" textAlign="center" mt={15} mb={9}>
+			<Typography variant="h3" textAlign="center" my={{ xs: 5, md: 12 }}>
 				The best to buy
 			</Typography>
 
