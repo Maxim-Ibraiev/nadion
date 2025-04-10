@@ -15,7 +15,7 @@ import Link from 'next/link'
 import s from './mainPage.module.scss'
 
 function Home() {
-	const { products, getProductById, categoredProducts, getFilteredProducts } = useProducts()
+	const { products, getProductById, categoredProducts, getProductCollection } = useProducts()
 
 	return (
 		<Layout>
@@ -66,6 +66,7 @@ function Home() {
 					</Box>
 				</GridCol>
 			</Box>
+
 			<Box className={s.priceLinks}>
 				<Link href={routes.getPriceRange(0, 600)} className="button">
 					up to 600
@@ -81,11 +82,11 @@ function Home() {
 				</Link>
 			</Box>
 
-			<Typography variant="h3" textAlign="center" my={{ xs: 5, md: 12 }}>
+			<Typography variant="h3" textAlign="center" my={{ xs: 3 }}>
 				{language.tShirt}
 			</Typography>
 
-			<ProductsRow products={categoredProducts.maleClothes} width={117} />
+			<ProductsRow products={categoredProducts.maleClothes} width={240} />
 
 			<Box className={s.banner}>
 				<Typography textAlign="center" variant="h2" fontSize={{ xs: 20, sm: 30 }}>
@@ -96,11 +97,11 @@ function Home() {
 				</Link>
 			</Box>
 
-			<Typography variant="h3" textAlign="center" my={{ xs: 5, md: 12 }} fontSize={{ xs: 30, sm: 40 }}>
+			<Typography variant="h3" textAlign="center" my={{ xs: 3 }} fontSize={{ xs: 30, sm: 40 }}>
 				{language.bestProduct}
 			</Typography>
 
-			<ProductsRow products={getFilteredProducts(products, { price: ['3000', '650'] })} width={117} />
+			<ProductsRow products={getProductCollection('bestsellers')} width={240} />
 		</Layout>
 	)
 }
