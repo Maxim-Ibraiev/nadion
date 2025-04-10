@@ -1,1 +1,1 @@
-export { default } from './shoppingBagModal'
+export { default } from './ShoppingBagModal'
