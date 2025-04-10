@@ -1,7 +1,9 @@
 @import '@/styles/variables.scss';
 
 .shoppingBag {
-	height: calc(100vh - var(--headerHeight));
+	height: calc(100% - var(--headerHeight));
+
+	max-height: fit-content;
 	margin-top: var(--headerHeight);
 	border-radius: 4px;
 

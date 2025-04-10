@@ -42,9 +42,10 @@ export default function useProducts() {
 		products,
 		selectedProducts,
 		categoredProducts,
+		filteredProducts: filter.getQueryProducts(products),
 		getProductsByModel,
 		getProductById,
+		getFilteredProducts,
 		setSelectedProducts: setSelectedProductSwitch,
-		filteredProducts: filter.getQueryProducts(products),
 	}
 }

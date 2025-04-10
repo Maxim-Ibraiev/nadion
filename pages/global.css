@@ -1,4 +1,5 @@
 @import '~react-image-gallery/styles/css/image-gallery.css';
+@import url('https://fonts.googleapis.com/css2?family=Aladin&family=Roboto:wght@400;700&display=swap');
 
 :root {
 	--accent: var(--mui-palette-primary-main, #6458b7);
@@ -11,6 +12,8 @@
 	--contrastText: var(--mui-palette-primary-contrastText, #fff);
 	--borderColor: var(--mui-palette-divider, #dadada);
 	--layoutBackground: rgb(45, 45, 45);
+	--shadow: var(--mui-shadows-4, 0 10px 16px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%));
+	--paper: var(--mui-palette-background-paper, #fff);
 
 	--gray-0: var(--mui-palette-primary-gray50, #fafafa);
 	--gray-1: var(--mui-palette-primary-gray100, #f5f5f5);
@@ -24,6 +27,7 @@
 	--gray-9: var(--mui-palette-primary-gray900, #212121);
 
 	--font-sans: Roboto, -apple-system, system-ui, BlinkMacSystemFont, 'Helvetica Neue', 'Helvetica', sans-serif;
+	--fontLogo: 'Aladin', var(--font-sans);
 
 	--time-out: 250ms;
 	--cubic: linear;
@@ -93,12 +97,6 @@ ul {
 button {
 	background: none;
 	border: none;
-}
-
-.ReactModal__Body--open {
-	position: fixed;
-	width: 100%;
-	overflow-y: scroll;
 }
 
 .animated {

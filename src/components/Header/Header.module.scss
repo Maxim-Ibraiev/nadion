@@ -14,17 +14,14 @@
 	margin-bottom: 30px;
 	padding-left: 15px;
 
+	color: var(--contrastText);
 	background-color: var(--layoutBackground);
 
 	.logo {
-		font-family: Playball, serif;
-		font-size: 24px;
-
 		padding: 11px 0;
-	}
 
-	a {
-		color: var(--contrastText);
+		font-family: var(--fontLogo);
+		font-size: 30px;
 	}
 }
 

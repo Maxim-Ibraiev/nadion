@@ -1,6 +1,12 @@
 @import '@/styles/variables.scss';
 
+.shadow {
+	box-shadow: var(--shadow);
+}
+
 .header {
+	@extend .shadow;
+
 	display: grid;
 	gap: 24px;
 	padding: 15px 10px;

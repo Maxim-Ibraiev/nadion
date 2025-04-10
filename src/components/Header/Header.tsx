@@ -16,7 +16,7 @@ export default function Header() {
 	return (
 		<header className={s.header}>
 			<Link href={routes.home} className={s.logo}>
-				Butterfly
+				Nadion
 			</Link>
 			<div className={s.nav}>
 				<nav>

@@ -2,8 +2,7 @@
 
 import Button from '@/components/buttons/HederBtn'
 import language from '@/language'
-import { Modal, Paper } from '@mui/material'
-import cn from 'classnames'
+import { Box, Modal, Paper } from '@mui/material'
 import { useState } from 'react'
 import ShoppingBag from '../ShoppingBag/ShoppingBag'
 import s from './ShoppingBagButton.module.scss'
@@ -24,7 +23,7 @@ export default function ShoppingBagButton() {
 			</div>
 
 			<Modal open={isOpenShoppingBag} onClose={() => setIsOpenShoppingBag(false)}>
-				<Paper className={cn(s.shoppingBag)}>
+				<Paper className={s.shoppingBag}>
 					<ShoppingBag handleCloseModal={() => setIsOpenShoppingBag(false)} />
 				</Paper>
 			</Modal>

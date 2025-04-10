@@ -1,8 +1,8 @@
-import React from 'react'
 import cn from 'classnames'
-import s from './Layout.module.scss'
+import React from 'react'
 import Footer from '../Footer'
 import Header from '../Header'
+import s from './Layout.module.scss'
 
 interface IProps {
 	children: React.ReactNode

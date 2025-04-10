@@ -28,10 +28,7 @@ export default function Footer() {
 			</div>
 			<div className={s.about}>
 				<h4>{language.aboutOurCompany}</h4>
-				<p>
-					Lorem ipsum dolor, sit amet consectetur adipisicing elit. Modi repellendus cum, molestias expedita excepturi est nostrum magni
-					fuga debitis fugiat rerum odio maiores quaerat dolorem, deleniti consectetur accusamus distinctio dignissimos?
-				</p>
+				<p>{language.aboutUs}</p>
 			</div>
 		</footer>
 	)

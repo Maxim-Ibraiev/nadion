@@ -1,13 +1,8 @@
 @import '@/styles/variables.scss';
-
-.imagePlaceholder {
-	background-color: var(--gray-1);
-	background-position: center;
-	object-fit: contain;
-}
+@import '/pages/global.css';
 
 .bannerContainer {
-	@extend .imagePlaceholder;
+	position: relative;
 
 	width: 100%;
 	height: 400px;
@@ -17,9 +12,24 @@
 	justify-content: center;
 
 	gap: 10px;
-	padding: 20px;
+	padding: 40px;
 
-	object-fit: cover;
+	background-color: var(--gray-0);
+	background-position: center;
+	object-fit: contain;
+
+	color: var(--contrastText);
+
+	&::before {
+		content: '';
+		position: absolute;
+		inset: 0;
+		background-color: rgb(0, 0, 0, 0.3);
+	}
+
+	& > * {
+		z-index: 1;
+	}
 
 	@media screen and (min-width: $tableUpper) {
 		height: 700px;
@@ -31,6 +41,11 @@
 .hero {
 	@extend .bannerContainer;
 	background-image: url('/backgrounds/1.jpg');
+
+	.logo {
+		font-family: var(--fontLogo);
+		font-size: 30px;
+	}
 }
 
 .banner {
@@ -39,6 +54,8 @@
 	margin-top: 50px;
 	padding: 0 20%;
 	background-image: url('/backgrounds/4.jpg');
+	background-position: right;
+	height: 400px;
 
 	@media screen and (min-width: $tableUpper) {
 		margin-top: 100px;
@@ -46,18 +63,29 @@
 }
 
 .imageLint1 {
-	@extend .imagePlaceholder;
+	@extend .bannerContainer;
+	height: auto;
+	align-items: center;
 
 	background-image: url('/backgrounds/2.jpg');
 }
+
 .imageLint2 {
-	@extend .imagePlaceholder;
+	@extend .bannerContainer;
+	height: auto;
+	align-items: center;
 
 	background-image: url('/backgrounds/3.jpg');
+	background-position: top right;
 }
 
 .margin {
 	margin: 30px 0 60px;
+}
+
+.slogan {
+	width: fit-content;
+	white-space: pre-wrap;
 }
 
 .priceLinks {

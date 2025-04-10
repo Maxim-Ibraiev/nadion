@@ -41,6 +41,21 @@ function MyApp({ Component, ...rest }: AppProps) {
 					disableEnforceFocus: true,
 					disableAutoFocus: true,
 				},
+				styleOverrides: {
+					root: {
+						maxWidth: '1200px',
+						minWidth: '300px',
+						marginLeft: 'auto',
+						marginRight: 'auto',
+					},
+				},
+			},
+			MuiPaper: {
+				styleOverrides: {
+					root: {
+						boxShadow: '0 10px 16px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%)',
+					},
+				},
 			},
 		},
 	})

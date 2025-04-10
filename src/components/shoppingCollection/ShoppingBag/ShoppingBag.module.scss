@@ -30,10 +30,8 @@
 		border-top: 1px solid var(--borderColor);
 	}
 	& > * {
+		border: none;
 		border-bottom: 1px solid var(--borderColor);
-		border-right: none;
-		border-left: none;
-		border-top: none;
 	}
 }
 
@@ -61,6 +59,7 @@
 .footer {
 	width: calc(100% - 40px);
 	gap: 50px;
+
 	@media screen and (max-width: $tableLesser) {
 		position: fixed;
 		bottom: 0;
