@@ -3,11 +3,17 @@
 .wrapper {
 	position: relative;
 
-	height: min-content;
-	margin-bottom: 125px;
 	padding-left: 20px;
 	padding-right: 20px;
 	padding-bottom: 20px;
+
+	@media screen and (min-width: 300px) {
+		margin-bottom: 125px;
+	}
+
+	@media screen and (max-width: $tableUpper) {
+		min-height: calc(100vh - var(--headerHeight));
+	}
 
 	@media screen and (min-width: $tableUpper) {
 		margin-bottom: 0;
@@ -59,8 +65,9 @@
 .footer {
 	width: calc(100% - 40px);
 	gap: 50px;
+	background-color: var(--paper);
 
-	@media screen and (max-width: $tableLesser) {
+	@media screen and (min-width: 300px) {
 		position: fixed;
 		bottom: 0;
 	}

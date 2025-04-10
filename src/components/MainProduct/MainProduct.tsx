@@ -13,6 +13,7 @@ import Gallery from '../Gallery'
 import NotFoundProduct from '../NotFoundProduct'
 import MainButton from '../buttons/MainButton'
 import { BagIcon } from '../icons'
+import ShoppingBagModal from '../shoppingCollection/shoppingBagModal'
 import s from './MainProduct.module.scss'
 
 export default function MainProduct() {
@@ -24,6 +25,7 @@ export default function MainProduct() {
 	const [isProductSelected, setIsProductSelected] = useState(Boolean(selectedProducts.find(({ getId }) => getId() === product?.getId())))
 	const [isLoading, setIsLoading] = useState(false)
 	const [shoppingId, setShoppingId] = useState('')
+	const [isOpenShoppingBag, setIsOpenShoppingBag] = useState(false)
 
 	const handleSelectProduct = () => {
 		if (product) {
@@ -32,6 +34,7 @@ export default function MainProduct() {
 			if (isNeedToAdd) {
 				setSelectedProducts('add', product)
 				setIsProductSelected(true)
+				setIsOpenShoppingBag(true)
 			}
 		}
 	}
@@ -84,6 +87,7 @@ export default function MainProduct() {
 					)}
 				</div>
 			</div>
+			<ShoppingBagModal isOpen={isOpenShoppingBag} onClose={() => setIsOpenShoppingBag(false)} />
 		</section>
 	) : (
 		<NotFoundProduct />

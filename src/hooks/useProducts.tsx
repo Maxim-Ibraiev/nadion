@@ -38,6 +38,22 @@ export default function useProducts() {
 		}
 	}
 
+	const getProductCollection = (collectionName: 'bestsellers'): IProduct[] => {
+		if (collectionName === 'bestsellers') {
+			return [
+				'67dee1414af00200694bd95a',
+				'67dae371acb6440069c7b3e2',
+				'67dae0f0acb6440069c7b3ce',
+				'643eeaf180c5ab00476474c6',
+				'67dae368acb6440069c7b3de',
+			]
+				.map((el) => getProductById(el))
+				.filter((el) => typeof el !== 'undefined')
+		}
+
+		return []
+	}
+
 	return {
 		products,
 		selectedProducts,
@@ -47,5 +63,6 @@ export default function useProducts() {
 		getProductById,
 		getFilteredProducts,
 		setSelectedProducts: setSelectedProductSwitch,
+		getProductCollection,
 	}
 }
