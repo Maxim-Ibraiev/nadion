@@ -3,7 +3,7 @@ import ArrowForward from '@mui/icons-material/ArrowForward'
 import { Box } from '@mui/material'
 import classNames from 'classnames'
 import React, { useRef, useState } from 'react'
-import s from './gridScrollRow.module.scss'
+import s from './GridScrollRow.module.scss'
 
 export default function GridInfRow({ children }: React.PropsWithChildren) {
 	const box = useRef<HTMLDivElement>(null)
