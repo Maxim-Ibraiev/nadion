@@ -2,10 +2,8 @@
 
 import Button from '@/components/buttons/HederBtn'
 import language from '@/language'
-import { Box, Modal, Paper } from '@mui/material'
 import { useState } from 'react'
-import ShoppingBag from '../ShoppingBag/ShoppingBag'
-import s from './ShoppingBagButton.module.scss'
+import ShoppingBagModal from '../shoppingBagModal'
 
 export default function ShoppingBagButton() {
 	const [isOpenShoppingBag, setIsOpenShoppingBag] = useState(false)
@@ -22,11 +20,12 @@ export default function ShoppingBagButton() {
 				/>
 			</div>
 
-			<Modal open={isOpenShoppingBag} onClose={() => setIsOpenShoppingBag(false)}>
-				<Paper className={s.shoppingBag}>
-					<ShoppingBag handleCloseModal={() => setIsOpenShoppingBag(false)} />
-				</Paper>
-			</Modal>
+			<ShoppingBagModal
+				isOpen={isOpenShoppingBag}
+				onClose={() => {
+					setIsOpenShoppingBag(false)
+				}}
+			/>
 		</div>
 	)
 }
