@@ -21,6 +21,7 @@ const language = {
 	color: 'Колір',
 	season: 'Сезон',
 	model: 'Модель',
+	brand: 'Бренд',
 	popularity: 'За популярністю',
 	lowPriceFirst: 'За зростанням ціни',
 	highPriceFirst: 'За спаданням ціни',

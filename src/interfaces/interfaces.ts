@@ -54,6 +54,7 @@ export type InitialFilter = {
 	color?: string | string[]
 	sort?: string | string[]
 	price?: string | string[]
+	brand?: string | string[]
 }
 
 export type FilterQuery = {

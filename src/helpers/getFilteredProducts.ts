@@ -40,6 +40,7 @@ type MatchedOption = {
 	color?: string[]
 	season?: string[]
 	sort?: string[]
+	brand?: string[]
 }
 
 function isMatchedProduct(product: IProduct, options: MatchedOption) {
@@ -51,6 +52,8 @@ function isMatchedProduct(product: IProduct, options: MatchedOption) {
 		isOptionMatch(product.getCategory(), options.category),
 		isOptionMatch(product.getColor(), options.color),
 		isOptionMatch(product.getMaterial(), options.material),
+		// todo
+		options.brand ? arrayWrapper(options.brand).some((el) => product.getTitle().includes(el)) : true,
 	]
 
 	return result.every((el) => el)

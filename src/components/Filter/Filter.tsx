@@ -32,7 +32,7 @@ interface IProps {
 
 const Filter = forwardRef(({ onRequestClose = () => {} }: IProps, ref) => {
 	const { categoredProducts } = useProducts()
-	const dressType = ['без рукавів', 'Короткий рукав', 'Довгі рукави', 'Довгий  довжина до коліна', 'Короткі']
+	const brands = ['Adidas', 'Puma', 'Phillip Plein', 'Kenzo', 'Versace']
 	const { isDesktop } = useDevice()
 	const filter = useFilter()
 	const router = useRouter()
@@ -141,15 +141,15 @@ const Filter = forwardRef(({ onRequestClose = () => {} }: IProps, ref) => {
 				</FormGroup>
 			</FilterAccordion>
 
-			<FilterAccordion summary={language.model}>
+			<FilterAccordion summary={language.brand}>
 				<FormGroup>
-					{dressType.map((type) => (
+					{brands.map((type) => (
 						<FormControlLabel
-							checked={filter.query.model?.includes(type) || false}
+							checked={filter.query.brand?.includes(type) || false}
 							key={type}
 							control={<Checkbox />}
 							label={type}
-							onChange={() => handleChange('model', type)}
+							onChange={() => handleChange('brand', type)}
 						/>
 					))}
 				</FormGroup>
