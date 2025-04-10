@@ -11,6 +11,7 @@ type TInitionalOptions = {
 	colors: string[]
 	category: string[]
 	model: string[]
+	brand: string[]
 	price: number[]
 }
 
@@ -24,6 +25,7 @@ const getOptionsFromProducts = (products: IProduct[]): IOptionsFromProduct => {
 		colors: [],
 		category: [],
 		model: [],
+		brand: [],
 		price: [],
 	}
 
@@ -33,6 +35,7 @@ const getOptionsFromProducts = (products: IProduct[]): IOptionsFromProduct => {
 		acc.category.push(product.getCategory())
 		acc.model.push(product.getModel())
 		acc.colors.push(...product.getColor())
+		acc.brand.push(product.getTitle())
 		acc.price.push(product.getPrice())
 
 		return acc
@@ -44,6 +47,7 @@ const getOptionsFromProducts = (products: IProduct[]): IOptionsFromProduct => {
 		color: Array.from(new Set(allOptions.colors)),
 		category: Array.from(new Set(allOptions.category)),
 		model: Array.from(new Set(allOptions.model)),
+		brand: Array.from(new Set(allOptions.brand)),
 		prince: Array.from(new Set(allOptions.price)),
 	}
 
@@ -53,6 +57,7 @@ const getOptionsFromProducts = (products: IProduct[]): IOptionsFromProduct => {
 		color: getOptionFormat(setOptions.color),
 		category: getOptionFormat(setOptions.category),
 		model: getOptionFormat(setOptions.model),
+		brand: getOptionFormat(setOptions.brand),
 		price: [
 			{ value: '0', label: '0' },
 			{ value: String(Math.max(...setOptions.prince)), label: String(Math.max(...setOptions.prince)) },

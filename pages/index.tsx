@@ -20,7 +20,7 @@ function Home() {
 		<Layout>
 			<Box className={s.hero}>
 				<Box className={s.shadow} />
-				<Typography className={s.logo} variant="h1" fontSize={30}>
+				<Typography className={s.logo} variant="h1" fontSize={60}>
 					Nadion
 				</Typography>
 				<Typography className={s.slogan} variant="body1" fontSize="large">
@@ -66,16 +66,16 @@ function Home() {
 			</Box>
 			<Box className={s.priceLinks}>
 				<Link href={routes.getPriceRange(0, 600)}>
-					<MainButton style={{ cursor: 'inherit' }}> up to 600</MainButton>
+					<MainButton> up to 600</MainButton>
 				</Link>
 				<Link href={routes.getPriceRange(0, 1000)}>
-					<MainButton style={{ cursor: 'inherit' }}> up to 1000</MainButton>
+					<MainButton> up to 1000</MainButton>
 				</Link>
 				<Link href={routes.getPriceRange(0, 1500)}>
-					<MainButton style={{ cursor: 'inherit' }}> up to 1500</MainButton>
+					<MainButton> up to 1500</MainButton>
 				</Link>
 				<Link href={routes.getPriceRange(0, 2000)}>
-					<MainButton style={{ cursor: 'inherit' }}> up to 2000</MainButton>
+					<MainButton> up to 2000</MainButton>
 				</Link>
 			</Box>
 
