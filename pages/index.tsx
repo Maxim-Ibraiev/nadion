@@ -10,6 +10,7 @@ import { wrapper } from '@/redux/store'
 import routes from '@/routes'
 import dispatchData from '@api/serverHelpers/dispatchData'
 import { Box, Typography } from '@mui/material'
+import classNames from 'classnames'
 import Link from 'next/link'
 import s from './mainPage.module.scss'
 
@@ -20,26 +21,27 @@ function Home() {
 		<Layout>
 			<Box className={s.hero}>
 				<Box className={s.shadow} />
-				<Typography className={s.logo} variant="h1" fontSize={60}>
+				<Typography className={s.logo} variant="h1">
 					Nadion
 				</Typography>
-				<Typography className={s.slogan} variant="body1" fontSize="large">
+				<Typography className={s.slogan} variant="body1" fontSize={{ xs: 13, sm: 20 }}>
 					{language.slogan}
 				</Typography>
 				<Box>
-					<Link href={routes.all}>
-						<MainButton> {language.toProducts}</MainButton>
+					<Link href={routes.all} className="button">
+						{language.toProducts}
 					</Link>
 				</Box>
 			</Box>
+
 			<Box className={s.margin}>
 				<GridCol>
-					<Box className={s.imageLint2}>
-						<Typography variant="h2" fontSize="large">
+					<Box className={s.imageLint1}>
+						<Typography variant="h2" fontSize={{ xs: 30, sm: 40 }}>
 							{language.maleClothes}
 						</Typography>
-						<Link href={routes.maleClothes}>
-							<MainButton> {language.toProducts}</MainButton>
+						<Link href={routes.maleClothes} className="button">
+							{language.toProducts}
 						</Link>
 					</Box>
 					<div>
@@ -54,28 +56,28 @@ function Home() {
 					<div>
 						<ProductCard product={getProductById('67dee3414af00200694bd95e') || products[20]} />
 					</div>
-					<Box className={s.imageLint1}>
-						<Typography variant="h2" fontSize="large">
+					<Box className={s.imageLint2}>
+						<Typography variant="h2" fontSize={{ xs: 30, sm: 40 }}>
 							{language.femaleClothes}
 						</Typography>
-						<Link href={routes.femaleClothes}>
-							<MainButton> {language.toProducts}</MainButton>
+						<Link href={routes.femaleClothes} className="button">
+							{language.toProducts}
 						</Link>
 					</Box>
 				</GridCol>
 			</Box>
 			<Box className={s.priceLinks}>
-				<Link href={routes.getPriceRange(0, 600)}>
-					<MainButton> up to 600</MainButton>
+				<Link href={routes.getPriceRange(0, 600)} className="button">
+					up to 600
 				</Link>
-				<Link href={routes.getPriceRange(0, 1000)}>
-					<MainButton> up to 1000</MainButton>
+				<Link href={routes.getPriceRange(0, 1000)} className="button">
+					up to 1000
 				</Link>
-				<Link href={routes.getPriceRange(0, 1500)}>
-					<MainButton> up to 1500</MainButton>
+				<Link href={routes.getPriceRange(0, 1500)} className="button">
+					up to 1500
 				</Link>
-				<Link href={routes.getPriceRange(0, 2000)}>
-					<MainButton> up to 2000</MainButton>
+				<Link href={routes.getPriceRange(0, 2000)} className="button">
+					up to 2000
 				</Link>
 			</Box>
 
@@ -86,15 +88,15 @@ function Home() {
 			<ProductsRow products={categoredProducts.maleClothes} width={117} />
 
 			<Box className={s.banner}>
-				<Typography textAlign="center" variant="h2" fontSize={30}>
+				<Typography textAlign="center" variant="h2" fontSize={{ xs: 20, sm: 30 }}>
 					{language.visitShope}
 				</Typography>
-				<Link href={routes.googleMap} className={s.button}>
-					<MainButton>{language.toMap}</MainButton>
+				<Link href={routes.googleMap} className={classNames(s.center, 'button')}>
+					{language.toMap}
 				</Link>
 			</Box>
 
-			<Typography variant="h3" textAlign="center" my={{ xs: 5, md: 12 }}>
+			<Typography variant="h3" textAlign="center" my={{ xs: 5, md: 12 }} fontSize={{ xs: 30, sm: 40 }}>
 				{language.bestProduct}
 			</Typography>
 

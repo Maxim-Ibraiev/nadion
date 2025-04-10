@@ -10,8 +10,6 @@ interface IProps {
 	status?: Request
 	className?: string
 	isLoading?: boolean
-
-	// eslint-disable-next-line no-unused-vars
 	onClick?: (event: MouseEvent) => void
 }
 type ButtonType = React.DetailedHTMLProps<React.ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>
@@ -30,7 +28,7 @@ function Button({
 
 	return (
 		<button
-			className={cn(className, s.btn, {
+			className={cn(className, 'button', {
 				[s.request]: isShowLoading,
 				[s.error]: status === 'Error',
 				[s.success]: status === 'Success',
