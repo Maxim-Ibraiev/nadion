@@ -1,0 +1,72 @@
+.size {
+	height: 125px;
+	width: 100px;
+}
+
+.addContainer {
+	@extend .size;
+
+	position: relative;
+	background: var(--paper);
+}
+
+.border:focus-within {
+	position: absolute;
+	inset: 0;
+	border: 3px var(--accent) solid;
+}
+
+.addContainer::before {
+	content: '+';
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	font-size: 50px;
+}
+
+.imageContainer {
+	@extend .size;
+
+	position: absolute;
+	inset: 0;
+}
+
+.image {
+	object-fit: contain;
+}
+
+.input {
+	@extend .size;
+	opacity: 0;
+
+	cursor: pointer;
+}
+
+.deleteButton {
+	position: absolute;
+	top: 3px;
+	right: 3px;
+
+	height: 25px;
+	width: 25px;
+
+	transform: rotate(45deg);
+	border-radius: 100%;
+	background-color: var(--paper);
+	transition: background-color, ease-in-out, var(--time-out);
+
+	&:hover,
+	&:focus {
+		background-color: var(--error);
+	}
+}
+
+.deleteButton::after {
+	content: '+';
+	position: absolute;
+	font-size: 20px;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}

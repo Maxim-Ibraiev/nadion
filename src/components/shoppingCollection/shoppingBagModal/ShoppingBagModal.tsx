@@ -9,7 +9,7 @@ interface IProps {
 
 export default function ShoppingBagModal({ isOpen, onClose }: IProps) {
 	return (
-		<Modal open={isOpen} onClose={onClose}>
+		<Modal open={isOpen} onClose={onClose} className={s.modal}>
 			<Paper className={s.shoppingBag}>
 				<ShoppingBag handleCloseModal={onClose} />
 			</Paper>

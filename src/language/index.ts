@@ -10,15 +10,19 @@ const language = {
 	largeSizes: 'Великі розміри',
 	tShirt: 'Футболки',
 	shirts: 'Сорочки',
+	blazer: 'Блейзер',
 	handMade: 'Індивідуальне пошиття',
 
 	// ua - filters
 	globalCategory: 'Глобальна категорія',
+	title: 'Назва',
+	description: 'Опис',
 	category: 'Категорія',
 	size: 'Розмір',
 	sizes: 'Розміри',
 	material: 'Матеріал',
 	color: 'Колір',
+	colors: 'Кольори',
 	season: 'Сезон',
 	model: 'Модель',
 	brand: 'Бренд',
@@ -50,6 +54,10 @@ const language = {
 	teal: 'Бірюзовий',
 	white: 'Білий',
 	yellow: 'Жовтий',
+	gold: 'Золотий',
+	lightblue: 'Світло-блакитний',
+	colorPick: 'Вибрати колір',
+	useHexFormat: '	Використовуйте Hex формат (#000000)',
 
 	KulirkaLuxury: 'Кулірка Люкс',
 	guipure: 'Гіпюр',
@@ -106,6 +114,7 @@ const language = {
 	shopName: 'Магазин',
 	thanks: 'Дякуємо за замовлення!',
 	waitForACall: 'Ваше вамовлення в обробці, очікуйте дзвінка менеджера!',
+	add: 'Додати',
 
 	// foter
 	aboutOurCompany: 'Про нашу компанію',
@@ -128,4 +137,8 @@ const language = {
 	editProduct: 'Редагувати товар',
 }
 
-export default language
+interface Language extends Record<keyof typeof language, any> {
+	[key: string]: string
+}
+
+export default language as Language
