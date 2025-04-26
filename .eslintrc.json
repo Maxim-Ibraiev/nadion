@@ -20,6 +20,7 @@
 		"import/order": "warn",
 		"lines-between-class-members": "warn",
 		"no-else-return": "off",
+		"no-plusplus": ["warn",{"allowForLoopAfterthoughts":true}],
 		"no-unused-vars": [
 			"warn",
 			{

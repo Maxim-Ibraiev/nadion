@@ -1,4 +1,5 @@
 import serverApi from '@/api/serverApi'
+import httpStatusCodes from '@/api/src/httpStatusCodes'
 import Validation from '@/api/src/routes/middleware/Validation'
 import dispatchData from '@/api/src/serverHelpers/dispatchData'
 import Layout from '@/components/Layout'
@@ -16,7 +17,7 @@ import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import api from '../../src/api/api'
 
-const initialProduct: ProductToAdd = {
+const initialProduct: Omit<ProductToAdd, 'images'> = {
 	title: '',
 	description: '',
 	model: '',
@@ -36,7 +37,7 @@ export default function AddPage() {
 	const allOptions = getOptionsFromProducts(products)
 	const theme = useTheme()
 	const [buttonStatus, setButtonStatus] = useState<Request>()
-	// const [fileList, setFileList] = useState<File[]>([])
+	const [fileList, setFileList] = useState<File[]>([])
 	const formik = useFormik<typeof initialProduct>({
 		initialValues: initialProduct,
 
@@ -55,10 +56,14 @@ export default function AddPage() {
 			try {
 				setButtonStatus('Request')
 
-				const respons = await api.admin.addProduct(value)
+				const imagesRes = await api.admin.imageAdd(fileList, { color: value.colors, title: value.title })
 
-				if (respons.status === 200) setButtonStatus('Success')
-				else setButtonStatus('Error')
+				if (imagesRes.data && imagesRes.status === httpStatusCodes.OK) {
+					const productPromis = await api.admin.addProduct({ ...value, images: imagesRes.data })
+
+					if (productPromis.status === httpStatusCodes.OK) setButtonStatus('Success')
+					else setButtonStatus('Error')
+				}
 			} catch (e) {
 				setButtonStatus('Error')
 			}
@@ -73,11 +78,7 @@ export default function AddPage() {
 		<Layout>
 			<Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }} component="form" onSubmit={formik.handleSubmit}>
 				<Typography variant="h3">Add product</Typography>
-				<Form.FilesGrid
-					onChange={(e) => {
-						// formik.setFieldValue('images', e.filter(Boolean))
-					}}
-				/>
+				<Form.FilesGrid onChange={setFileList} />
 
 				{formik.errors.globalCategory && <Typography color="error">{formik.errors.globalCategory}</Typography>}
 				<Form.Select formik={formik} name="globalCategory" options={getOptionFormat(categories)} sx={{ minWidth: '300px' }} />

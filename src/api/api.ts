@@ -13,7 +13,7 @@ import axios, { AxiosResponse } from 'axios'
 import { getShotSelectedProducts } from '../helpers'
 import routes from '../routes'
 import requestSymulator from './requestSymulator'
-// import { ImageOptions } from './src/routes/admin/ImageCloud/ImageCloud'
+import type { ImageOptions } from './src/routes/admin/ImageCloud/ImageCloud'
 
 const api = {
 	getShoppingBag: (id: string) => axios.get(routes.api.getShoppingBag(id)),
@@ -30,27 +30,27 @@ const api = {
 		addProduct: (body: ProductToAdd) => axios.post(routes.api.adminProduct, body),
 		// editProduct: (id: string, productToUpdate: ProductToUpdate) => axios.patch(routes.api.adminProduct, { id, product: productToUpdate }),
 
-		// imageAdd: async (files: File[], options: Omit<ImageOptions, 'id'>) => {
-		// 	const formData = new FormData()
-		// 	formData.append('imageOptions', JSON.stringify(options))
+		imageAdd: async (files: File[], options: Omit<ImageOptions, 'id'>) => {
+			const formData = new FormData()
+			formData.append('imageOptions', JSON.stringify(options))
 
-		// 	files.forEach((file) => {
-		// 		if (file) formData.append('images', file)
-		// 	})
+			files.forEach((file) => {
+				if (file) formData.append('images', file)
+			})
 
-		// 	return (await axios.post(routes.api.adminImags, formData)).data as IResponse<IProductObject['images']>
-		// },
-		// imageUpdate: async (id: string, files: File[], options: Omit<ImageOptions, 'id'>) => {
-		// 	const formData = new FormData()
-		// 	formData.append('id', JSON.stringify(id))
-		// 	formData.append('imageOptions', JSON.stringify(options))
+			return (await axios.post(routes.api.adminImags, formData)).data as IResponse<IProductObject['images']>
+		},
+		imageUpdate: async (id: string, files: File[], options: Omit<ImageOptions, 'id'>) => {
+			const formData = new FormData()
+			formData.append('id', JSON.stringify(id))
+			formData.append('imageOptions', JSON.stringify(options))
 
-		// 	files.forEach((file, ind) => {
-		// 		if (file) formData.append(`image-${ind}`, file)
-		// 	})
+			files.forEach((file, ind) => {
+				if (file) formData.append(`image-${ind}`, file)
+			})
 
-		// 	return (await axios.patch(routes.api.adminImags, formData)).data as IResponse<IProductObject['images']>
-		// },
+			return (await axios.patch(routes.api.adminImags, formData)).data as IResponse<IProductObject['images']>
+		},
 	},
 
 	callRequest: async (data: ICallRequest): Promise<IResponse<null>> => {

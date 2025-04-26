@@ -91,8 +91,8 @@ export interface IFileImage {
 	hash: any
 }
 
-type UnlistedDataForBackEnd = 'id' | 'selectedSize' | 'images'
+type UnlistedDataForBackEnd = 'id' | 'selectedSize'
 
 export type ProductToAdd = Omit<IProductObject, UnlistedDataForBackEnd | 'popularity'>
 
-export type ProductToUpdate = Omit<Partial<IProductObject>, UnlistedDataForBackEnd> & { images: IFileImage[] }
+export type ProductToUpdate = Omit<Partial<IProductObject>, UnlistedDataForBackEnd>

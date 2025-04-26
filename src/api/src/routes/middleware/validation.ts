@@ -27,6 +27,7 @@ export default class Validation {
 			mtime: Joi.string().max(300),
 			newFilename: Joi.string().max(300),
 			originalFilename: Joi.string().max(300),
+			size: Joi.number().min(1).max(10485760), // 10MB in binary
 
 			_events: Joi.optional(),
 			_eventsCount: Joi.optional(),
@@ -38,7 +39,7 @@ export default class Validation {
 		})
 		.single()
 
-	static fileListToAdd = Joi.array().items(this.fileSchema).min(2).max(10)
+	static fileListToAdd = Joi.object({ images: this.fileSchema })
 
 	static fileListToUpdate = Joi.object({
 		'image-0': this.fileSchema,
@@ -58,7 +59,7 @@ export default class Validation {
 	static images = Joi.array().items(this.imageItem).min(2).max(10).required()
 
 	static productToAdd = Joi.object<ProductToAdd>({
-		// images: this.fileListToAdd,
+		images: this.images,
 		title: Joi.string().min(3).max(1000).required(),
 		description: Joi.string().min(3).max(1000).required(),
 		globalCategory: Joi.string().min(3).max(999).required(),
@@ -91,6 +92,6 @@ export default class Validation {
 		title: Joi.string().min(3).max(1000),
 		color: Joi.array().items(Joi.string().min(1).max(1000)),
 		id: Joi.array().items(Joi.string().min(0).max(9999)).single(),
-		preImages: this.updateImage,
+		preImages: this.updateImage.optional(),
 	})
 }
