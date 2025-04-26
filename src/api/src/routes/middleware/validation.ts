@@ -1,94 +1,96 @@
+import type { ProductToAdd } from '@/interfaces'
+import type { IFileImage } from '@/interfaces/interfaces'
 import Joi from 'joi'
 
-export const idValidation = Joi.string().required().min(24).max(24)
+export default class Validation {
+	static id = Joi.string().required().min(24).max(24)
 
-export const adminLoginValidation = Joi.object({
-  login: Joi.string().min(1).max(99).required(),
-  password: Joi.string().min(1).max(99).required(),
-})
+	static adminLogin = Joi.object({
+		login: Joi.string().min(1).max(99).required(),
+		password: Joi.string().min(1).max(99).required(),
+	})
 
-export const shoppingBagValidation = Joi.object({
-  selectedProducts: Joi.array()
-    .required()
-    .items(Joi.object({ selectedSize: Joi.string().min(0).max(99), id: idValidation })),
-})
+	static shoppingBag = Joi.object({
+		selectedProducts: Joi.array()
+			.required()
+			.items(Joi.object({ selectedSize: Joi.string().min(0).max(99), id: this.id })),
+	})
 
-export const fileValidation = Joi.object({
-  myImage: Joi.array().min(2).max(10),
-})
+	static file = Joi.object({
+		myImage: Joi.array().min(2).max(10),
+	})
 
-const fileSchema = Joi.array()
-  .items({
-    filepath: Joi.string().max(300),
-    mimetype: Joi.string().max(300),
-    mtime: Joi.string().max(300),
-    newFilename: Joi.string().max(300),
-    originalFilename: Joi.string().max(300),
-    size: Joi.number().max(10485760), // 10MB in binary
+	static fileSchema = Joi.array<IFileImage>()
+		.items({
+			filepath: Joi.string().max(300),
+			mimetype: Joi.string().max(300),
+			mtime: Joi.string().max(300),
+			newFilename: Joi.string().max(300),
+			originalFilename: Joi.string().max(300),
 
-    _events: Joi.optional(),
-    _eventsCount: Joi.optional(),
-    _maxListeners: Joi.optional(),
-    _writeStream: Joi.optional(),
-    lastModifiedDate: Joi.optional(),
-    hashAlgorithm: Joi.optional(),
-    hash: Joi.optional(),
-  })
-  .single()
+			_events: Joi.optional(),
+			_eventsCount: Joi.optional(),
+			_maxListeners: Joi.optional(),
+			_writeStream: Joi.optional(),
+			lastModifiedDate: Joi.optional(),
+			hashAlgorithm: Joi.optional(),
+			hash: Joi.optional(),
+		})
+		.single()
 
-export const fileListToAddValidation = Joi.object({ images: Joi.array().items(fileSchema).min(2).max(10) })
-export const fileListToUpdateValidation = Joi.object({
-  'image-0': fileSchema,
-  'image-1': fileSchema,
-  'image-2': fileSchema,
-  'image-3': fileSchema,
-  'image-4': fileSchema,
-  'image-5': fileSchema,
-})
+	static fileListToAdd = Joi.array().items(this.fileSchema).min(2).max(10)
 
-const imageItem = Joi.object({
-  original: Joi.string().min(1).max(999),
-  thumbnail: Joi.string().min(1).max(999),
-  color: Joi.array().min(1).max(99),
-})
+	static fileListToUpdate = Joi.object({
+		'image-0': this.fileSchema,
+		'image-1': this.fileSchema,
+		'image-2': this.fileSchema,
+		'image-3': this.fileSchema,
+		'image-4': this.fileSchema,
+		'image-5': this.fileSchema,
+	})
 
-const images = Joi.array().items(imageItem).min(2).max(10).required()
+	static imageItem = Joi.object({
+		original: Joi.string().min(1).max(999),
+		thumbnail: Joi.string().min(1).max(999),
+		color: Joi.array().min(1).max(99),
+	})
 
-export const productToAddValidation = Joi.object({
-  images,
-  title: Joi.string().min(3).max(1000).required(),
-  description: Joi.string().min(3).max(1000).required(),
-  globalCategory: Joi.string().min(3).max(999).required(),
-  category: Joi.string().min(3).max(999).required(),
-  price: Joi.number().min(1).max(999999),
-  colors: Joi.array().items(Joi.string().min(1).max(30)).max(3),
-  model: Joi.string().min(3).max(1000),
-  sizes: Joi.array().items(Joi.string().min(1).max(30)).max(10),
-  material: Joi.array().min(1).max(99),
-  season: Joi.string().min(3).max(999),
-  popularity: Joi.number().min(-999).max(999999),
-})
+	static images = Joi.array().items(this.imageItem).min(2).max(10).required()
 
-export const updateImage = images.min(0).allow()
+	static productToAdd = Joi.object<ProductToAdd>({
+		// images: this.fileListToAdd,
+		title: Joi.string().min(3).max(1000).required(),
+		description: Joi.string().min(3).max(1000).required(),
+		globalCategory: Joi.string().min(3).max(999).required(),
+		category: Joi.string().min(3).max(999).required(),
+		price: Joi.number().min(1).max(999999),
+		colors: Joi.array().items(Joi.string().min(1).max(30)).min(1).max(3),
+		model: Joi.string().min(3).max(1000),
+		sizes: Joi.array().items(Joi.string().min(1).max(30)).min(1).max(10),
+		material: Joi.array().min(1).max(99),
+	})
 
-export const updateProductValidation = Joi.object({
-  images: updateImage.optional(),
-  title: Joi.string().min(3).max(1000).required().optional(),
-  description: Joi.string().min(3).max(1000).required().optional(),
-  globalCategory: Joi.string().min(3).max(999).required().optional(),
-  category: Joi.string().min(3).max(999).required().optional(),
-  price: Joi.number().min(1).max(999999).optional(),
-  colors: Joi.array().items(Joi.string().min(1).max(30)).max(3).optional(),
-  model: Joi.string().min(3).max(1000).optional(),
-  sizes: Joi.array().items(Joi.string().min(1).max(30)).max(10).optional(),
-  material: Joi.array().min(1).max(99).optional(),
-  season: Joi.string().min(3).max(999).optional(),
-  popularity: Joi.number().min(-999).max(999999).optional(),
-})
+	static updateImage = this.images.min(0).allow()
 
-export const imageOptionsValidation = Joi.object({
-  title: Joi.string().min(3).max(1000),
-  color: Joi.array().items(Joi.string().min(1).max(1000)),
-  id: Joi.array().items(Joi.string().min(0).max(9999)).single(),
-  preImages: updateImage,
-})
+	static updateProduct = Joi.object({
+		images: this.updateImage.optional(),
+		title: Joi.string().min(3).max(1000).required().optional(),
+		description: Joi.string().min(3).max(1000).required().optional(),
+		globalCategory: Joi.string().min(3).max(999).required().optional(),
+		category: Joi.string().min(3).max(999).required().optional(),
+		price: Joi.number().min(1).max(999999).optional(),
+		colors: Joi.array().items(Joi.string().min(1).max(30)).max(3).optional(),
+		model: Joi.string().min(3).max(1000).optional(),
+		sizes: Joi.array().items(Joi.string().min(1).max(30)).max(10).optional(),
+		material: Joi.array().min(1).max(99).optional(),
+		season: Joi.string().min(3).max(999).optional(),
+		popularity: Joi.number().min(-999).max(999999).optional(),
+	})
+
+	static imageOptions = Joi.object({
+		title: Joi.string().min(3).max(1000),
+		color: Joi.array().items(Joi.string().min(1).max(1000)),
+		id: Joi.array().items(Joi.string().min(0).max(9999)).single(),
+		preImages: this.updateImage,
+	})
+}

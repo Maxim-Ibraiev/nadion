@@ -1,4 +1,5 @@
 import { IProduct, IProductObject } from '@/helpers/ProductStructure'
+import { File } from 'buffer'
 
 export type Category = 'femaleClothes' | 'maleClothes' | 'childrenClothes' | 'all'
 export type Categories = Category[]
@@ -73,8 +74,25 @@ export interface IAdmin {
 	auth: boolean
 }
 
-type UnlistedDataForBackEnd = 'id' | 'createdAt' | 'updatedAt' | '__v' | 'selectedSize'
+export interface IFileImage {
+	instance: File
+	filepath: string
+	mimetype: string
+	mtime: string
+	newFilename: string
+	originalFilename: string
+
+	_events: any
+	_eventsCount: any
+	_maxListeners: any
+	_writeStream: any
+	lastModifiedDate: any
+	hashAlgorithm: any
+	hash: any
+}
+
+type UnlistedDataForBackEnd = 'id' | 'selectedSize' | 'images'
 
 export type ProductToAdd = Omit<IProductObject, UnlistedDataForBackEnd | 'popularity'>
 
-export type ProductToUpdate = Omit<Partial<IProductObject>, UnlistedDataForBackEnd>
+export type ProductToUpdate = Omit<Partial<IProductObject>, UnlistedDataForBackEnd> & { images: IFileImage[] }

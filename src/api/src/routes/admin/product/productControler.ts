@@ -1,7 +1,7 @@
 import { IProductObject, IResponse, type IError } from '@/interfaces'
-import RequestValidator from '@api/routes/RequestValidator'
 import Responser from '@api/routes/Responser'
 import { NextApiHandler } from 'next'
+import Validation from '../../middleware/Validation'
 import { addProduct, updateProduct } from './productModel'
 
 export const edit: NextApiHandler = async (req, res) => {
@@ -13,8 +13,8 @@ export const edit: NextApiHandler = async (req, res) => {
 		delete data.id
 
 		// validation
-		const productError = RequestValidator.productUpdate(data).error
-		const idError = RequestValidator.id(id).error
+		const productError = Validation.updateProduct.validate(data).error
+		const idError = Validation.id.validate(id).error
 		if (productError) response = Responser.getBadRequest(productError)
 		if (idError) response = Responser.getBadRequest(idError)
 		if (response) res.status(response.status).json(response)
@@ -41,15 +41,19 @@ export const add: NextApiHandler = async (req, res) => {
 
 	try {
 		const data = req.body
+		console.log(' data:', data)
 
 		// validation
-		const productError = RequestValidator.product(data).error
+		const productError = Validation.productToAdd.validate(data).error
+		console.log(' productError:', productError)
 		if (productError) response = Responser.getBadRequest(productError)
 		if (response) res.status(response.status).json(response)
 		if (response) return
 
 		try {
 			// add products
+			console.log('add products')
+
 			const productResponse = await addProduct(data)
 			response = Responser.getOK(productResponse)
 		} catch (error) {

@@ -15,7 +15,7 @@ const language = {
 
 	// ua - filters
 	globalCategory: 'Глобальна категорія',
-	title: 'Назва',
+	title: 'Заголовок',
 	description: 'Опис',
 	category: 'Категорія',
 	size: 'Розмір',
