@@ -1,35 +1,36 @@
 import { arrayWrapper } from '@/helpers'
 import { IProductObject } from '@/interfaces'
+import type { IFileList } from '@/interfaces/interfaces'
 import { v2 as cloudinary, UploadApiResponse } from 'cloudinary'
-import formidable, { File } from 'formidable'
+import { File } from 'formidable'
 import getConfig from 'next/config'
 
 export type ImageOptions = {
-	id: string
 	color: string[]
 	title: string
 	preImages?: IProductObject['images']
 }
+
+type ImageOptionsWithHash = ImageOptions & { hash: string }
 
 const { imageCloudConfig } = getConfig().serverRuntimeConfig
 
 cloudinary.config(imageCloudConfig)
 
 export default class ImageCloud {
-	static async imageUploader(files: formidable.Files, options: ImageOptions) {
-		if (files.images) {
-			return this.fileUploader(files.images, { title: options.title, id: options.id })
-		}
+	static async imageUploader(files: IFileList, options: ImageOptionsWithHash) {
+		// todo thumbnail as plaseholder base64
+		const hash = String(Math.floor(Math.random() * 1000))
 
 		const filePromises: Promise<UploadApiResponse[]>[] = []
 
-		for (let index = 0; index < 6; index++) {
-			const file = files[`image-${index}`]
+		for (let index = 0; index < Object.keys(files).length; index++) {
+			const file = Object.entries(files).at(index)?.[1]
 			const originFile = options.preImages && options.preImages[index]
 
 			if (file && originFile) this.deleteImage(originFile)
 			if (file) {
-				const fileResponse = this.fileUploader(file, { title: options.title, index, id: options.id })
+				const fileResponse = this.fileUploader(file, { title: options.title, index, hash })
 
 				filePromises.push(fileResponse)
 			}
@@ -38,7 +39,7 @@ export default class ImageCloud {
 		return Promise.all(filePromises).then((el) => el.flat())
 	}
 
-	private static async fileUploader(files: File | File[], options: { title: string; id: string; index?: number }) {
+	private static async fileUploader(files: File | File[], options: { title: string; hash: string; index?: number }) {
 		const arrFiles = arrayWrapper(files)
 		const data: UploadApiResponse[] = []
 
@@ -47,7 +48,7 @@ export default class ImageCloud {
 				try {
 					const res = await cloudinary.uploader.upload(file.filepath, {
 						folder: 'products',
-						public_id: this.getImageName(options.title, options.index || ind, options.id),
+						public_id: this.getImageName(options.title, options.index || ind, options.hash),
 					})
 					data.push(res)
 
@@ -65,19 +66,19 @@ export default class ImageCloud {
 		return cloudinary.uploader.destroy(`products/${image.original}`)
 	}
 
-	static getImageName(title: string, index: number | string, id: string) {
-		return `${title}__${index}__${id}`
+	static getImageName(title: string, index: number | string, hash: string) {
+		return `${title}__${index}`
 	}
 
-	static imageParser(files: formidable.Files, options: ImageOptions) {
-		if (files.images) {
-			return arrayWrapper(files.images).map((_, ind) => this.getImageItem(ind, options))
-		}
+	static imageParser(files: IFileList, options: ImageOptionsWithHash) {
+		// if (files.images) {
+		// 	return arrayWrapper(files.images).map((_, ind) => this.getImageItem(ind, options))
+		// }
 
 		const images: IProductObject['images'] = []
 
-		for (let index = 0; index < 6; index++) {
-			const file = files[`image-${index}`]
+		for (let index = 0; index < Object.keys(files).length; index++) {
+			const file = Object.entries(files).at(index)?.[1]
 
 			if (file) {
 				images[index] = this.getImageItem(index, options)
@@ -89,9 +90,9 @@ export default class ImageCloud {
 		return images.filter(Boolean)
 	}
 
-	private static getImageItem = (index: number, options: ImageOptions) => ({
-		original: ImageCloud.getImageName(options.title, index, options.id),
-		thumbnail: ImageCloud.getImageName(options.title, index, options.id),
+	private static getImageItem = (index: number, options: ImageOptionsWithHash) => ({
+		original: ImageCloud.getImageName(options.title, index, options.hash),
+		thumbnail: ImageCloud.getImageName(options.title, index, options.hash),
 		color: options.color,
 	})
 }

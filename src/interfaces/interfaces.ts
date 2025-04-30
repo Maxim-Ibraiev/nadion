@@ -91,6 +91,15 @@ export interface IFileImage {
 	hash: any
 }
 
+export interface IFileList {
+	'image-0': IFileImage
+	'image-1': IFileImage
+	'image-2': IFileImage
+	'image-3': IFileImage
+	'image-4': IFileImage
+	'image-5': IFileImage
+}
+
 type UnlistedDataForBackEnd = 'id' | 'selectedSize'
 
 export type ProductToAdd = Omit<IProductObject, UnlistedDataForBackEnd | 'popularity'>

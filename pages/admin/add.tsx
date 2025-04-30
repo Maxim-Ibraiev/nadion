@@ -6,6 +6,7 @@ import Layout from '@/components/Layout'
 import Button from '@/components/buttons/MainButton'
 import Form from '@/components/inputs/Form'
 import { categories } from '@/constants'
+import { HandlerError } from '@/helpers'
 import getOptionsFromProducts, { getOptionFormat } from '@/helpers/getOptionsFromProducts'
 import { useProducts } from '@/hooks'
 import type { ProductToAdd, Request } from '@/interfaces'
@@ -42,7 +43,7 @@ export default function AddPage() {
 		initialValues: initialProduct,
 
 		onSubmit: async (values) => {
-			const { error, value } = Validation.productToAdd.validate(values, { abortEarly: false })
+			const { error, value } = Validation.productToAddWithoutImages.validate(values, { abortEarly: false })
 
 			if (error) {
 				error.details.forEach((errorItem) => {
@@ -56,15 +57,12 @@ export default function AddPage() {
 			try {
 				setButtonStatus('Request')
 
-				const imagesRes = await api.admin.imageAdd(fileList, { color: value.colors, title: value.title })
+				const productPromis = await api.admin.addProduct(value, fileList, { color: value.colors, title: value.title })
 
-				if (imagesRes.data && imagesRes.status === httpStatusCodes.OK) {
-					const productPromis = await api.admin.addProduct({ ...value, images: imagesRes.data })
-
-					if (productPromis.status === httpStatusCodes.OK) setButtonStatus('Success')
-					else setButtonStatus('Error')
-				}
+				if (productPromis.status === httpStatusCodes.OK) setButtonStatus('Success')
+				else setButtonStatus('Error')
 			} catch (e) {
+				HandlerError.addAction('onSubmit')
 				setButtonStatus('Error')
 			}
 		},

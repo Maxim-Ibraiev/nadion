@@ -1,6 +1,7 @@
 import type { ProductToAdd } from '@/interfaces'
-import type { IFileImage } from '@/interfaces/interfaces'
+import type { IFileImage, IFileList } from '@/interfaces/interfaces'
 import Joi from 'joi'
+import type { ImageOptions } from '../admin/ImageCloud/ImageCloud'
 
 export default class Validation {
 	static id = Joi.string().required().min(24).max(24)
@@ -39,9 +40,7 @@ export default class Validation {
 		})
 		.single()
 
-	static fileListToAdd = Joi.object({ images: this.fileSchema })
-
-	static fileListToUpdate = Joi.object({
+	static fileListToAdd = Joi.object<IFileList>({
 		'image-0': this.fileSchema,
 		'image-1': this.fileSchema,
 		'image-2': this.fileSchema,
@@ -71,6 +70,18 @@ export default class Validation {
 		material: Joi.array().min(1).max(99),
 	})
 
+	static productToAddWithoutImages = Joi.object<ProductToAdd>({
+		title: Joi.string().min(3).max(1000).required(),
+		description: Joi.string().min(3).max(1000).required(),
+		globalCategory: Joi.string().min(3).max(999).required(),
+		category: Joi.string().min(3).max(999).required(),
+		price: Joi.number().min(1).max(999999),
+		colors: Joi.array().items(Joi.string().min(1).max(30)).min(1).max(3),
+		model: Joi.string().min(3).max(1000),
+		sizes: Joi.array().items(Joi.string().min(1).max(30)).min(1).max(10),
+		material: Joi.array().min(1).max(99),
+	})
+
 	static updateImage = this.images.min(0).allow()
 
 	static updateProduct = Joi.object({
@@ -88,10 +99,10 @@ export default class Validation {
 		popularity: Joi.number().min(-999).max(999999).optional(),
 	})
 
-	static imageOptions = Joi.object({
+	static imageOptions = Joi.object<ImageOptions>({
 		title: Joi.string().min(3).max(1000),
 		color: Joi.array().items(Joi.string().min(1).max(1000)),
-		id: Joi.array().items(Joi.string().min(0).max(9999)).single(),
 		preImages: this.updateImage.optional(),
+		// id: Joi.array().items(Joi.string().min(0).max(9999)).single(),
 	})
 }

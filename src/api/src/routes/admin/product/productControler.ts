@@ -1,33 +1,55 @@
-import { IProductObject, IResponse, type IError } from '@/interfaces'
+import { formData } from '@/helpers'
+import type { addProductList } from '@/helpers/formData'
+import { IProductObject, IResponse, type IError, type ProductToAdd } from '@/interfaces'
 import Responser from '@api/routes/Responser'
 import { NextApiHandler } from 'next'
 import Validation from '../../middleware/Validation'
+import ImageCloud from '../ImageCloud'
+import type { ImageOptions } from '../ImageCloud/ImageCloud'
+import fileReader from './fileReader'
 import { addProduct, updateProduct } from './productModel'
 
+export const edit: NextApiHandler = async (req, res) => {}
+/*
 export const edit: NextApiHandler = async (req, res) => {
 	let response: IResponse<IProductObject | IError> | null = null
+	const { files, fields } = await fileReader(req)
+	const { id } = req.body
+	const imageOptions = JSON.parse(fields.imageOptions ? fields.imageOptions[0] : 'null') as ImageOptions
+	const product = JSON.parse(fields.product ? fields.product[0] : '') as IProductObject
+	// delete product.id
 
 	try {
-		const data = req.body.product
-		const { id } = req.body
-		delete data.id
-
 		// validation
-		const productError = Validation.updateProduct.validate(data).error
+		const productError = Validation.updateProduct.validate(product).error
+		const fileError = Validation.fileListToUpdate.validate(files).error
+		const optionsError = Validation.imageOptions.validate(imageOptions).error
 		const idError = Validation.id.validate(id).error
-		if (productError) response = Responser.getBadRequest(productError)
+		const validationError = productError || fileError || optionsError || idError
+		if (validationError) response = Responser.getBadRequest(validationError)
 		if (idError) response = Responser.getBadRequest(idError)
 		if (response) res.status(response.status).json(response)
 		if (response) return
 
-		try {
-			// update product
-			const productResponse = await updateProduct(id, data)
+		// update product
+		const productResponse = await updateProduct(id, {
+			...product,
+			images: ImageCloud.imageParser(files, imageOptions),
+		})
 
-			response = Responser.getOK(productResponse)
-		} catch (error) {
-			response = Responser.getServerError(error)
-		}
+		// delete images
+		product.images.forEach((image) => {
+			const isNotMatch = !imageOptions.preImages?.some((el) => el.original.includes(image.original))
+			if (isNotMatch) {
+				ImageCloud.deleteImage(image)
+				console.log('image delete:', image)
+			}
+		})
+
+		// add image
+		await ImageCloud.imageUploader(files, imageOptions)
+
+		response = Responser.getOK(productResponse)
 
 		res.status(response.status).json(response)
 	} catch (error) {
@@ -35,28 +57,36 @@ export const edit: NextApiHandler = async (req, res) => {
 		res.status(response.status).json(response)
 	}
 }
+*/
 
 export const add: NextApiHandler = async (req, res) => {
 	let response: IResponse<IProductObject | IError> | null = null
+	const { fields, files } = await fileReader<addProductList>(req)
+	const { product, imageOptions } = await formData.getAddProduct(fields)
 
 	try {
-		const data = req.body
-		console.log(' data:', data)
-
 		// validation
-		const productError = Validation.productToAdd.validate(data).error
-		console.log(' productError:', productError)
-		if (productError) response = Responser.getBadRequest(productError)
+		const { value: validateProduct, error: productError } = Validation.productToAddWithoutImages.validate(product)
+		const { value: validateImageOptions, error: optionsError } = Validation.imageOptions.validate(imageOptions)
+		const { value: validateFiles, error: fileError } = Validation.fileListToAdd.validate(files, { abortEarly: false })
+		const validationError = fileError || optionsError || productError
+		if (validationError) response = Responser.getBadRequest(validationError)
 		if (response) res.status(response.status).json(response)
-		if (response) return
+		if (validationError) return
+
+		// add products
+		const imageOptionsWithHash = { ...validateImageOptions, hash: Math.floor(Math.random() * 10000).toString() }
+		const images = ImageCloud.imageParser(validateFiles, imageOptionsWithHash)
+		const productToAdd: ProductToAdd = { ...validateProduct, images }
+		const productResponse = await addProduct(productToAdd)
+		response = Responser.getOK(productResponse)
 
 		try {
-			// add products
-			console.log('add products')
-
-			const productResponse = await addProduct(data)
-			response = Responser.getOK(productResponse)
+			// add images
+			await ImageCloud.imageUploader(validateFiles, imageOptionsWithHash)
 		} catch (error) {
+			// delete created product
+
 			response = Responser.getServerError(error)
 		}
 

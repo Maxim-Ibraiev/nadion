@@ -1,4 +1,5 @@
 export { default as arrayWrapper } from './arrayWrapper'
+export { default as formData } from './formData'
 export { default as getDataURL } from './getDataURL'
 export { default as getFilteredProducts } from './getFilteredProducts'
 export { default as getImgSize } from './getImgSize'

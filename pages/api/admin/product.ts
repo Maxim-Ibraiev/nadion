@@ -1,3 +1,8 @@
-import handler from '../../../src/api/src/routes/admin/product/productRouter'
+import handler from '@api/routes/admin/product/productRouter'
 
 export default handler
+export const config = {
+	api: {
+		bodyParser: false,
+	},
+}

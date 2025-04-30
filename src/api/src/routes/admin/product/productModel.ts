@@ -1,7 +1,7 @@
+import { IProductObject, type ProductToAdd } from '@/interfaces'
 import axios from 'axios'
-import { IProductObject } from '../../../../../interfaces'
 
-export const addProduct = async (newProduct: IProductObject) =>
+export const addProduct = async (newProduct: ProductToAdd) =>
 	axios.post<IProductObject>('https://projectbf-29lq.onrender.com/products', newProduct).then((r) => r.data as IProductObject)
 
 export const updateProduct = async (id: IProductObject['id'], newProduct: IProductObject) =>
