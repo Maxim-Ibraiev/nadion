@@ -1,3 +1,4 @@
+import httpStatusCodes from '@/api/src/httpStatusCodes'
 import { formData } from '@/helpers'
 import type { addProductList } from '@/helpers/formData'
 import { IProductObject, IResponse, type IError, type ProductToAdd } from '@/interfaces'
@@ -7,7 +8,7 @@ import Validation from '../../middleware/Validation'
 import ImageCloud from '../ImageCloud'
 import type { ImageOptions } from '../ImageCloud/ImageCloud'
 import fileReader from './fileReader'
-import { addProduct, updateProduct } from './productModel'
+import { addProduct, removeProduct, updateProduct } from './productModel'
 
 export const edit: NextApiHandler = async (req, res) => {}
 /*
@@ -76,16 +77,18 @@ export const add: NextApiHandler = async (req, res) => {
 
 		// add products
 		const imageOptionsWithHash = { ...validateImageOptions, hash: Math.floor(Math.random() * 10000).toString() }
-		const images = ImageCloud.imageParser(validateFiles, imageOptionsWithHash)
+		const images = await ImageCloud.imageParser(validateFiles, imageOptionsWithHash)
 		const productToAdd: ProductToAdd = { ...validateProduct, images }
 		const productResponse = await addProduct(productToAdd)
-		response = Responser.getOK(productResponse)
+
+		response = Responser.getOK<IProductObject>(productResponse)
 
 		try {
 			// add images
-			await ImageCloud.imageUploader(validateFiles, imageOptionsWithHash)
+			ImageCloud.imageUploader(validateFiles, imageOptionsWithHash)
 		} catch (error) {
 			// delete created product
+			removeProduct(productResponse.id)
 
 			response = Responser.getServerError(error)
 		}

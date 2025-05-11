@@ -1,3 +1,4 @@
+import type { ICloudImageResponse } from '@/interfaces/interfaces'
 import Joi from 'joi'
 import { Categories, IAdmin, IError, IProductObject, IResponse, IShoppingBag } from '../../../interfaces'
 import httpStatusCodes from '../httpStatusCodes'
@@ -8,7 +9,17 @@ type InputData<Type> = {
 	error?: IError | null
 	message?: string
 }
-type Data = Categories | IProductObject | IProductObject[] | IProductObject['images'] | IShoppingBag | IAdmin | null | IError
+
+type Data =
+	| Categories
+	| IProductObject
+	| IProductObject[]
+	| IProductObject['images']
+	| ICloudImageResponse
+	| IShoppingBag
+	| IAdmin
+	| null
+	| IError
 
 class Responser {
 	static getBaseResponse<T extends Data>({ status, data = null, error, message = error?.message ?? '' }: InputData<T>): IResponse<T> {

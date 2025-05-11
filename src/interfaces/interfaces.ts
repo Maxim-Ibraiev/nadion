@@ -1,5 +1,5 @@
 import { IProduct, IProductObject } from '@/helpers/ProductStructure'
-import { File } from 'buffer'
+import type { UploadApiResponse } from 'cloudinary'
 
 export type Category = 'femaleClothes' | 'maleClothes' | 'childrenClothes' | 'all'
 export type Categories = Category[]
@@ -92,12 +92,17 @@ export interface IFileImage {
 }
 
 export interface IFileList {
-	'image-0': IFileImage
-	'image-1': IFileImage
-	'image-2': IFileImage
-	'image-3': IFileImage
-	'image-4': IFileImage
-	'image-5': IFileImage
+	'image-0': [File]
+	'image-1': [File]
+	'image-2': [File]
+	'image-3': [File]
+	'image-4': [File]
+	'image-5': [File]
+}
+
+export interface ICloudImageResponse {
+	cloudImages: UploadApiResponse[]
+	images: IProductObject['images']
 }
 
 type UnlistedDataForBackEnd = 'id' | 'selectedSize'

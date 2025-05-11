@@ -16,12 +16,6 @@ class HendlerError {
 
 		if (!isInstance) HendlerError.baseError(`Expected instanceof ProductStructure but got ${JSON.stringify(products)}.`)
 	}
-
-	static placeHolder(error: unknown) {
-		console.error(error)
-
-		HendlerError.baseError(`getPlaceholder error.`)
-	}
 }
 
 export default HendlerError

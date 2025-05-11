@@ -1,3 +1,4 @@
+import { MIN_IMAGE_LENGTH } from '@/constants'
 import type { ProductToAdd } from '@/interfaces'
 import type { IFileImage, IFileList } from '@/interfaces/interfaces'
 import Joi from 'joi'
@@ -47,11 +48,19 @@ export default class Validation {
 		'image-3': this.fileSchema,
 		'image-4': this.fileSchema,
 		'image-5': this.fileSchema,
+	}).custom((value: IFileList, { error }) => {
+		const imageLength = Object.values(value).filter((el) => el[0]).length
+
+		if (imageLength < MIN_IMAGE_LENGTH) {
+			return error(`"image" length should be at list 2. Length: ${imageLength}`)
+		}
+
+		return value
 	})
 
 	static imageItem = Joi.object({
 		original: Joi.string().min(1).max(999),
-		thumbnail: Joi.string().min(1).max(999),
+		thumbnail: Joi.string().min(1).max(9999),
 		color: Joi.array().min(1).max(99),
 	})
 

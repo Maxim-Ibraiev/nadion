@@ -57,13 +57,13 @@ export default function AddPage() {
 			try {
 				setButtonStatus('Request')
 
-				const productPromis = await api.admin.addProduct(value, fileList, { color: value.colors, title: value.title })
+				const productResponse = await api.admin.addProduct(value, fileList, { color: value.colors, title: value.title })
 
-				if (productPromis.status === httpStatusCodes.OK) setButtonStatus('Success')
+				if (productResponse.status === httpStatusCodes.OK) setButtonStatus('Success')
 				else setButtonStatus('Error')
 			} catch (e) {
-				HandlerError.addAction('onSubmit')
 				setButtonStatus('Error')
+				HandlerError.addAction('HandlerError at onSubmit form')
 			}
 		},
 	})

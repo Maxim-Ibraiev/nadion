@@ -1,4 +1,6 @@
+import { MAX_IMAGE_LENGTH } from '@/constants'
 import { arrayWrapper } from '@/helpers'
+import getPlaceholder from '@/helpers/placeholder'
 import { IProductObject } from '@/interfaces'
 import type { IFileList } from '@/interfaces/interfaces'
 import { v2 as cloudinary, UploadApiResponse } from 'cloudinary'
@@ -19,27 +21,27 @@ cloudinary.config(imageCloudConfig)
 
 export default class ImageCloud {
 	static async imageUploader(files: IFileList, options: ImageOptionsWithHash) {
-		// todo thumbnail as plaseholder base64
-		const hash = String(Math.floor(Math.random() * 1000))
-
+		const imagesPomise = this.imageParser(files, options)
 		const filePromises: Promise<UploadApiResponse[]>[] = []
 
-		for (let index = 0; index < Object.keys(files).length; index++) {
-			const file = Object.entries(files).at(index)?.[1]
+		for (let index = 0; index < MAX_IMAGE_LENGTH; index++) {
+			const file = Object.values(files).at(index)
 			const originFile = options.preImages && options.preImages[index]
 
 			if (file && originFile) this.deleteImage(originFile)
 			if (file) {
-				const fileResponse = this.fileUploader(file, { title: options.title, index, hash })
-
+				const fileResponse = this.filesUploader(file, { title: options.title, index, hash: options.hash })
 				filePromises.push(fileResponse)
 			}
 		}
 
-		return Promise.all(filePromises).then((el) => el.flat())
+		const cloudImages = await Promise.all(filePromises).then((el) => el.flat())
+		const images = await imagesPomise
+
+		return { images, cloudImages }
 	}
 
-	private static async fileUploader(files: File | File[], options: { title: string; hash: string; index?: number }) {
+	private static async filesUploader(files: File | File[], options: { title: string; hash: string; index?: number }) {
 		const arrFiles = arrayWrapper(files)
 		const data: UploadApiResponse[] = []
 
@@ -70,18 +72,21 @@ export default class ImageCloud {
 		return `${title}__${index}`
 	}
 
-	static imageParser(files: IFileList, options: ImageOptionsWithHash) {
-		// if (files.images) {
-		// 	return arrayWrapper(files.images).map((_, ind) => this.getImageItem(ind, options))
-		// }
-
+	static async imageParser(files: IFileList, options: ImageOptionsWithHash) {
 		const images: IProductObject['images'] = []
+		const fileItems = await Promise.all(
+			Object.values(files).reduce((acc, value, index) => {
+				acc[index] = this.getImageItem(value, index, options)
 
-		for (let index = 0; index < Object.keys(files).length; index++) {
-			const file = Object.entries(files).at(index)?.[1]
+				return acc
+			}, [] as Promise<IProductObject['images'][0]>[])
+		)
+
+		for (let index = 0; index < MAX_IMAGE_LENGTH; index++) {
+			const file = Object.values(files).at(index)
 
 			if (file) {
-				images[index] = this.getImageItem(index, options)
+				images[index] = fileItems[index]
 			} else if (options.preImages) {
 				images[index] = options.preImages[index]
 			}
@@ -90,9 +95,9 @@ export default class ImageCloud {
 		return images.filter(Boolean)
 	}
 
-	private static getImageItem = (index: number, options: ImageOptionsWithHash) => ({
+	private static getImageItem = async (file: [File], index: number, options: ImageOptionsWithHash) => ({
 		original: ImageCloud.getImageName(options.title, index, options.hash),
-		thumbnail: ImageCloud.getImageName(options.title, index, options.hash),
+		thumbnail: await getPlaceholder(file),
 		color: options.color,
 	})
 }
