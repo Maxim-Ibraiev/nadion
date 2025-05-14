@@ -18,9 +18,9 @@ import type { ImageOptions } from './src/routes/admin/ImageCloud/ImageCloud'
 
 const api = {
 	admin: {
-		// login: (body: ILoginData): Promise<IResponse<IAdmin>> => axios.post(routes.api.adminLogin, body).then((res) => res.data),
+		login: (body: ILoginData): Promise<IResponse<IAdmin>> => axios.post(routes.api.adminLogin, body).then((res) => res.data),
 
-		// logout: (): Promise<IResponse<IAdmin>> => axios.get(routes.api.adminLogin).then((res) => res.data),
+		logout: (): Promise<IResponse<IAdmin>> => axios.post(routes.api.adminLogout, null).then((res) => res.data),
 
 		// addProduct: (body: ProductToAdd) => axios.post(routes.api.adminProduct, body),
 

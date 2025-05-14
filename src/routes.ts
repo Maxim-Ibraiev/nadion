@@ -25,14 +25,15 @@ const routes = {
 	api: {
 		getShoppingBag: (id?: string) => (id ? `/api/shoppingBag?id=${id}` : '/api/shoppingBag'),
 		shoppingBag: '/api/shoppingBag',
-		adminLogin: '/api/admin/auth',
+		adminLogin: '/api/admin/login',
+		adminLogout: '/api/admin/logout',
 		adminProduct: '/api/admin/product',
 		adminImags: '/api/admin/images',
 	},
 
 	admin: {
 		main: '/admin',
-		auth: '/admin/login',
+		login: '/admin/login',
 		add: '/admin/add',
 		toEditProduct: (id: string) => `/admin/product/${id}`,
 	},

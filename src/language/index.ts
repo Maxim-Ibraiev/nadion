@@ -106,6 +106,7 @@ const language = {
 	orderIsConfirmed: 'Замовлення підтверджено',
 	enterToAdmin: 'Вхід в адмін панель',
 	login: 'Логін',
+	logout: 'Вийти',
 	password: 'Пароль',
 	delivary: 'Доставка',
 	pickup: 'Самовивіз',

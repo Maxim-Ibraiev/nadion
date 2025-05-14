@@ -1,5 +1,8 @@
 @import '../../../styles/variables.scss';
 
+.secondary {
+	background: var(--secondary);
+}
 .error {
 	background: var(--error);
 }

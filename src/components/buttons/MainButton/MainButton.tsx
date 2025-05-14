@@ -7,6 +7,7 @@ import s from './MainButton.module.scss'
 interface IProps {
 	children: React.ReactNode
 	isSubmit?: boolean
+	isSecondary?: boolean
 	status?: Request
 	className?: string
 	isLoading?: boolean
@@ -22,6 +23,7 @@ function Button({
 	status = null,
 	isLoading = false,
 	disabled = false,
+	isSecondary = false,
 	...butonProps
 }: IProps & ButtonType) {
 	const isShowLoading = isLoading || status === 'Request'
@@ -29,6 +31,7 @@ function Button({
 	return (
 		<button
 			className={cn(className, 'button', {
+				[s.secondary]: isSecondary,
 				[s.request]: isShowLoading,
 				[s.error]: status === 'Error',
 				[s.success]: status === 'Success',

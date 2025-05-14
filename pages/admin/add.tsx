@@ -1,6 +1,7 @@
 import serverApi from '@/api/serverApi'
 import httpStatusCodes from '@/api/src/httpStatusCodes'
 import Validation from '@/api/src/routes/middleware/Validation'
+import cookieOptions from '@/api/src/serverHelpers/cookieOptions'
 import dispatchData from '@/api/src/serverHelpers/dispatchData'
 import Layout from '@/components/Layout'
 import Button from '@/components/buttons/MainButton'
@@ -9,12 +10,15 @@ import { categories } from '@/constants'
 import { HandlerError } from '@/helpers'
 import getOptionsFromProducts, { getOptionFormat } from '@/helpers/getOptionsFromProducts'
 import { useProducts } from '@/hooks'
-import type { ProductToAdd, Request } from '@/interfaces'
+import type { IAdmin, ProductToAdd, Request } from '@/interfaces'
 import language from '@/language'
 import { wrapper } from '@/redux/store'
+import routes from '@/routes'
 import { Box, Typography, useTheme } from '@mui/material'
 import { useFormik } from 'formik'
+import { getIronSession } from 'iron-session'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import api from '../../src/api/api'
 
@@ -34,10 +38,12 @@ const Input = Form.Input<typeof initialProduct>
 const CreatableInput = Form.CreatableInput<typeof initialProduct>
 
 export default function AddPage() {
+	const router = useRouter()
 	const { products } = useProducts()
 	const allOptions = getOptionsFromProducts(products)
 	const theme = useTheme()
 	const [buttonStatus, setButtonStatus] = useState<Request>()
+	const [logoutStatus, setLogoutStatus] = useState<Request>()
 	const [fileList, setFileList] = useState<File[]>([])
 	const formik = useFormik<typeof initialProduct>({
 		initialValues: initialProduct,
@@ -68,6 +74,17 @@ export default function AddPage() {
 		},
 	})
 
+	const handleLogout = () => {
+		setLogoutStatus('Request')
+		api.admin
+			.logout()
+			.then(() => {
+				setLogoutStatus('Success')
+				router.push(routes.admin.login)
+			})
+			.catch(() => setLogoutStatus('Error'))
+	}
+
 	useEffect(() => {
 		if (buttonStatus) setButtonStatus(null)
 	}, [formik.values])
@@ -75,7 +92,12 @@ export default function AddPage() {
 	return (
 		<Layout>
 			<Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }} component="form" onSubmit={formik.handleSubmit}>
-				<Typography variant="h3">Add product</Typography>
+				<Typography component="span" sx={{ display: 'flex', justifyContent: 'space-between' }}>
+					<Typography variant="h3">Add product</Typography>
+					<Button status={logoutStatus} isSecondary onClick={handleLogout}>
+						{language.logout}
+					</Button>
+				</Typography>
 				<Form.FilesGrid onChange={setFileList} />
 
 				{formik.errors.globalCategory && <Typography color="error">{formik.errors.globalCategory}</Typography>}
@@ -110,13 +132,20 @@ export default function AddPage() {
 				<Button status={buttonStatus} isSubmit>
 					{language.save}
 				</Button>
-				<Typography component="pre">{JSON.stringify(formik.values, null, 2)}</Typography>
 			</Box>
 		</Layout>
 	)
 }
 
-export const getServerSideProps = wrapper.getServerSideProps(({ dispatch }) => async () => {
+export const getServerSideProps = wrapper.getServerSideProps(({ dispatch }) => async ({ req, res }) => {
+	const session = await getIronSession<IAdmin>(req, res, cookieOptions)
+
+	if (!session.auth) {
+		return {
+			redirect: { destination: routes.admin.login, permanent: true },
+		}
+	}
+
 	const products = await serverApi.getProducts()
 
 	dispatchData(dispatch, { products })

@@ -1,13 +1,13 @@
 import { MIN_IMAGE_LENGTH } from '@/constants'
 import type { ProductToAdd } from '@/interfaces'
-import type { IFileImage, IFileList } from '@/interfaces/interfaces'
+import type { IFileImage, IFileList, ILoginData } from '@/interfaces/interfaces'
 import Joi from 'joi'
 import type { ImageOptions } from '../admin/ImageCloud/ImageCloud'
 
 export default class Validation {
 	static id = Joi.string().required().min(24).max(24)
 
-	static adminLogin = Joi.object({
+	static adminLogin = Joi.object<ILoginData>({
 		login: Joi.string().min(1).max(99).required(),
 		password: Joi.string().min(1).max(99).required(),
 	})
