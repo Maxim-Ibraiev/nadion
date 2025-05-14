@@ -1,4 +1,5 @@
 import type { ICloudImageResponse } from '@/interfaces/interfaces'
+import { Axios, AxiosError } from 'axios'
 import Joi from 'joi'
 import { Categories, IAdmin, IError, IProductObject, IResponse, IShoppingBag } from '../../../interfaces'
 import httpStatusCodes from '../httpStatusCodes'
@@ -65,6 +66,14 @@ class Responser {
 
 	static getServerError(error: unknown) {
 		console.error('Server error middleware, ', error)
+
+		if (error instanceof AxiosError) {
+			return this.getBaseResponse<IError>({
+				message: error.message,
+				status: error.status || httpStatusCodes.INTERNAL_SERVER_ERROR,
+				error: { data: error.name + error.stack, message: error.message },
+			})
+		}
 
 		if (error instanceof Error) {
 			return this.getBaseResponse<IError>({
