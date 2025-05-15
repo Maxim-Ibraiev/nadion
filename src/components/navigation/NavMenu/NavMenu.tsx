@@ -21,7 +21,7 @@ export default function NavMenu() {
 				/>
 			</div>
 
-			<Modal open={isOpen} onClose={() => setIsOpen(false)}>
+			<Modal open={isOpen} onClose={() => setIsOpen(false)} onClick={() => setIsOpen(false)}>
 				<MenuMob />
 			</Modal>
 		</div>

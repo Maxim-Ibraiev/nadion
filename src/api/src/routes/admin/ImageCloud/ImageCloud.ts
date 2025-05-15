@@ -69,7 +69,7 @@ export default class ImageCloud {
 	}
 
 	static getImageName(title: string, index: number | string, hash: string) {
-		return `${title}__${index}`
+		return `${title}__${index}__${hash}`
 	}
 
 	static async imageParser(files: IFileList, options: ImageOptionsWithHash) {

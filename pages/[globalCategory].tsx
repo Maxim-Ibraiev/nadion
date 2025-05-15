@@ -14,15 +14,22 @@ export default function Home() {
 	)
 }
 
-export const getServerSideProps = wrapper.getServerSideProps(({ dispatch }) => async ({ req }) => {
+export async function getStaticPaths() {
+	const paths: { params: { globalCategory: string } }[] = []
+	categories.map((el) => paths.push({ params: { globalCategory: el } }))
+
+	return {
+		paths,
+		fallback: false,
+	}
+}
+
+export const getStaticProps = wrapper.getStaticProps(({ dispatch }) => async () => {
 	const products = await serverApi.getProducts()
 
 	dispatchData(dispatch, { products })
 
-	const category = req.url?.split('?')[0].slice(1) || ''
-
 	return {
 		props: {},
-		notFound: !categories.includes(category as Category),
 	}
 })

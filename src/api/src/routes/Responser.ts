@@ -65,8 +65,6 @@ class Responser {
 	}
 
 	static getServerError(error: unknown) {
-		console.error('Server error middleware, ', error)
-
 		if (error instanceof AxiosError) {
 			return this.getBaseResponse<IError>({
 				message: error.message,
@@ -74,6 +72,8 @@ class Responser {
 				error: { data: error.name + error.stack, message: error.message },
 			})
 		}
+
+		console.error('Server error middleware, ', error)
 
 		if (error instanceof Error) {
 			return this.getBaseResponse<IError>({
