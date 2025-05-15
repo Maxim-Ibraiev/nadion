@@ -1,4 +1,4 @@
-import { IProductObject, type IResponse, type ProductToAdd } from '@/interfaces'
+import { IProductObject, type ProductToAdd } from '@/interfaces'
 import axios from 'axios'
 
 export const addProduct = async (newProduct: ProductToAdd) =>

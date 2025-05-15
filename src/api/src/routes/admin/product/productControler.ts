@@ -1,8 +1,10 @@
 import httpStatusCodes from '@/api/src/httpStatusCodes'
+import cookieOptions from '@/api/src/serverHelpers/cookieOptions'
 import { formData } from '@/helpers'
 import type { addProductList } from '@/helpers/formData'
-import { IProductObject, IResponse, type IError, type ProductToAdd } from '@/interfaces'
+import { IProductObject, IResponse, type IAdmin, type IError, type ProductToAdd } from '@/interfaces'
 import Responser from '@api/routes/Responser'
+import { getIronSession } from 'iron-session'
 import { NextApiHandler } from 'next'
 import Validation from '../../middleware/Validation'
 import ImageCloud from '../ImageCloud'
@@ -65,12 +67,16 @@ export const add: NextApiHandler = async (req, res) => {
 	const { fields, files } = await fileReader<addProductList>(req)
 	const { product, imageOptions } = await formData.getAddProduct(fields)
 
+	const session = await getIronSession<IAdmin>(req, res, cookieOptions)
+	Object.assign(product, { creator: session.name })
+
 	try {
 		// validation
 		const { value: validateProduct, error: productError } = Validation.productToAddWithoutImages.validate(product)
 		const { value: validateImageOptions, error: optionsError } = Validation.imageOptions.validate(imageOptions)
 		const { value: validateFiles, error: fileError } = Validation.fileListToAdd.validate(files, { abortEarly: false })
 		const validationError = fileError || optionsError || productError
+		console.log(' validationError:', validationError)
 		if (validationError) response = Responser.getBadRequest(validationError)
 		if (response) res.status(response.status).json(response)
 		if (validationError) return

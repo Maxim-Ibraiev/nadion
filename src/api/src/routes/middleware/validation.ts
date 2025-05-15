@@ -77,6 +77,7 @@ export default class Validation {
 		model: Joi.string().min(3).max(1000),
 		sizes: Joi.array().items(Joi.string().min(1).max(30)).min(1).max(10),
 		material: Joi.array().min(1).max(99),
+		creator: Joi.string().min(1).max(99).optional(),
 	})
 
 	static productToAddWithoutImages = Joi.object<ProductToAdd>({
@@ -89,6 +90,7 @@ export default class Validation {
 		model: Joi.string().min(3).max(1000),
 		sizes: Joi.array().items(Joi.string().min(1).max(30)).min(1).max(10),
 		material: Joi.array().min(1).max(99),
+		creator: Joi.string().min(1).max(99).optional(),
 	})
 
 	static updateImage = this.images.min(0).allow()

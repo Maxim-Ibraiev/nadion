@@ -107,6 +107,6 @@ export interface ICloudImageResponse {
 
 type UnlistedDataForBackEnd = 'id' | 'selectedSize'
 
-export type ProductToAdd = Omit<IProductObject, UnlistedDataForBackEnd | 'popularity'>
+export type ProductToAdd = Omit<IProductObject, UnlistedDataForBackEnd | 'popularity'> & { creator?: string }
 
 export type ProductToUpdate = Omit<Partial<IProductObject>, UnlistedDataForBackEnd>
