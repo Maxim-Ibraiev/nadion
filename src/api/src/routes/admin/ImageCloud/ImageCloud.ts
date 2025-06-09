@@ -1,5 +1,5 @@
 import { MAX_IMAGE_LENGTH } from '@/constants'
-import { arrayWrapper } from '@/helpers'
+import { arrayWrapper, formData } from '@/helpers'
 import getPlaceholder from '@/helpers/placeholder'
 import { IProductObject } from '@/interfaces'
 import type { IFileList } from '@/interfaces/interfaces'
@@ -25,7 +25,7 @@ export default class ImageCloud {
 		const filePromises: Promise<UploadApiResponse[]>[] = []
 
 		for (let index = 0; index < MAX_IMAGE_LENGTH; index++) {
-			const file = Object.values(files).at(index)
+			const file = formData.getFileArray(files).at(index)
 			const originFile = options.preImages && options.preImages[index]
 
 			if (file && originFile) this.deleteImage(originFile)
@@ -65,7 +65,9 @@ export default class ImageCloud {
 	}
 
 	static async deleteImage(image: IProductObject['images'][0]) {
-		return cloudinary.uploader.destroy(`products/${image.original}`)
+		console.log('Image delated: ', image.original)
+
+		return cloudinary.uploader.destroy(`products/${image.original}`) as Promise<{ result: string }>
 	}
 
 	static getImageName(title: string, index: number | string, hash: string) {
@@ -75,15 +77,14 @@ export default class ImageCloud {
 	static async imageParser(files: IFileList, options: ImageOptionsWithHash) {
 		const images: IProductObject['images'] = []
 		const fileItems = await Promise.all(
-			Object.values(files).reduce((acc, value, index) => {
-				acc[index] = this.getImageItem(value, index, options)
-
+			formData.getFileArray(files).reduce((acc, value, index) => {
+				if (value) acc[index] = this.getImageItem(value, index, options)
 				return acc
 			}, [] as Promise<IProductObject['images'][0]>[])
 		)
 
 		for (let index = 0; index < MAX_IMAGE_LENGTH; index++) {
-			const file = Object.values(files).at(index)
+			const file = fileItems.at(index)
 
 			if (file) {
 				images[index] = fileItems[index]

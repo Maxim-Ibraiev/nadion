@@ -1,5 +1,6 @@
 import { IProduct, IProductObject } from '@/helpers/ProductStructure'
 import type { UploadApiResponse } from 'cloudinary'
+import { File } from 'formidable'
 
 export type Category = 'femaleClothes' | 'maleClothes' | 'childrenClothes' | 'all'
 export type Categories = Category[]
@@ -107,6 +108,6 @@ export interface ICloudImageResponse {
 
 type UnlistedDataForBackEnd = 'id' | 'selectedSize'
 
-export type ProductToAdd = Omit<IProductObject, UnlistedDataForBackEnd | 'popularity'> & { creator?: string }
+export type ProductToAdd = Omit<IProductObject, UnlistedDataForBackEnd | 'popularity'>
 
-export type ProductToUpdate = Omit<Partial<IProductObject>, UnlistedDataForBackEnd>
+export type ProductToUpdate = Omit<Partial<IProductObject>, 'selectedSize'>

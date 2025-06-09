@@ -1,14 +1,19 @@
-import { IProduct } from '../interfaces'
+import { IProduct, type IError } from '../interfaces'
 import ProductStructure from './ProductStructure'
 
 class HendlerError {
-	private static baseError(message: string) {
-		if (process.env.NODE_ENV === 'development') throw new Error(message)
-		else console.error(message)
+	private static baseError(message: string, error?: unknown) {
+		if (process.env.NODE_ENV === 'development') {
+			if (error) console.error(error)
+			throw new Error(message)
+		} else {
+			console.error(message)
+			if (error) console.error(error)
+		}
 	}
 
-	static addAction(message: string) {
-		HendlerError.baseError(message)
+	static addAction(message: string, error?: unknown) {
+		HendlerError.baseError(message, error)
 	}
 
 	static productType(products: IProduct[] | readonly IProduct[]) {

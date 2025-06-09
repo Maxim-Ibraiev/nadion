@@ -1,3 +1,5 @@
+import type { ProductToAdd } from '@/interfaces'
+
 export interface IProductObject {
 	price: number
 	popularity: number
@@ -12,6 +14,7 @@ export interface IProductObject {
 	sizes: string[]
 	id: string
 	selectedSize?: null | string
+	creator?: string
 }
 
 export type IProduct = ProductStructure
@@ -84,6 +87,13 @@ export default class ProductStructure {
 		sizes: this.getAllSizeOptions(),
 		selectedSize: this.getSelectedSize(),
 	})
+
+	toFormObject = (): Omit<ProductToAdd, 'images'> => {
+		// eslint-disable-next-line no-unused-vars
+		const { images, popularity, id, selectedSize, ...formState } = this.toObject()
+
+		return formState
+	}
 
 	static getSeason = () => {
 		console.warn('property "season" is deprecated')

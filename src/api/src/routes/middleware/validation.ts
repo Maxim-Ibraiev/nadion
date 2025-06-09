@@ -1,11 +1,11 @@
 import { MIN_IMAGE_LENGTH } from '@/constants'
 import type { ProductToAdd } from '@/interfaces'
-import type { IFileImage, IFileList, ILoginData } from '@/interfaces/interfaces'
+import type { IFileImage, IFileList, ILoginData, ProductToUpdate } from '@/interfaces/interfaces'
 import Joi from 'joi'
 import type { ImageOptions } from '../admin/ImageCloud/ImageCloud'
 
 export default class Validation {
-	static id = Joi.string().required().min(24).max(24)
+	static id = Joi.string().required().min(24).max(24).label('id')
 
 	static adminLogin = Joi.object<ILoginData>({
 		login: Joi.string().min(1).max(99).required(),
@@ -41,14 +41,16 @@ export default class Validation {
 		})
 		.single()
 
-	static fileListToAdd = Joi.object<IFileList>({
+	static fileList = Joi.object<IFileList>({
 		'image-0': this.fileSchema,
 		'image-1': this.fileSchema,
 		'image-2': this.fileSchema,
 		'image-3': this.fileSchema,
 		'image-4': this.fileSchema,
 		'image-5': this.fileSchema,
-	}).custom((value: IFileList, { error }) => {
+	})
+
+	static fileListToAdd = this.fileList.custom((value: IFileList, { error }) => {
 		const imageLength = Object.values(value).filter((el) => el[0]).length
 
 		if (imageLength < MIN_IMAGE_LENGTH) {
@@ -63,6 +65,8 @@ export default class Validation {
 		thumbnail: Joi.string().min(1).max(9999),
 		color: Joi.array().min(1).max(99),
 	})
+
+	static imageDeleteList = Joi.array<string[]>().items(Joi.string().min(1).max(999)).min(1).max(99)
 
 	static images = Joi.array().items(this.imageItem).min(2).max(10).required()
 
@@ -93,9 +97,9 @@ export default class Validation {
 		creator: Joi.string().min(1).max(99).optional(),
 	})
 
-	static updateImage = this.images.min(0).allow()
+	static updateImage = this.images.allow()
 
-	static updateProduct = Joi.object({
+	static updateProduct = Joi.object<ProductToUpdate>({
 		images: this.updateImage.optional(),
 		title: Joi.string().min(3).max(1000).required().optional(),
 		description: Joi.string().min(3).max(1000).required().optional(),
@@ -106,8 +110,9 @@ export default class Validation {
 		model: Joi.string().min(3).max(1000).optional(),
 		sizes: Joi.array().items(Joi.string().min(1).max(30)).max(10).optional(),
 		material: Joi.array().min(1).max(99).optional(),
-		season: Joi.string().min(3).max(999).optional(),
 		popularity: Joi.number().min(-999).max(999999).optional(),
+		creator: Joi.string().min(1).max(99).optional(),
+		id: Joi.string().min(1).max(99),
 	})
 
 	static imageOptions = Joi.object<ImageOptions>({
