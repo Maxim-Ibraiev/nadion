@@ -98,6 +98,7 @@ const language = {
 	toMap: 'Відкрити мапу',
 
 	// ua - form
+	name: "Ім'я",
 	firstName: "Ім'я",
 	lastName: 'Прізвище',
 	email: 'Email',
@@ -116,6 +117,8 @@ const language = {
 	thanks: 'Дякуємо за замовлення!',
 	waitForACall: 'Ваше вамовлення в обробці, очікуйте дзвінка менеджера!',
 	add: 'Додати',
+	novaPostNumber: 'Номер відділення нової пошти',
+	ukrPostNumber: 'Номер відділення укрпошти',
 
 	// foter
 	aboutOurCompany: 'Про нашу компанію',

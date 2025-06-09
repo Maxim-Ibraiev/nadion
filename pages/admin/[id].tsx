@@ -27,7 +27,7 @@ export default function Edit({ id }: IProps) {
 		<AdminProductForm
 			product={product}
 			images={product.getImages()}
-			handleSumbit={(value, fileList) =>
+			handleEditSumbit={(value, fileList) =>
 				api.admin.editProduct(value, fileList, {
 					color: value.colors || product.getColor(),
 					title: value.title || product.getTitle(),

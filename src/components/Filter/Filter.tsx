@@ -154,14 +154,17 @@ const Filter = forwardRef(({ onRequestClose = () => {} }: IProps, ref) => {
 					))}
 				</FormGroup>
 			</FilterAccordion>
-			<MainButton
-				onClick={() => {
-					handleSubmitFilter()
-					onRequestClose()
-				}}
-			>
-				submit
-			</MainButton>
+			<Box>
+				<MainButton
+					className={s.search}
+					onClick={() => {
+						handleSubmitFilter()
+						onRequestClose()
+					}}
+				>
+					{language.search}
+				</MainButton>
+			</Box>
 		</Box>
 	)
 })

@@ -1,4 +1,4 @@
-import { IProduct, type IError } from '../interfaces'
+import { IProduct } from '../interfaces'
 import ProductStructure from './ProductStructure'
 
 class HendlerError {

@@ -1,7 +1,7 @@
 export const UAH = 'грн'
 
 export const TIMEOUT = 250
-export const REVALIDATE = 600000
+export const REVALIDATE = 3600 // 1 hour
 export const MIN_IMAGE_LENGTH = 2
 export const MAX_IMAGE_LENGTH = 6
 

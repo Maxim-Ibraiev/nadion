@@ -1,3 +1,4 @@
+import serverApi from '@/api/serverApi'
 import Layout from '@/components/Layout'
 import ToggleList from '@/components/ToggleList'
 import MainButton from '@/components/buttons/MainButton'
@@ -6,7 +7,6 @@ import UkrPost from '@/components/icons/UkrPost'
 import Form from '@/components/inputs/Form'
 import ShoppingBagFooter from '@/components/shoppingCollection/ShoppingBagFooter'
 import ShoppingBagItem from '@/components/shoppingCollection/ShoppingBagItem'
-import PRODUCTS from '@/constants/PRODUCTS'
 import { useProducts } from '@/hooks'
 import language from '@/language'
 import { wrapper } from '@/redux/store'
@@ -136,7 +136,6 @@ export default function Checkout() {
 
 					{formChoise.isPostDelivary && (
 						<Box component="form" onSubmit={formik.handleSubmit} className={s.form}>
-							<Typography alignContent="center">{language.city}</Typography>
 							<Form.Input formik={formik} name="city" required>
 								{['Odessa', 'Kryvyi Rig'].map((el) => (
 									<MenuItem key={el} value={el}>
@@ -144,8 +143,6 @@ export default function Checkout() {
 									</MenuItem>
 								))}
 							</Form.Input>
-
-							<Typography alignContent="center">Отделения почты</Typography>
 							{formChoise.isNovaPost && (
 								<Form.Input formik={formik} name="novaPostNumber" required>
 									{['#1', '#10'].map((el) => (
@@ -164,11 +161,7 @@ export default function Checkout() {
 									))}
 								</Form.Input>
 							)}
-
-							<Typography alignContent="center">{language.firstName}</Typography>
 							<Form.Input formik={formik} name="name" required />
-
-							<Typography alignContent="center">{language.phoneNumber}</Typography>
 							<Form.Input formik={formik} name="phoneNumber" required />
 							<Box className={s.submit}>
 								{isEmtiBag && <Typography color="error">{language.emptyBag}</Typography>}
@@ -201,13 +194,10 @@ export default function Checkout() {
 	)
 }
 
-export const getServerSideProps = wrapper.getServerSideProps((store) => async ({ query }) => {
-	const data = {
-		products: { data: PRODUCTS, error: null, status: 200 },
-		shoppingBag: { data: { id: '0000', selectedProducts: [] }, error: null, status: 200 },
-	}
+export const getServerSideProps = wrapper.getServerSideProps(({ dispatch }) => async () => {
+	const res = await serverApi.getProducts()
 
-	dispatchData(store.dispatch, data)
+	dispatchData(dispatch, { products: res })
 
 	return {
 		props: {},

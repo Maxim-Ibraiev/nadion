@@ -11,7 +11,7 @@ import AdminProductForm from './AdminProductForm'
 export default function AddPage() {
 	return (
 		<AdminProductForm
-			handleSumbit={(value, fileList) => api.admin.addProduct(value, fileList, { color: value.colors, title: value.title })}
+			handleAddSumbit={(value, fileList) => api.admin.addProduct(value, fileList, { color: value.colors, title: value.title })}
 		/>
 	)
 }

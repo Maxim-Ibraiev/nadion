@@ -1,17 +1,6 @@
 import formData from '@/helpers/formData'
-import {
-	IAdmin,
-	ICallRequest,
-	ILoginData,
-	IProduct,
-	IProductObject,
-	IResponse,
-	IShoppingBag,
-	ProductToUpdate,
-	type ProductToAdd,
-} from '@/interfaces'
-import axios, { AxiosResponse } from 'axios'
-import { getShotSelectedProducts } from '../helpers'
+import { IAdmin, ICallRequest, ILoginData, IProductObject, IResponse, ProductToUpdate, type ProductToAdd } from '@/interfaces'
+import axios from 'axios'
 import routes from '../routes'
 import requestSymulator from './requestSymulator'
 import type { ImageOptions } from './src/routes/admin/ImageCloud/ImageCloud'

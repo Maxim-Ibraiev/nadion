@@ -32,13 +32,23 @@ const emtyInitialProduct: ReturnType<IProduct['toFormObject']> = {
 const Input = Form.Input<typeof emtyInitialProduct>
 const CreatableInput = Form.CreatableInput<typeof emtyInitialProduct>
 
-interface IProps {
-	handleSumbit: (body: ProductToAdd | ProductToUpdate, fileList: File[]) => Promise<IResponse<IProductObject>>
-	product?: IProduct
-	images?: ReturnType<IProduct['getImages']>
-}
+type IProps =
+	| {
+			handleAddSumbit: (body: ProductToAdd, fileList: File[]) => Promise<IResponse<IProductObject>>
 
-export default function ProductAdminPanel({ handleSumbit, product, images = [] }: IProps) {
+			handleEditSumbit?: undefined
+			product?: undefined
+			images?: undefined
+	  }
+	| {
+			handleEditSumbit: (body: ProductToUpdate, fileList: File[]) => Promise<IResponse<IProductObject>>
+			product: IProduct
+			images: ReturnType<IProduct['getImages']>
+
+			handleAddSumbit?: undefined
+	  }
+
+export default function ProductAdminPanel({ handleAddSumbit, handleEditSumbit, product, images = [] }: IProps) {
 	const router = useRouter()
 	const { products } = useProducts()
 	const allOptions = getOptionsFromProducts(products)
@@ -67,8 +77,8 @@ export default function ProductAdminPanel({ handleSumbit, product, images = [] }
 				setButtonStatus('Request')
 
 				const productResponse = product
-					? await handleSumbit({ ...value, id: product.getId() }, fileList)
-					: await handleSumbit(value, fileList)
+					? await handleEditSumbit({ ...value, id: product.getId() }, fileList)
+					: await handleAddSumbit(value, fileList)
 
 				if (product && imageListToDelete.length) {
 					await api.admin.deleteImage(product.getId(), imageListToDelete)

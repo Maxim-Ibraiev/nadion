@@ -3,6 +3,7 @@ import Layout from '@/components/Layout'
 import ProductCard from '@/components/ProductCard'
 import ProductsRow from '@/components/ProductsRow'
 import GridCol from '@/components/gridTemplates/GridCol/GridCol'
+import { REVALIDATE } from '@/constants'
 import useProducts from '@/hooks/useProducts'
 import language from '@/language'
 import { wrapper } from '@/redux/store'
@@ -112,5 +113,5 @@ export const getStaticProps = wrapper.getStaticProps(({ dispatch }) => async () 
 
 	dispatchData(dispatch, { products: res })
 
-	return { props: {} }
+	return { props: {}, revalidate: REVALIDATE }
 })

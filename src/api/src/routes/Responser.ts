@@ -1,5 +1,5 @@
 import type { ICloudImageResponse } from '@/interfaces/interfaces'
-import { Axios, AxiosError } from 'axios'
+import { AxiosError } from 'axios'
 import Joi from 'joi'
 import { Categories, IAdmin, IError, IProductObject, IResponse, IShoppingBag } from '../../../interfaces'
 import httpStatusCodes from '../httpStatusCodes'

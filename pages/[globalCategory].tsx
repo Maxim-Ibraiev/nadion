@@ -1,8 +1,7 @@
 import serverApi from '@/api/serverApi'
 import Catalog from '@/components/Catalog'
 import Layout from '@/components/Layout'
-import { categories } from '@/constants'
-import type { Category } from '@/interfaces'
+import { categories, REVALIDATE } from '@/constants'
 import { wrapper } from '@/redux/store'
 import dispatchData from '@api/serverHelpers/dispatchData'
 
@@ -31,5 +30,6 @@ export const getStaticProps = wrapper.getStaticProps(({ dispatch }) => async () 
 
 	return {
 		props: {},
+		revalidate: REVALIDATE,
 	}
 })

@@ -43,3 +43,12 @@
 	display: grid;
 	grid-template-columns: repeat(3, 1fr);
 }
+
+.search {
+	max-width: 300px;
+	margin: 10px auto;
+
+	@media screen and (min-width: $tableUpper) {
+		width: 100%;
+	}
+}
