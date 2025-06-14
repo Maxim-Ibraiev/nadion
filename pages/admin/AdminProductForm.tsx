@@ -1,5 +1,6 @@
-import httpStatusCodes from '@/api/src/httpStatusCodes'
-import Validation from '@/api/src/routes/middleware/Validation'
+import api from '@/api'
+import httpStatusCodes from '@/api/httpStatusCodes'
+import Validation from '@/api/routes/middleware/Validation'
 import Layout from '@/components/Layout'
 import Button from '@/components/buttons/MainButton'
 import Form from '@/components/inputs/Form'
@@ -15,7 +16,6 @@ import { useFormik } from 'formik'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
-import api from '../../src/api/api'
 
 const emtyInitialProduct: ReturnType<IProduct['toFormObject']> = {
 	title: '',

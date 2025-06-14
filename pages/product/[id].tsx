@@ -3,13 +3,13 @@ import MainProduct from '@/components/MainProduct'
 import NotFoundProduct from '@/components/NotFoundProduct'
 import { useProducts } from '@/hooks'
 import { useRouter } from 'next/router'
-// import api from '../../src/api/serverApi'
 import serverApi from '@/api/serverApi'
+import dispatchData from '@/api/serverHelpers/dispatchData'
 import { REVALIDATE } from '@/constants'
 import PRODUCTS from '@/constants/PRODUCTS'
+import { HandlerError } from '@/helpers'
 import { getProductStructure } from '@/redux/selectors'
 import { wrapper } from '@/redux/store'
-import dispatchData from '@api/serverHelpers/dispatchData'
 
 export default function Product() {
 	const router = useRouter()
@@ -46,7 +46,7 @@ export async function getStaticPaths() {
 			}))
 		}
 	} catch (error) {
-		console.error('Product fetch error in product/[id]: ', error)
+		HandlerError.addAction('Product fetch error in product/[id]: ', error)
 	}
 
 	return {

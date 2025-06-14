@@ -1,5 +1,5 @@
-import api from '@/api/api'
-import cookieOptions from '@/api/src/serverHelpers/cookieOptions'
+import api from '@/api'
+import cookieOptions from '@/api/serverHelpers/cookieOptions'
 import MainButton from '@/components/buttons/MainButton'
 import Input from '@/components/inputs/Input'
 import Layout from '@/components/Layout'
