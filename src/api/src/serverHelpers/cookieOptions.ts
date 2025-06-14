@@ -1,8 +1,12 @@
-import getConfig from 'next/config'
+import { HandlerError } from '@/helpers'
 
-const { sessionOptions } = getConfig().serverRuntimeConfig
+const { SESSION_NAME, SESSION_PASSWORD } = process.env
+
+if (!SESSION_NAME && !SESSION_PASSWORD) {
+	HandlerError.addAction('cookieOptions: Can not find the SESSION keys')
+}
 
 export default {
-	password: sessionOptions.password as string,
-	cookieName: sessionOptions.cookieName as string,
+	cookieName: SESSION_NAME || '',
+	password: SESSION_PASSWORD || '',
 }
