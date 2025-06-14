@@ -1,21 +1,28 @@
 import { MAX_IMAGE_LENGTH } from '@/constants'
-import { arrayWrapper, formData } from '@/helpers'
+import { arrayWrapper, formData, HandlerError } from '@/helpers'
 import getPlaceholder from '@/helpers/placeholder'
 import { IProductObject } from '@/interfaces'
 import type { IFileList } from '@/interfaces/interfaces'
 import { v2 as cloudinary, UploadApiResponse } from 'cloudinary'
 import { File } from 'formidable'
-import getConfig from 'next/config'
 
 export type ImageOptions = {
 	color: string[]
 	title: string
 	preImages?: IProductObject['images']
 }
-
 type ImageOptionsWithHash = ImageOptions & { hash: string }
 
-const { imageCloudConfig } = getConfig().serverRuntimeConfig
+const imageCloudConfig = {
+	cloud_name: process.env.CLOUD_NAME,
+	api_key: process.env.CLOUD_API_KEY,
+	api_secret: process.env.CLOUD_API_SECRET,
+}
+
+const IsNotAccessToCloud = !imageCloudConfig.api_key && !imageCloudConfig.api_secret && !imageCloudConfig.cloud_name
+if (IsNotAccessToCloud) {
+	HandlerError.addAction('ImageCloud: Can not find the imageCloud keys')
+}
 
 cloudinary.config(imageCloudConfig)
 

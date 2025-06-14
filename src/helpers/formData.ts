@@ -1,6 +1,6 @@
 /* eslint-disable no-shadow */
 /* eslint-disable no-unused-vars */
-import type { ImageOptions } from '@/api/src/routes/admin/ImageCloud/ImageCloud'
+import type { ImageOptions } from '@/api/routes/admin/ImageCloud/ImageCloud'
 import { MAX_IMAGE_LENGTH } from '@/constants'
 import HandlerError from '@/helpers/HandlerError'
 import type { IProductObject, ProductToAdd } from '@/interfaces'

@@ -1,11 +1,11 @@
+import api from '@/api'
 import serverApi from '@/api/serverApi'
-import cookieOptions from '@/api/src/serverHelpers/cookieOptions'
-import dispatchData from '@/api/src/serverHelpers/dispatchData'
+import cookieOptions from '@/api/serverHelpers/cookieOptions'
+import dispatchData from '@/api/serverHelpers/dispatchData'
 import type { IAdmin } from '@/interfaces'
 import { wrapper } from '@/redux/store'
 import routes from '@/routes'
 import { getIronSession } from 'iron-session'
-import api from '../../src/api/api'
 import AdminProductForm from './AdminProductForm'
 
 export default function AddPage() {

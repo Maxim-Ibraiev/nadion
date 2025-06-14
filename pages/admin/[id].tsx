@@ -1,6 +1,6 @@
-import api from '@/api/api'
+import api from '@/api'
 import serverApi from '@/api/serverApi'
-import dispatchData from '@/api/src/serverHelpers/dispatchData'
+import dispatchData from '@/api/serverHelpers/dispatchData'
 import Layout from '@/components/Layout'
 import NotFoundProduct from '@/components/NotFoundProduct'
 import { useProducts } from '@/hooks'

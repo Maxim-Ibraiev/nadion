@@ -1,9 +1,9 @@
 import serverApi from '@/api/serverApi'
+import dispatchData from '@/api/serverHelpers/dispatchData'
 import Catalog from '@/components/Catalog'
 import Layout from '@/components/Layout'
 import { categories, REVALIDATE } from '@/constants'
 import { wrapper } from '@/redux/store'
-import dispatchData from '@api/serverHelpers/dispatchData'
 
 export default function Home() {
 	return (

@@ -1,4 +1,5 @@
 import serverApi from '@/api/serverApi'
+import dispatchData from '@/api/serverHelpers/dispatchData'
 import Layout from '@/components/Layout'
 import ToggleList from '@/components/ToggleList'
 import MainButton from '@/components/buttons/MainButton'
@@ -11,7 +12,6 @@ import { useProducts } from '@/hooks'
 import language from '@/language'
 import { wrapper } from '@/redux/store'
 import routes from '@/routes'
-import dispatchData from '@api/serverHelpers/dispatchData'
 import CheckIcon from '@mui/icons-material/Check'
 import { Box, MenuItem, Modal, Paper, Tab, Tabs, Typography } from '@mui/material'
 import { useFormik } from 'formik'
@@ -23,9 +23,9 @@ import s from './CheckoutPage.module.scss'
 const validPostformikKeys = ['city', 'novaPostNumber', 'ukrPostNumber', 'phoneNumber', 'name'] as const
 
 type validPostformKeysType = (typeof validPostformikKeys)[number]
-type NovaPostStateType = Record<validPostformKeysType, string>
+type PostStateType = Record<validPostformKeysType, string>
 
-const initianallformikState: NovaPostStateType = {
+const initianallformikState: PostStateType = {
 	city: '',
 	novaPostNumber: '',
 	ukrPostNumber: '',
@@ -54,15 +54,14 @@ export default function Checkout() {
 
 	const formik = useFormik({
 		initialValues: initianallformikState,
+
 		onSubmit: (e) => {
-			if (formChoise.isNovaPost) formik.setFieldValue('ukrPostNumber', '')
-			if (formChoise.isUkrPost) formik.setFieldValue('novaPostNumber', '')
 			if (selectedProducts.length === 0) {
 				setIsEmtiBag(true)
 				return
 			}
 
-			console.log({ formChoise, selectedProducts: selectedProducts.map((el) => el.toObject()) })
+			console.log({ formChoise, formValue: formik.values, selectedProducts: selectedProducts.map((el) => el.toObject()) })
 
 			setSelectedProducts('reset')
 			setIsOpenSubmitModal(true)
@@ -136,31 +135,9 @@ export default function Checkout() {
 
 					{formChoise.isPostDelivary && (
 						<Box component="form" onSubmit={formik.handleSubmit} className={s.form}>
-							<Form.Input formik={formik} name="city" required>
-								{['Odessa', 'Kryvyi Rig'].map((el) => (
-									<MenuItem key={el} value={el}>
-										{el}
-									</MenuItem>
-								))}
-							</Form.Input>
-							{formChoise.isNovaPost && (
-								<Form.Input formik={formik} name="novaPostNumber" required>
-									{['#1', '#10'].map((el) => (
-										<MenuItem key={el} value={el}>
-											{el}
-										</MenuItem>
-									))}
-								</Form.Input>
-							)}
-							{formChoise.isUkrPost && (
-								<Form.Input formik={formik} name="ukrPostNumber" required>
-									{['5 UkrPost', '13 UkrPost'].map((el) => (
-										<MenuItem key={el} value={el}>
-											{el}
-										</MenuItem>
-									))}
-								</Form.Input>
-							)}
+							<Form.Input formik={formik} name="city" required />
+							{formChoise.isNovaPost && <Form.Input formik={formik} name="novaPostNumber" required />}
+							{formChoise.isUkrPost && <Form.Input formik={formik} name="ukrPostNumber" required />}
 							<Form.Input formik={formik} name="name" required />
 							<Form.Input formik={formik} name="phoneNumber" required />
 							<Box className={s.submit}>

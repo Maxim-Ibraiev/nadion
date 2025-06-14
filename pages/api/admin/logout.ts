@@ -1,1 +1,1 @@
-export { default } from '@api/routes/admin/logout/logoutRouter'
+export { default } from '@/api/routes/admin/logout/logoutRouter'

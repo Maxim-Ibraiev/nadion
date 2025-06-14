@@ -1,3 +1,3 @@
-import handler from '../../src/api/src/routes/products/productsRouter'
+import handler from '@/api/routes/products/productsRouter'
 
 export default handler

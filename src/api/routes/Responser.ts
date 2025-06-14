@@ -1,8 +1,8 @@
 import type { ICloudImageResponse } from '@/interfaces/interfaces'
 import { AxiosError } from 'axios'
 import Joi from 'joi'
-import { Categories, IAdmin, IError, IProductObject, IResponse, IShoppingBag } from '../../../interfaces'
-import httpStatusCodes from '../httpStatusCodes'
+import { Categories, IAdmin, IError, IProductObject, IResponse, IShoppingBag } from '@/interfaces'
+import httpStatusCodes from '@/api/httpStatusCodes'
 
 type InputData<Type> = {
 	status: number

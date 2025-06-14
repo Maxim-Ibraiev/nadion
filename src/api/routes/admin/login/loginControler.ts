@@ -1,4 +1,4 @@
-import cookieOptions from '@/api/src/serverHelpers/cookieOptions'
+import cookieOptions from '@/api/serverHelpers/cookieOptions'
 import type { IAdmin, IError, IResponse } from '@/interfaces'
 import { getIronSession } from 'iron-session'
 import type { NextApiRequest, NextApiResponse } from 'next'
