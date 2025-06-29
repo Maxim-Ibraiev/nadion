@@ -1,7 +1,4 @@
 import { getProducts } from '@/api/routes/products/productsController'
-import cookieOptions from '@/api/serverHelpers/cookieOptions'
-import type { IAdmin } from '@/interfaces'
-import { getIronSession } from 'iron-session'
 import type { NextApiRequest, NextApiResponse } from 'next'
 import Validation from '../../middleware/Validation'
 import Responser from '../../Responser'
