@@ -53,8 +53,9 @@ export default function ProductAdminPanel({ handleAddSumbit, handleEditSumbit, p
 	const { products } = useProducts()
 	const allOptions = getOptionsFromProducts(products)
 	const theme = useTheme()
-	const [buttonStatus, setButtonStatus] = useState<Request>()
 	const [logoutStatus, setLogoutStatus] = useState<Request>()
+	const [buttonStatus, setButtonStatus] = useState<Request>()
+	const [deleteButtonStatus, setDeleteButtonStatus] = useState<Request>()
 	const [fileList, setFileList] = useState<File[]>([])
 	const [imageListToDelete, setImageListToDelete] = useState<string[]>([])
 
@@ -116,6 +117,24 @@ export default function ProductAdminPanel({ handleAddSumbit, handleEditSumbit, p
 			return preImages
 		})
 
+	const handleDeleteProduct = async () => {
+		if (!product) return
+
+		if (!window.confirm(language.isConfirmToDeleteProduct)) return
+
+		setDeleteButtonStatus('Request')
+
+		try {
+			await api.admin.deleteProduct(product.getId())
+
+			setDeleteButtonStatus('Success')
+			// todo route push
+		} catch (error) {
+			setDeleteButtonStatus('Error')
+			HandlerError.addAction('Client product delete error', error)
+		}
+	}
+
 	useEffect(() => {
 		if (buttonStatus) setButtonStatus(null)
 	}, [formik.values])
@@ -164,9 +183,12 @@ export default function ProductAdminPanel({ handleAddSumbit, handleEditSumbit, p
 				<Button status={buttonStatus} isSubmit>
 					{language.save}
 				</Button>
-				<pre>
-					<span style={{ maxWidth: '300px', textOverflow: 'clip' }}>{JSON.stringify({ ...formik.values, images: [] }, null, 2)}</span>
-				</pre>
+
+				{product && (
+					<Button status={deleteButtonStatus} isSecondary onClick={handleDeleteProduct}>
+						{language.deleteProdact}
+					</Button>
+				)}
 			</Box>
 		</Layout>
 	)

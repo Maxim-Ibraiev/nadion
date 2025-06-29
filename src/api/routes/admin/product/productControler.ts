@@ -1,7 +1,9 @@
 import Responser from '@/api/routes/Responser'
-import { formData } from '@/helpers'
+import cookieOptions from '@/api/serverHelpers/cookieOptions'
+import { formData, HandlerError } from '@/helpers'
 import type { addProductList } from '@/helpers/formData'
-import { IProductObject, IResponse, type IError, type ProductToAdd } from '@/interfaces'
+import { IProductObject, IResponse, type IAdmin, type IError, type ProductToAdd } from '@/interfaces'
+import { getIronSession } from 'iron-session'
 import { NextApiHandler } from 'next'
 import Validation from '../../middleware/Validation'
 import ImageCloud from '../ImageCloud'
@@ -51,6 +53,8 @@ export const add: NextApiHandler = async (req, res) => {
 	const { fields, files } = await fileReader<addProductList>(req)
 	const { product, imageOptions } = await formData.getProduct(fields)
 
+	const session = await getIronSession<IAdmin>(req, res, cookieOptions)
+
 	Object.assign(product, { creator: session.name })
 
 	try {
@@ -86,4 +90,34 @@ export const add: NextApiHandler = async (req, res) => {
 		response = Responser.getServerError(error)
 		res.status(response.status).json(response)
 	}
+}
+
+export const productDelete: NextApiHandler = async (req, res) => {
+	const { id } = req.query
+
+	let response: IResponse<IProductObject | IError> | null = null
+
+	// validation
+	const { value: validatedId, error } = Validation.id.validate(id)
+	if (error) {
+		response = Responser.getBadRequest(error)
+		res.status(response.status).json(response)
+
+		return
+	}
+
+	try {
+		const deletedResponse = await removeProduct(validatedId)
+		console.log('product deleted: ', deletedResponse)
+
+		await ImageCloud.deleteImagesByList(deletedResponse.images.map((prd) => prd.original))
+
+		response = Responser.getOK(deletedResponse)
+	} catch (e) {
+		HandlerError.addAction('productDelete error', e)
+
+		response = Responser.getServerError(e)
+	}
+
+	res.status(200).json(response)
 }

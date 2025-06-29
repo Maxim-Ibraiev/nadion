@@ -71,10 +71,27 @@ export default class ImageCloud {
 		})
 	}
 
-	static async deleteImage(image: IProductObject['images'][0]) {
-		console.log('Image delated: ', image.original)
+	static async deleteImagesByList(imageList: string[]) {
+		const promises = imageList.reduce((acc, element) => {
+			acc.push(ImageCloud.deleteImageByName(element))
 
-		return cloudinary.uploader.destroy(`products/${image.original}`) as Promise<{ result: string }>
+			return acc
+		}, [] as Promise<{ result: string }>[])
+
+		return Promise.all(promises)
+	}
+
+	static async deleteImage(image: IProductObject['images'][0]) {
+		return this.deleteImageByName(image.original)
+	}
+
+	private static async deleteImageByName(imageNameOrURL: string) {
+		const split = imageNameOrURL.split('/')
+		const imageName = imageNameOrURL.includes('http') ? split.at(split.length - 1) : imageNameOrURL
+
+		console.log('Image delated: ', imageName)
+
+		return cloudinary.uploader.destroy(`products/${imageName}`) as Promise<{ result: string }>
 	}
 
 	static getImageName(title: string, index: number | string, hash: string) {

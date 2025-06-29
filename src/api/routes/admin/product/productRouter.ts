@@ -3,7 +3,7 @@ import type { IAdmin } from '@/interfaces'
 import { getIronSession } from 'iron-session'
 import { NextApiRequest, NextApiResponse } from 'next'
 import Responser from '../../Responser'
-import { add, edit } from './productControler'
+import { add, edit, productDelete } from './productControler'
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
 	const session = await getIronSession<IAdmin>(req, res, cookieOptions)
@@ -25,10 +25,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 			break
 		}
 
-		// case 'DELETE': {
-		//   await productDelete(req, res)
-		//   break
-		// }
+		case 'DELETE': {
+			await productDelete(req, res)
+			break
+		}
 
 		default:
 			{

@@ -1,7 +1,7 @@
 import formData from '@/helpers/formData'
-import { IAdmin, ILoginData, IProductObject, IResponse, ProductToUpdate, type ProductToAdd } from '@/interfaces'
-import axios from 'axios'
+import { IAdmin, ILoginData, IProductObject, IResponse, ProductToUpdate, type IProduct, type ProductToAdd } from '@/interfaces'
 import routes from '@/routes'
+import axios from 'axios'
 import type { ImageOptions } from './routes/admin/ImageCloud/ImageCloud'
 
 const api = {
@@ -24,7 +24,9 @@ const api = {
 			return (await axios.post(routes.api.adminProduct, data)).data as IResponse<IProductObject>
 		},
 
-		deleteImage: async (id: string, imageList: string[]) =>
+		deleteProduct: async (id: ReturnType<IProduct['getId']>) => axios.delete<IProductObject>(routes.api.adminProduct, { params: { id } }),
+
+		deleteImage: async (id: ReturnType<IProduct['getId']>, imageList: string[]) =>
 			axios.delete<IProductObject>(routes.api.adminImags, { data: { id, imageList } }),
 	},
 }

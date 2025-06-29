@@ -8,4 +8,4 @@ export const addProduct = async (newProduct: ProductToAdd) =>
 export const updateProduct = async (id: IProductObject['id'], newProduct: Partial<IProductObject>) =>
 	axios.patch<IProductObject>(`${DB_URL}/products/${id}`, newProduct).then((r) => r.data as IProductObject)
 
-export const removeProduct = async (id: string) => axios.delete(`${DB_URL}/products/${id}`).then((r) => r.data as IProductObject)
+export const removeProduct = async (id: string) => axios.delete(`${DB_URL}/products/${id}`).then((r) => r.data.data as IProductObject)

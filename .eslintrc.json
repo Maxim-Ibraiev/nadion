@@ -10,7 +10,7 @@
 		"no-restricted-exports": "off",
 		"react/jsx-filename-extension": "off",
 		"no-use-before-define": "off",
-		"react-hooks/exhaustive-deps":"off",
+		"react-hooks/exhaustive-deps": "off",
 		"no-redeclare": "off",
 		"react/self-closing-comp": "warn",
 		"react/jsx-no-useless-fragment": "warn",
@@ -20,7 +20,8 @@
 		"import/order": "warn",
 		"lines-between-class-members": "warn",
 		"no-else-return": "off",
-		"no-plusplus": ["warn",{"allowForLoopAfterthoughts":true}],
+		"no-alert": "off",
+		"no-plusplus": ["warn", { "allowForLoopAfterthoughts": true }],
 		"no-unused-vars": [
 			"warn",
 			{

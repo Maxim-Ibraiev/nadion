@@ -23,8 +23,6 @@ const routes = {
 	getPriceRange: (min: number, max: number) => `${routes.all}?price=${min}&price=${max}`,
 
 	api: {
-		getShoppingBag: (id?: string) => (id ? `/api/shoppingBag?id=${id}` : '/api/shoppingBag'),
-		shoppingBag: '/api/shoppingBag',
 		adminLogin: '/api/admin/login',
 		adminLogout: '/api/admin/logout',
 		adminProduct: '/api/admin/product',

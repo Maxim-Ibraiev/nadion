@@ -28,24 +28,14 @@ export const imagesDelete = async (req: NextApiRequest, res: NextApiResponse) =>
 
 	// delete
 	if (product) {
-		const promises = ValidatedDeletList.reduce((acc, element) => {
-			const split = element.split('/')
-			const imageName = element.includes('http') ? split.at(split.length - 1) : element
-			const imageItem = product.images.find((el) => el.original === imageName)
-
-			if (imageItem) {
-				acc.push(ImageCloud.deleteImage(imageItem))
-			}
-
-			return acc
-		}, [] as Promise<{ result: string }>[])
-
-		await Promise.all(promises)
+		await ImageCloud.deleteImagesByList(ValidatedDeletList)
 
 		const newImages = product.images.filter((el) => ValidatedDeletList.some((imageToDelete) => imageToDelete !== el.original))
 		const updatedProduct = await updateProduct(product.id, { images: newImages })
 
 		response = Responser.getOK(updatedProduct)
+	} else {
+		response = Responser.getNotFound({ data: { product }, message: 'not found product' })
 	}
 
 	res.status(response.status).json(response)

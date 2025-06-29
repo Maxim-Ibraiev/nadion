@@ -106,6 +106,8 @@ const language = {
 	confirmOrder: 'Підтвердити замовлення',
 	orderIsConfirmed: 'Замовлення підтверджено',
 	enterToAdmin: 'Вхід в адмін панель',
+	deleteProdact: 'Видалити товар',
+	isConfirmToDeleteProduct: 'Ви впевнені що хочете видалити товар ?',
 	login: 'Логін',
 	logout: 'Вийти',
 	password: 'Пароль',
