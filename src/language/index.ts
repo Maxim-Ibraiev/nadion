@@ -105,9 +105,6 @@ const language = {
 	phoneNumber: 'Телефон',
 	confirmOrder: 'Підтвердити замовлення',
 	orderIsConfirmed: 'Замовлення підтверджено',
-	enterToAdmin: 'Вхід в адмін панель',
-	deleteProdact: 'Видалити товар',
-	isConfirmToDeleteProduct: 'Ви впевнені що хочете видалити товар ?',
 	login: 'Логін',
 	logout: 'Вийти',
 	password: 'Пароль',
@@ -121,6 +118,12 @@ const language = {
 	add: 'Додати',
 	novaPostNumber: 'Номер відділення нової пошти',
 	ukrPostNumber: 'Номер відділення укрпошти',
+
+	// admin
+	adminMenegment: 'Панель адміністратора',
+	enterToAdmin: 'Вхід в адмін панель',
+	deleteProdact: 'Видалити товар',
+	isConfirmToDeleteProduct: 'Ви впевнені що хочете видалити товар ?',
 
 	// foter
 	aboutOurCompany: 'Про нашу компанію',

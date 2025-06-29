@@ -33,7 +33,8 @@ const routes = {
 		main: '/admin',
 		login: '/admin/login',
 		add: '/admin/add',
-		toEditProduct: (id: string) => `/admin/product/${id}`,
+		products: '/admin/products',
+		toEditProduct: (id: string) => `/admin/${id}`,
 	},
 }
 

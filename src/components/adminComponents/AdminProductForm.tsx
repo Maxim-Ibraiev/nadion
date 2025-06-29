@@ -2,6 +2,7 @@ import api from '@/api'
 import httpStatusCodes from '@/api/httpStatusCodes'
 import Validation from '@/api/routes/middleware/Validation'
 import Layout from '@/components/Layout'
+import AdminHeader from '@/components/adminComponents/AdminHeader'
 import Button from '@/components/buttons/MainButton'
 import Form from '@/components/inputs/Form'
 import { categories } from '@/constants'
@@ -141,6 +142,8 @@ export default function ProductAdminPanel({ handleAddSumbit, handleEditSumbit, p
 
 	return (
 		<Layout>
+			<AdminHeader />
+
 			<Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }} component="form" onSubmit={formik.handleSubmit}>
 				<Typography component="span" sx={{ display: 'flex', justifyContent: 'space-between' }}>
 					<Typography variant="h3">Add product</Typography>

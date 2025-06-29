@@ -9,7 +9,11 @@ import { useState } from 'react'
 import ProductSorter from '../ProductSorter'
 import s from './Catalog.module.scss'
 
-export default function Catalog() {
+interface IProps {
+	getLinkForProduct?: (id: string) => string
+}
+
+export default function Catalog({ getLinkForProduct }: IProps) {
 	const { isMobile, isTable } = useDevice()
 	const [isOpenFilter, setIsOpenFilter] = useState(false)
 	const isUseModal = isMobile || isTable
@@ -40,7 +44,7 @@ export default function Catalog() {
 				<Filter />
 			)}
 			<Box className={s.catalog}>
-				<CardList products={filteredProducts} />
+				<CardList products={filteredProducts} getLinkForProduct={getLinkForProduct} />
 			</Box>
 		</Box>
 	)

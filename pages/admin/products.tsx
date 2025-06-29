@@ -1,18 +1,21 @@
-import api from '@/api'
 import serverApi from '@/api/serverApi'
 import cookieOptions from '@/api/serverHelpers/cookieOptions'
 import dispatchData from '@/api/serverHelpers/dispatchData'
-import AdminProductForm from '@/components/adminComponents/AdminProductForm'
+import Catalog from '@/components/Catalog'
+import Layout from '@/components/Layout'
 import type { IAdmin } from '@/interfaces'
+import language from '@/language'
 import { wrapper } from '@/redux/store'
 import routes from '@/routes'
 import { getIronSession } from 'iron-session'
+import AdminHeader from '@/components/adminComponents/AdminHeader'
 
 export default function AddPage() {
 	return (
-		<AdminProductForm
-			handleAddSumbit={(value, fileList) => api.admin.addProduct(value, fileList, { color: value.colors, title: value.title })}
-		/>
+		<Layout>
+			<AdminHeader />
+			<Catalog getLinkForProduct={routes.admin.toEditProduct} />
+		</Layout>
 	)
 }
 

@@ -1,11 +1,11 @@
 import api from '@/api'
 import serverApi from '@/api/serverApi'
 import dispatchData from '@/api/serverHelpers/dispatchData'
+import AdminProductForm from '@/components/adminComponents/AdminProductForm'
 import Layout from '@/components/Layout'
 import NotFoundProduct from '@/components/NotFoundProduct'
 import { useProducts } from '@/hooks'
 import { wrapper } from '@/redux/store'
-import AdminProductForm from './AdminProductForm'
 
 interface IProps {
 	id: string
