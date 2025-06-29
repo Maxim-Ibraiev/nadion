@@ -1,9 +1,7 @@
 import Responser from '@/api/routes/Responser'
-import cookieOptions from '@/api/serverHelpers/cookieOptions'
 import { formData } from '@/helpers'
 import type { addProductList } from '@/helpers/formData'
-import { IProductObject, IResponse, type IAdmin, type IError, type ProductToAdd } from '@/interfaces'
-import { getIronSession } from 'iron-session'
+import { IProductObject, IResponse, type IError, type ProductToAdd } from '@/interfaces'
 import { NextApiHandler } from 'next'
 import Validation from '../../middleware/Validation'
 import ImageCloud from '../ImageCloud'
@@ -16,14 +14,6 @@ export const edit: NextApiHandler = async (req, res) => {
 	const { product, imageOptions } = await formData.getProduct(fields)
 	const { id } = product
 	delete product.id
-
-	const session = await getIronSession<IAdmin>(req, res, cookieOptions)
-
-	if (!session.auth) {
-		response = Responser.getForbidden(null)
-		res.status(response.status).json(response)
-		return
-	}
 
 	try {
 		// validation
@@ -61,14 +51,7 @@ export const add: NextApiHandler = async (req, res) => {
 	const { fields, files } = await fileReader<addProductList>(req)
 	const { product, imageOptions } = await formData.getProduct(fields)
 
-	const session = await getIronSession<IAdmin>(req, res, cookieOptions)
 	Object.assign(product, { creator: session.name })
-
-	if (!session.auth) {
-		response = Responser.getForbidden(null)
-		res.status(response.status).json(response)
-		return
-	}
 
 	try {
 		// validation

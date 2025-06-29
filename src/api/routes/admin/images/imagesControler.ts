@@ -13,14 +13,6 @@ export const imagesDelete = async (req: NextApiRequest, res: NextApiResponse) =>
 	const { id, imageList } = req.body as { id: string; imageList: string[] }
 	let response = Responser.getNotFound(null)
 
-	const session = await getIronSession<IAdmin>(req, res, cookieOptions)
-
-	if (!session.auth) {
-		response = Responser.getForbidden(null)
-		res.status(response.status).json(response)
-		return
-	}
-
 	// validation
 	const { value: validatedId, error: idError } = Validation.id.validate(id)
 	const { value: ValidatedDeletList, error: ListError } = Validation.imageDeleteList.validate(imageList)
