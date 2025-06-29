@@ -53,7 +53,9 @@ function isMatchedProduct(product: IProduct, options: MatchedOption) {
 		isOptionMatch(product.getColor(), options.color),
 		isOptionMatch(product.getMaterial(), options.material),
 		// todo
-		options.brand ? arrayWrapper(options.brand).some((el) => product.getTitle().includes(el)) : true,
+		options.brand
+			? arrayWrapper(options.brand).some((el) => product.getTitle().toLocaleLowerCase().includes(el.toLocaleLowerCase()))
+			: true,
 	]
 
 	return result.every((el) => el)
