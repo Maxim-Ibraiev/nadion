@@ -1,14 +1,12 @@
 import { DEFAULT_SORT_FOR_PRODUCTS, SHOPPING_ID } from '@/constants'
 import { arrayWrapper, getFilteredProducts } from '@/helpers'
 import { FilterQuery, IProduct, InitialFilter } from '@/interfaces'
-import isEqual from 'lodash.isequal'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 
 export default function useFilter() {
 	const router = useRouter()
 	const [query, setQuery] = useState(filterChecker(router.query))
-	const [isQueryEquallyURL, setIsQueryEquallyURL] = useState(true)
 
 	const define = (option: keyof InitialFilter, values: string[]) => {
 		const newQuery = { ...query, [option]: values }
@@ -16,7 +14,6 @@ export default function useFilter() {
 		if (values.length === 0) delete newQuery[option]
 
 		setQuery(newQuery)
-		setIsQueryEquallyURL(isEqual(newQuery, filterChecker(router.query)))
 
 		return newQuery
 	}
@@ -40,7 +37,6 @@ export default function useFilter() {
 		})
 
 		Object.defineProperties(copyQuery, {
-			[SHOPPING_ID]: { value: arrayWrapper(router.query[SHOPPING_ID]) },
 			globalCategory: { value: arrayWrapper(router.query.globalCategory) },
 			sort: { value: [DEFAULT_SORT_FOR_PRODUCTS] },
 		})
@@ -52,10 +48,9 @@ export default function useFilter() {
 
 	useEffect(() => {
 		setQuery(filterChecker(router.query))
-		setIsQueryEquallyURL(true)
 	}, [router.query])
 
-	return { query, isQueryEquallyURL, define, reset, updateURL, getQueryProducts }
+	return { query, define, reset, updateURL, getQueryProducts }
 }
 
 function filterChecker(filter: InitialFilter): FilterQuery {

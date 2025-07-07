@@ -20,8 +20,6 @@ export default function Product() {
 	return <Layout>{product ? <MainProduct /> : <NotFoundProduct />}</Layout>
 }
 
-// const productsResponse = api.getProducts()
-
 export const getStaticProps = wrapper.getStaticProps(({ dispatch }) => async () => {
 	const res = await serverApi.getProducts()
 

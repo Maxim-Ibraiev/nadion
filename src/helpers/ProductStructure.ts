@@ -94,9 +94,4 @@ export default class ProductStructure {
 
 		return formState
 	}
-
-	static getSeason = () => {
-		console.warn('property "season" is deprecated')
-		return ''
-	}
 }
