@@ -27,6 +27,7 @@ const routes = {
 		adminLogout: '/api/admin/logout',
 		adminProduct: '/api/admin/product',
 		adminImags: '/api/admin/images',
+		alert: '/api/alert',
 	},
 
 	admin: {

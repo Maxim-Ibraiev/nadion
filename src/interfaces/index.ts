@@ -18,4 +18,5 @@ export type {
 	ProductToAdd,
 	ProductToUpdate,
 	Request,
+	CartSchema,
 } from './interfaces'
