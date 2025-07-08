@@ -92,6 +92,11 @@ export interface IFileImage {
 	hash: any
 }
 
+export type CartSchema = {
+	chatId: number
+	subscriptions: string[]
+}
+
 export interface IFileList {
 	'image-0': [File]
 	'image-1': [File]

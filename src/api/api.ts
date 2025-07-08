@@ -2,15 +2,19 @@ import formData from '@/helpers/formData'
 import { IAdmin, ILoginData, IProductObject, IResponse, ProductToUpdate, type IProduct, type ProductToAdd } from '@/interfaces'
 import routes from '@/routes'
 import axios from 'axios'
+import type { PostStateType } from '../../pages/checkout'
 import type { ImageOptions } from './routes/admin/ImageCloud/ImageCloud'
 
 const api = {
+	newOrderAalert: (products: IProduct[], form: PostStateType) => {
+		const data = axios.put(routes.api.alert, { products: products.map((el) => el.toObject()), form })
+
+		return data
+	},
 	admin: {
 		login: (body: ILoginData): Promise<IResponse<IAdmin>> => axios.post(routes.api.adminLogin, body).then((res) => res.data),
 
 		logout: (): Promise<IResponse<IAdmin>> => axios.post(routes.api.adminLogout, null).then((res) => res.data),
-
-		// addProduct: (body: ProductToAdd) => axios.post(routes.api.adminProduct, body),
 
 		editProduct: async (productToUpdate: ProductToUpdate, files: File[], imageOptions: ImageOptions) => {
 			const data = formData.setProduct({ files, imageOptions, product: productToUpdate })

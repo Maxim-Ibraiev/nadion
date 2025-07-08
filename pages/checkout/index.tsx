@@ -1,3 +1,4 @@
+import api from '@/api'
 import serverApi from '@/api/serverApi'
 import dispatchData from '@/api/serverHelpers/dispatchData'
 import Layout from '@/components/Layout'
@@ -8,7 +9,9 @@ import UkrPost from '@/components/icons/UkrPost'
 import Form from '@/components/inputs/Form'
 import ShoppingBagFooter from '@/components/shoppingCollection/ShoppingBagFooter'
 import ShoppingBagItem from '@/components/shoppingCollection/ShoppingBagItem'
+import { HandlerError } from '@/helpers'
 import { useProducts } from '@/hooks'
+import type { Request } from '@/interfaces'
 import language from '@/language'
 import { wrapper } from '@/redux/store'
 import routes from '@/routes'
@@ -23,7 +26,7 @@ import s from './CheckoutPage.module.scss'
 const validPostformikKeys = ['city', 'novaPostNumber', 'ukrPostNumber', 'phoneNumber', 'name'] as const
 
 type validPostformKeysType = (typeof validPostformikKeys)[number]
-type PostStateType = Record<validPostformKeysType, string>
+export type PostStateType = Record<validPostformKeysType, string>
 
 const initianallformikState: PostStateType = {
 	city: '',
@@ -41,6 +44,8 @@ export default function Checkout() {
 	const [postIndex, setPostIndex] = useState(0)
 	const [isOpenSubmitModal, setIsOpenSubmitModal] = useState(false)
 	const [isEmtiBag, setIsEmtiBag] = useState(false)
+	const [submitButton, setSetsubmitButton] = useState<Request>()
+
 	const DELIVARY_POST_INDEX = 0
 	const DELIVARY_PICK_UP_INDEX = 1
 	const NOVA_POST_INDEX = 0
@@ -55,17 +60,24 @@ export default function Checkout() {
 	const formik = useFormik({
 		initialValues: initianallformikState,
 
-		onSubmit: (e) => {
+		onSubmit: async (data) => {
 			if (selectedProducts.length === 0) {
 				setIsEmtiBag(true)
 				return
 			}
 
-			console.log({ formChoise, formValue: formik.values, selectedProducts: selectedProducts.map((el) => el.toObject()) })
+			setSetsubmitButton('Request')
+			try {
+				await api.newOrderAalert(selectedProducts, data)
 
-			setSelectedProducts('reset')
-			setIsOpenSubmitModal(true)
-			formik.resetForm()
+				setSelectedProducts('reset')
+				setIsOpenSubmitModal(true)
+				formik.resetForm()
+				setSetsubmitButton('Success')
+			} catch (error) {
+				setSetsubmitButton('Error')
+				HandlerError.addAction('checkout error', error)
+			}
 		},
 	})
 
@@ -142,7 +154,7 @@ export default function Checkout() {
 							<Form.Input formik={formik} name="phoneNumber" required />
 							<Box className={s.submit}>
 								{isEmtiBag && <Typography color="error">{language.emptyBag}</Typography>}
-								<MainButton isSubmit disabled={isEmtiBag}>
+								<MainButton isSubmit disabled={isEmtiBag} status={submitButton}>
 									{language.confirmOrder}
 								</MainButton>
 							</Box>

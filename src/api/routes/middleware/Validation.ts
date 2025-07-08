@@ -1,7 +1,8 @@
 import { MIN_IMAGE_LENGTH } from '@/constants'
-import type { ProductToAdd } from '@/interfaces'
+import type { IProductObject, ProductToAdd } from '@/interfaces'
 import type { IFileImage, IFileList, ILoginData, ProductToUpdate } from '@/interfaces/interfaces'
 import Joi from 'joi'
+import type { PostStateType } from '../../../../pages/checkout'
 import type { ImageOptions } from '../admin/ImageCloud/ImageCloud'
 
 export default class Validation {
@@ -119,6 +120,5 @@ export default class Validation {
 		title: Joi.string().min(3).max(1000),
 		color: Joi.array().items(Joi.string().min(1).max(1000)),
 		preImages: this.updateImage.optional(),
-		// id: Joi.array().items(Joi.string().min(0).max(9999)).single(),
 	})
 }

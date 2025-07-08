@@ -22,6 +22,7 @@
 		"no-else-return": "off",
 		"no-alert": "off",
 		"no-plusplus": ["warn", { "allowForLoopAfterthoughts": true }],
+		"no-multi-assign": "off",
 		"no-unused-vars": [
 			"warn",
 			{
